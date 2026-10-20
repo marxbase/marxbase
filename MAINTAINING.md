@@ -55,11 +55,22 @@ with `--evidence show`. If it advises against them, keep `hide`.
 - Report form says it could not send: the Supabase project is probably paused (Restore it) or the key changed.
 - Wrong or missing result: decide it with Routine 1, then publish with Routine 2.
 
+## DNS records for marxbase.org (Cloudflare, all set to DNS only, grey cloud)
+| Type | Name | Value |
+| --- | --- | --- |
+| A (four records) | `@` | 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153 |
+| CNAME | `www` | `marxbase.github.io` |
+| TXT | `_github-pages-challenge-marxbase` | the value shown in the GitHub organization's Pages settings (domain verification) |
+
+The domain is verified in the **organization** `marxbase` (Settings > Pages), and set as the custom domain in the repository's Pages settings with
+**Enforce HTTPS** on. Do not turn the Cloudflare proxy (orange cloud) on: it hides GitHub's addresses and blocks its certificate. The certificate
+renews automatically while the records stay as above.
+
 ## Launch checklist (completed once)
-- [ ] Production Supabase project created, `schema.sql` run, `rls_check.py` all PASS **TO FILL**
-- [ ] Repository public, Pages source set to GitHub Actions, Actions variables set **TO FILL**
-- [ ] `marxbase.org` pointed at GitHub Pages, HTTPS enforced **TO FILL**
-- [ ] Live smoke test passed; one real report received and deleted **TO FILL**
+- [x] Production Supabase project created, `schema.sql` run, `rls_check.py` all PASS (2026-10-20)
+- [x] Repository public (`marxbase/marxbase`), Pages source set to GitHub Actions, Actions variables set (2026-10-20)
+- [x] `marxbase.org` pointed at GitHub Pages, HTTPS enforced, `http://` and `www` redirect (2026-10-20)
+- [x] Live smoke test passed on https://marxbase.org/; one real report received through the live form (2026-10-20); delete the test row in the Supabase table editor
 - [ ] Release `v1.0` tagged, DOI added **TO FILL**
 - [ ] PI sign-off and copyright answer recorded **TO FILL**
 - [ ] Successor has owner access to GitHub, Cloudflare, Supabase and Zenodo **TO FILL**
