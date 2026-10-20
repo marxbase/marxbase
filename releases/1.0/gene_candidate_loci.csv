@@ -1,0 +1,24 @@
+﻿gene_id,locus_tag,status,product,hint
+MARXBASE-G000042,KLMA_20830,candidate,lactose permease,"annotation symbol matches; paper wording (PMID 23344501, 28444380, 30687296, 33937967) shares lactose"
+MARXBASE-G000042,KLMA_30010,candidate,sugar porter family MFS transporter,annotation symbol matches
+MARXBASE-G000042,KLMA_30728,candidate,lactose permease,"annotation symbol matches; paper wording (PMID 23344501, 28444380, 30687296, 33937967) shares lactose"
+MARXBASE-G000042,KLMA_80005,candidate,high-affinity glucose transporter,"annotation symbol matches; paper wording (PMID 23344501, 28444380, 30687296, 33937967) shares glucose"
+MARXBASE-G000143,KLMA_40102,candidate,zinc-dependent alcohol dehydrogenase,"annotation symbol matches; product shares alcohol, dehydrogenase with the S. cerevisiae ADH1 description"
+MARXBASE-G000143,KLMA_40220,candidate,zinc-dependent alcohol dehydrogenase,"reciprocal best hit of S. cerevisiae ADH1; product shares alcohol, dehydrogenase with the S. cerevisiae ADH1 description"
+MARXBASE-G000140,KLMA_30607,candidate,uncharacterized protein,annotation symbol matches
+MARXBASE-G000140,KLMA_60180,candidate,glucose-inactivated glycerol proton symporter STL1,"annotation symbol matches; reciprocal best hit of S. cerevisiae STL1; product shares glucose, glycerol, proton, symporter with the S. cerevisiae STL1 description"
+MARXBASE-G000048,KLMA_10394,rejected,amino acid permease GAP1,"annotation symbol matches; reciprocal best hit of S. cerevisiae GAP1; product shares acid, amino, permease with the S. cerevisiae GAP1 description"
+MARXBASE-G000048,KLMA_40218,confirmed,type I glyceraldehyde-3-phosphate dehydrogenase,"annotation symbol matches; paper wording (PMID 10649452) shares dehydrogenase, glyceraldehyde, phosphate"
+MARXBASE-G000109,KLMA_10621,candidate,L-lactate dehydrogenase (cytochrome),"annotation symbol matches; reciprocal best hit of S. cerevisiae CYB2; product shares cytochrome, lactate with the S. cerevisiae CYB2 description; paper wording (PMID 29208409) shares dehydrogenase, lactate"
+MARXBASE-G000109,KLMA_30013,candidate,FMN-dependent alpha-hydroxy acid dehydrogenase,"annotation symbol matches; paper wording (PMID 29208409) shares acid, dehydrogenase"
+MARXBASE-G000110,KLMA_10649,candidate,FAD-binding oxidoreductase,annotation symbol matches
+MARXBASE-G000110,KLMA_40583,candidate,FAD-binding oxidoreductase,annotation symbol matches
+MARXBASE-G000110,KLMA_50301,candidate,D-lactate dehydrogenase,"annotation symbol matches; reciprocal best hit of S. cerevisiae DLD1; product shares dehydrogenase, lactate with the S. cerevisiae DLD1 description; paper wording (PMID 29208409) shares dehydrogenase, lactate"
+MARXBASE-G000252,KLMA_10184,candidate,glycosyltransferase family 32 protein,annotation symbol matches
+MARXBASE-G000252,KLMA_40267,candidate,"initiation-specific alpha-1,6-mannosyltransferase",annotation symbol matches; reciprocal best hit of S. cerevisiae OCH1; product shares mannosyltransferase with the S. cerevisiae OCH1 description; paper wording (PMID 32469948) shares mannosyltransferase
+MARXBASE-G000262,KLMA_20158,candidate,alcohol dehydrogenase ADH3,"annotation symbol matches; reciprocal best hit of S. cerevisiae ADH3; product shares alcohol, dehydrogenase with the S. cerevisiae ADH3 description; paper wording (PMID 19966463) shares adh3, dehydrogenase"
+MARXBASE-G000262,KLMA_80306,candidate,zinc-dependent alcohol dehydrogenase,"annotation symbol matches; product shares alcohol, dehydrogenase with the S. cerevisiae ADH3 description; paper wording (PMID 19966463) shares dehydrogenase"
+MARXBASE-G000269,KLMA_30018,candidate,SDR family oxidoreductase,reciprocal best hit of S. cerevisiae GRE2
+MARXBASE-G000269,KLMA_60425,candidate,SDR family oxidoreductase,annotation symbol matches
+MARXBASE-G000285,KLMA_20259,candidate,bifunctional 2-aminoadipate transaminase/aromatic-amino-acid:2-oxoglutarate transaminase,"annotation symbol matches; reciprocal best hit of S. cerevisiae ARO8; product shares acid, amino, aromatic with the S. cerevisiae ARO8 description; paper wording (PMID 41596828) shares acid"
+MARXBASE-G000285,KLMA_50151,candidate,PLP-dependent aminotransferase family protein,annotation symbol matches; product shares aminotransferase with the S. cerevisiae ARO8 description

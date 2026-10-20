@@ -1,0 +1,7322 @@
+[
+ {
+  "id": "pmid:10099455",
+  "type": "article-journal",
+  "title": "Inulase-secreting strain of Saccharomyces cerevisiae produces fructose.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "Brevnova",
+    "given": "EE"
+   },
+   {
+    "family": "Kozlov",
+    "given": "DG"
+   },
+   {
+    "family": "Efremov",
+    "given": "BD"
+   },
+   {
+    "family": "Benevolensky",
+    "given": "SV"
+   }
+  ],
+  "PMID": "10099455",
+  "issued": {
+   "date-parts": [
+    [
+     1998
+    ]
+   ]
+  }
+ },
+ {
+  "id": "pmid:10417218",
+  "type": "article-journal",
+  "title": "Continuous ethanol fermentation of lactose by a recombinant flocculating Saccharomyces cerevisiae strain.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "Domingues",
+    "given": "L"
+   },
+   {
+    "family": "Dantas",
+    "given": "MM"
+   },
+   {
+    "family": "Lima",
+    "given": "N"
+   },
+   {
+    "family": "Teixeira",
+    "given": "JA"
+   }
+  ],
+  "PMID": "10417218",
+  "issued": {
+   "date-parts": [
+    [
+     1999
+    ]
+   ]
+  },
+  "DOI": "10.1002/(sici)1097-0290(19990920)64:6<692::aid-bit8>3.0.co;2-j"
+ },
+ {
+  "id": "pmid:10649452",
+  "type": "article-journal",
+  "title": "Flocculation of Saccharomyces cerevisiae is induced by transformation with the GAP1 gene from Kluyveromyces marxianus.",
+  "container-title": "Yeast (Chichester, England)",
+  "author": [
+   {
+    "family": "Moreira",
+    "given": "RF"
+   },
+   {
+    "family": "Ferreira-Da-Silva",
+    "given": "F"
+   },
+   {
+    "family": "Fernandes",
+    "given": "PA"
+   },
+   {
+    "family": "Moradas-Ferreira",
+    "given": "P"
+   }
+  ],
+  "PMID": "10649452",
+  "issued": {
+   "date-parts": [
+    [
+     2000
+    ]
+   ]
+  },
+  "DOI": "10.1002/(sici)1097-0061(200002)16:3<231::aid-yea530>3.0.co;2-c"
+ },
+ {
+  "id": "pmid:10705459",
+  "type": "article-journal",
+  "title": "Molecular characterization of a novel yeast cell-wall acid phosphatase cloned from Kluyveromyces marxianus.",
+  "container-title": "Bioscience, biotechnology, and biochemistry",
+  "author": [
+   {
+    "family": "Yoda",
+    "given": "K"
+   },
+   {
+    "family": "Ko",
+    "given": "JH"
+   },
+   {
+    "family": "Nagamatsu",
+    "given": "T"
+   },
+   {
+    "family": "Lin",
+    "given": "Y"
+   },
+   {
+    "family": "Kaibara",
+    "given": "C"
+   },
+   {
+    "family": "Kawada",
+    "given": "T"
+   },
+   {
+    "family": "Tomishige",
+    "given": "N"
+   },
+   {
+    "family": "Hashimoto",
+    "given": "H"
+   },
+   {
+    "family": "Noda",
+    "given": "Y"
+   },
+   {
+    "family": "Yamasaki",
+    "given": "M"
+   }
+  ],
+  "PMID": "10705459",
+  "issued": {
+   "date-parts": [
+    [
+     2000
+    ]
+   ]
+  },
+  "DOI": "10.1271/bbb.64.142"
+ },
+ {
+  "id": "pmid:10943566",
+  "type": "article-journal",
+  "title": "Construction of efficient centromeric, multicopy and expression vectors for the yeast Kluyveromyces marxianus using homologous elements and the promoter of a purine-cytosine-like permease.",
+  "container-title": "Journal of molecular microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Ball",
+    "given": "MM"
+   },
+   {
+    "family": "Raynal",
+    "given": "A"
+   },
+   {
+    "family": "Guérineau",
+    "given": "M"
+   },
+   {
+    "family": "Iborra",
+    "given": "F"
+   }
+  ],
+  "PMID": "10943566",
+  "issued": {
+   "date-parts": [
+    [
+     1999
+    ]
+   ]
+  }
+ },
+ {
+  "id": "pmid:11460240",
+  "type": "article-journal",
+  "title": "Alcohol production from cheese whey permeate using genetically modified flocculent yeast cells.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "Domingues",
+    "given": "L"
+   },
+   {
+    "family": "Lima",
+    "given": "N"
+   },
+   {
+    "family": "Teixeira",
+    "given": "JA"
+   }
+  ],
+  "PMID": "11460240",
+  "issued": {
+   "date-parts": [
+    [
+     2001
+    ]
+   ]
+  },
+  "DOI": "10.1002/1097-0290(20010305)72:5<507::aid-bit1014>3.0.co;2-u"
+ },
+ {
+  "id": "pmid:14529965",
+  "type": "article-journal",
+  "title": "Acquisition of flocculation phenotype by Kluyveromyces marxianus when overexpressing GAP1 gene encoding an isoform of glyceraldehyde-3-phosphate dehydrogenase.",
+  "container-title": "Journal of microbiological methods",
+  "author": [
+   {
+    "family": "Almeida",
+    "given": "C"
+   },
+   {
+    "family": "Queirós",
+    "given": "O"
+   },
+   {
+    "family": "Wheals",
+    "given": "A"
+   },
+   {
+    "family": "Teixeira",
+    "given": "J"
+   },
+   {
+    "family": "Moradas-Ferreira",
+    "given": "P"
+   }
+  ],
+  "PMID": "14529965",
+  "issued": {
+   "date-parts": [
+    [
+     2003
+    ]
+   ]
+  },
+  "DOI": "10.1016/s0167-7012(03)00189-1"
+ },
+ {
+  "id": "pmid:15962338",
+  "type": "article-journal",
+  "title": "Evaluation of the tetracycline promoter system for regulated gene expression in Kluyveromyces marxianus.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "Pecota",
+    "given": "DC"
+   },
+   {
+    "family": "Da Silva",
+    "given": "NA"
+   }
+  ],
+  "PMID": "15962338",
+  "issued": {
+   "date-parts": [
+    [
+     2005
+    ]
+   ]
+  },
+  "DOI": "10.1002/bit.20584"
+ },
+ {
+  "id": "pmid:16982106",
+  "type": "article-journal",
+  "title": "Sequential gene integration for the engineering of Kluyveromyces marxianus.",
+  "container-title": "Journal of biotechnology",
+  "author": [
+   {
+    "family": "Pecota",
+    "given": "DC"
+   },
+   {
+    "family": "Rajgarhia",
+    "given": "V"
+   },
+   {
+    "family": "Da Silva",
+    "given": "NA"
+   }
+  ],
+  "PMID": "16982106",
+  "issued": {
+   "date-parts": [
+    [
+     2007
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jbiotec.2006.07.031"
+ },
+ {
+  "id": "pmid:17624462",
+  "type": "article-journal",
+  "title": "Application of the Cre-loxP system for multiple gene disruption in the yeast Kluyveromyces marxianus.",
+  "container-title": "Journal of biotechnology",
+  "author": [
+   {
+    "family": "Ribeiro",
+    "given": "O"
+   },
+   {
+    "family": "Gombert",
+    "given": "AK"
+   },
+   {
+    "family": "Teixeira",
+    "given": "JA"
+   },
+   {
+    "family": "Domingues",
+    "given": "L"
+   }
+  ],
+  "PMID": "17624462",
+  "issued": {
+   "date-parts": [
+    [
+     2007
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jbiotec.2007.05.027"
+ },
+ {
+  "id": "pmid:1803820",
+  "type": "article-journal",
+  "title": "Cloning and disruption of the LEU2 gene of Kluyveromyces marxianus CBS 6556.",
+  "container-title": "Yeast (Chichester, England)",
+  "author": [
+   {
+    "family": "Bergkamp",
+    "given": "RJ"
+   },
+   {
+    "family": "Geerse",
+    "given": "RH"
+   },
+   {
+    "family": "Verbakel",
+    "given": "JM"
+   },
+   {
+    "family": "Musters",
+    "given": "W"
+   },
+   {
+    "family": "Planta",
+    "given": "RJ"
+   }
+  ],
+  "PMID": "1803820",
+  "issued": {
+   "date-parts": [
+    [
+     1991
+    ]
+   ]
+  },
+  "DOI": "10.1002/yea.320070908"
+ },
+ {
+  "id": "pmid:18040680",
+  "type": "article-journal",
+  "title": "Characterization of the superoxide dismutase SOD1 gene of Kluyveromyces marxianus L3 and improved production of SOD activity.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Raimondi",
+    "given": "S"
+   },
+   {
+    "family": "Uccelletti",
+    "given": "D"
+   },
+   {
+    "family": "Matteuzzi",
+    "given": "D"
+   },
+   {
+    "family": "Pagnoni",
+    "given": "UM"
+   },
+   {
+    "family": "Rossi",
+    "given": "M"
+   },
+   {
+    "family": "Palleschi",
+    "given": "C"
+   }
+  ],
+  "PMID": "18040680",
+  "issued": {
+   "date-parts": [
+    [
+     2008
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-007-1270-8"
+ },
+ {
+  "id": "pmid:1840529",
+  "type": "article-journal",
+  "title": "Cloning and sequencing of the inulinase gene of Kluyveromyces marxianus var. marxianus ATCC 12424.",
+  "container-title": "FEBS letters",
+  "author": [
+   {
+    "family": "Laloux",
+    "given": "O"
+   },
+   {
+    "family": "Cassart",
+    "given": "JP"
+   },
+   {
+    "family": "Delcour",
+    "given": "J"
+   },
+   {
+    "family": "Van Beeumen",
+    "given": "J"
+   },
+   {
+    "family": "Vandenhaute",
+    "given": "J"
+   }
+  ],
+  "PMID": "1840529",
+  "issued": {
+   "date-parts": [
+    [
+     1991
+    ]
+   ]
+  },
+  "DOI": "10.1016/0014-5793(91)80909-m"
+ },
+ {
+  "id": "pmid:18623603",
+  "type": "article-journal",
+  "title": "Highly efficient secretion of heterologous proteins from Saccharomyces cerevisiae using inulinase signal peptides.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "Chung",
+    "given": "BH"
+   },
+   {
+    "family": "Nam",
+    "given": "SW"
+   },
+   {
+    "family": "Kim",
+    "given": "BM"
+   },
+   {
+    "family": "Park",
+    "given": "YH"
+   }
+  ],
+  "PMID": "18623603",
+  "issued": {
+   "date-parts": [
+    [
+     1996
+    ]
+   ]
+  },
+  "DOI": "10.1002/(sici)1097-0290(19960220)49:4<473::aid-bit15>3.0.co;2-b"
+ },
+ {
+  "id": "pmid:18931291",
+  "type": "article-journal",
+  "title": "High-temperature ethanol fermentation and transformation with linear DNA in the thermotolerant yeast Kluyveromyces marxianus DMKU3-1042.",
+  "container-title": "Applied and environmental microbiology",
+  "author": [
+   {
+    "family": "Nonklang",
+    "given": "S"
+   },
+   {
+    "family": "Abdel-Banat",
+    "given": "BM"
+   },
+   {
+    "family": "Cha-aim",
+    "given": "K"
+   },
+   {
+    "family": "Moonjai",
+    "given": "N"
+   },
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Limtong",
+    "given": "S"
+   },
+   {
+    "family": "Yamada",
+    "given": "M"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   }
+  ],
+  "PMID": "18931291",
+  "issued": {
+   "date-parts": [
+    [
+     2008
+    ]
+   ]
+  },
+  "DOI": "10.1128/aem.01854-08",
+  "PMCID": "PMC2607150"
+ },
+ {
+  "id": "pmid:19420680",
+  "type": "article-journal",
+  "title": "Construction of flocculent Kluyveromyces marxianus strains suitable for high-temperature ethanol fermentation.",
+  "container-title": "Bioscience, biotechnology, and biochemistry",
+  "author": [
+   {
+    "family": "Nonklang",
+    "given": "S"
+   },
+   {
+    "family": "Ano",
+    "given": "A"
+   },
+   {
+    "family": "Abdel-Banat",
+    "given": "BM"
+   },
+   {
+    "family": "Saito",
+    "given": "Y"
+   },
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   }
+  ],
+  "PMID": "19420680",
+  "issued": {
+   "date-parts": [
+    [
+     2009
+    ]
+   ]
+  },
+  "DOI": "10.1271/bbb.80853"
+ },
+ {
+  "id": "pmid:19725536",
+  "type": "article-journal",
+  "title": "Cloning, characterization, and functional analysis of the EPG1-2 gene: a new allele coding for an endopolygalacturonase in Kluyveromyces marxianus.",
+  "container-title": "Journal of agricultural and food chemistry",
+  "author": [
+   {
+    "family": "Sieiro",
+    "given": "C"
+   },
+   {
+    "family": "Sestelo",
+    "given": "AB"
+   },
+   {
+    "family": "Villa",
+    "given": "TG"
+   }
+  ],
+  "PMID": "19725536",
+  "issued": {
+   "date-parts": [
+    [
+     2009
+    ]
+   ]
+  },
+  "DOI": "10.1021/jf900352q"
+ },
+ {
+  "id": "pmid:19894210",
+  "type": "article-journal",
+  "title": "Random and targeted gene integrations through the control of non-homologous end joining in the yeast Kluyveromyces marxianus.",
+  "container-title": "Yeast (Chichester, England)",
+  "author": [
+   {
+    "family": "Abdel-Banat",
+    "given": "BM"
+   },
+   {
+    "family": "Nonklang",
+    "given": "S"
+   },
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   }
+  ],
+  "PMID": "19894210",
+  "issued": {
+   "date-parts": [
+    [
+     2010
+    ]
+   ]
+  },
+  "DOI": "10.1002/yea.1729"
+ },
+ {
+  "id": "pmid:19966463",
+  "type": "article-journal",
+  "title": "The crucial role of alcohol dehydrogenase Adh3 in Kluyveromyces marxianus mitochondrial metabolism.",
+  "container-title": "Bioscience, biotechnology, and biochemistry",
+  "author": [
+   {
+    "family": "Lertwattanasakul",
+    "given": "N"
+   },
+   {
+    "family": "Shigemoto",
+    "given": "E"
+   },
+   {
+    "family": "Rodrussamee",
+    "given": "N"
+   },
+   {
+    "family": "Limtong",
+    "given": "S"
+   },
+   {
+    "family": "Thanonkeo",
+    "given": "P"
+   },
+   {
+    "family": "Yamada",
+    "given": "M"
+   }
+  ],
+  "PMID": "19966463",
+  "issued": {
+   "date-parts": [
+    [
+     2009
+    ]
+   ]
+  },
+  "DOI": "10.1271/bbb.90609"
+ },
+ {
+  "id": "pmid:20012282",
+  "type": "article-journal",
+  "title": "Secretion of Kluyveromyces lactis Cu/Zn SOD: strategies for enhanced production.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Raimondi",
+    "given": "S"
+   },
+   {
+    "family": "Uccelletti",
+    "given": "D"
+   },
+   {
+    "family": "Amaretti",
+    "given": "A"
+   },
+   {
+    "family": "Leonardi",
+    "given": "A"
+   },
+   {
+    "family": "Palleschi",
+    "given": "C"
+   },
+   {
+    "family": "Rossi",
+    "given": "M"
+   }
+  ],
+  "PMID": "20012282",
+  "issued": {
+   "date-parts": [
+    [
+     2010
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-009-2353-5"
+ },
+ {
+  "id": "pmid:20092622",
+  "type": "article-journal",
+  "title": "Heterologous expression of glucose oxidase in the yeast Kluyveromyces marxianus.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Rocha",
+    "given": "SN"
+   },
+   {
+    "family": "Abrahão-Neto",
+    "given": "J"
+   },
+   {
+    "family": "Cerdán",
+    "given": "ME"
+   },
+   {
+    "family": "González-Siso",
+    "given": "MI"
+   },
+   {
+    "family": "Gombert",
+    "given": "AK"
+   }
+  ],
+  "PMID": "20092622",
+  "issued": {
+   "date-parts": [
+    [
+     2010
+    ]
+   ]
+  },
+  "DOI": "10.1186/1475-2859-9-4",
+  "PMCID": "PMC2817671"
+ },
+ {
+  "id": "pmid:20676628",
+  "type": "article-journal",
+  "title": "Direct ethanol production from cellulosic materials at high temperature using the thermotolerant yeast Kluyveromyces marxianus displaying cellulolytic enzymes.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Yanase",
+    "given": "S"
+   },
+   {
+    "family": "Hasunuma",
+    "given": "T"
+   },
+   {
+    "family": "Yamada",
+    "given": "R"
+   },
+   {
+    "family": "Tanaka",
+    "given": "T"
+   },
+   {
+    "family": "Ogino",
+    "given": "C"
+   },
+   {
+    "family": "Fukuda",
+    "given": "H"
+   },
+   {
+    "family": "Kondo",
+    "given": "A"
+   }
+  ],
+  "PMID": "20676628",
+  "issued": {
+   "date-parts": [
+    [
+     2010
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-010-2784-z"
+ },
+ {
+  "id": "pmid:21053048",
+  "type": "article-journal",
+  "title": "Cloning and characterization of Kluyveromyces marxianus Hog1 gene.",
+  "container-title": "Biotechnology letters",
+  "author": [
+   {
+    "family": "Qian",
+    "given": "J"
+   },
+   {
+    "family": "Qin",
+    "given": "X"
+   },
+   {
+    "family": "Yin",
+    "given": "Q"
+   },
+   {
+    "family": "Chu",
+    "given": "J"
+   },
+   {
+    "family": "Wang",
+    "given": "Y"
+   }
+  ],
+  "PMID": "21053048",
+  "issued": {
+   "date-parts": [
+    [
+     2011
+    ]
+   ]
+  },
+  "DOI": "10.1007/s10529-010-0458-7"
+ },
+ {
+  "id": "pmid:21124058",
+  "type": "article-journal",
+  "title": "Recombinant Production of an Inulinase in a Saccharomyces cerevisiae gal80 Strain.",
+  "container-title": "Journal of microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Lim",
+    "given": "SH"
+   },
+   {
+    "family": "Lee",
+    "given": "H"
+   },
+   {
+    "family": "Sok",
+    "given": "DE"
+   },
+   {
+    "family": "Choi",
+    "given": "ES"
+   }
+  ],
+  "PMID": "21124058",
+  "issued": {
+   "date-parts": [
+    [
+     2010
+    ]
+   ]
+  },
+  "DOI": "10.4014/jmb.1007.07009"
+ },
+ {
+  "id": "pmid:22016987",
+  "type": "article-journal",
+  "title": "[Ethanol fermentation from Jerusalem artichoke tubers by a genetically-modified Saccharomyces cerevisiae strain capable of secreting inulinase].",
+  "container-title": "Sheng wu gong cheng xue bao = Chinese journal of biotechnology",
+  "author": [
+   {
+    "family": "Li",
+    "given": "N"
+   },
+   {
+    "family": "Yuan",
+    "given": "W"
+   },
+   {
+    "family": "Wang",
+    "given": "N"
+   },
+   {
+    "family": "Xin",
+    "given": "C"
+   },
+   {
+    "family": "Ge",
+    "given": "X"
+   },
+   {
+    "family": "Bai",
+    "given": "F"
+   }
+  ],
+  "PMID": "22016987",
+  "issued": {
+   "date-parts": [
+    [
+     2011
+    ]
+   ]
+  }
+ },
+ {
+  "id": "pmid:22515264",
+  "type": "article-journal",
+  "title": "A highly efficient β-glucosidase from the buffalo rumen fungus Neocallimastix patriciarum W5.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Chen",
+    "given": "HL"
+   },
+   {
+    "family": "Chen",
+    "given": "YC"
+   },
+   {
+    "family": "Lu",
+    "given": "MJ"
+   },
+   {
+    "family": "Chang",
+    "given": "JJ"
+   },
+   {
+    "family": "Wang",
+    "given": "HC"
+   },
+   {
+    "family": "Ke",
+    "given": "HM"
+   },
+   {
+    "family": "Wang",
+    "given": "TY"
+   },
+   {
+    "family": "Ruan",
+    "given": "SK"
+   },
+   {
+    "family": "Wang",
+    "given": "TY"
+   },
+   {
+    "family": "Hung",
+    "given": "KY"
+   },
+   {
+    "family": "Cho",
+    "given": "HY"
+   },
+   {
+    "family": "Lin",
+    "given": "WT"
+   },
+   {
+    "family": "Shih",
+    "given": "MC"
+   },
+   {
+    "family": "Li",
+    "given": "WH"
+   }
+  ],
+  "PMID": "22515264",
+  "issued": {
+   "date-parts": [
+    [
+     2012
+    ]
+   ]
+  },
+  "DOI": "10.1186/1754-6834-5-24",
+  "PMCID": "PMC3403894"
+ },
+ {
+  "id": "pmid:22838397",
+  "type": "article-journal",
+  "title": "A novel Kluyveromyces marxianus strain with an inducible flocculation phenotype.",
+  "container-title": "AMB Express",
+  "author": [
+   {
+    "family": "Vallejo",
+    "given": "JA"
+   },
+   {
+    "family": "Serrat",
+    "given": "M"
+   },
+   {
+    "family": "Pérez-Portuondo",
+    "given": "I"
+   },
+   {
+    "family": "Sánchez-Pérez",
+    "given": "A"
+   },
+   {
+    "family": "Ageitos",
+    "given": "JM"
+   },
+   {
+    "family": "Villa",
+    "given": "TG"
+   }
+  ],
+  "PMID": "22838397",
+  "issued": {
+   "date-parts": [
+    [
+     2012
+    ]
+   ]
+  },
+  "DOI": "10.1186/2191-0855-2-38",
+  "PMCID": "PMC3431993"
+ },
+ {
+  "id": "pmid:22911091",
+  "type": "article-journal",
+  "title": "Characterization of Saccharomyces cerevisiae promoters for heterologous gene expression in Kluyveromyces marxianus.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Lee",
+    "given": "KS"
+   },
+   {
+    "family": "Kim",
+    "given": "JS"
+   },
+   {
+    "family": "Heo",
+    "given": "P"
+   },
+   {
+    "family": "Yang",
+    "given": "TJ"
+   },
+   {
+    "family": "Sung",
+    "given": "YJ"
+   },
+   {
+    "family": "Cheon",
+    "given": "Y"
+   },
+   {
+    "family": "Koo",
+    "given": "HM"
+   },
+   {
+    "family": "Yu",
+    "given": "BJ"
+   },
+   {
+    "family": "Seo",
+    "given": "JH"
+   },
+   {
+    "family": "Jin",
+    "given": "YS"
+   },
+   {
+    "family": "Park",
+    "given": "JC"
+   },
+   {
+    "family": "Kweon",
+    "given": "DH"
+   }
+  ],
+  "PMID": "22911091",
+  "issued": {
+   "date-parts": [
+    [
+     2013
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-012-4306-7"
+ },
+ {
+  "id": "pmid:23338601",
+  "type": "article-journal",
+  "title": "Essentiality of respiratory activity for pentose utilization in thermotolerant yeast Kluyveromyces marxianus DMKU 3-1042.",
+  "container-title": "Antonie van Leeuwenhoek",
+  "author": [
+   {
+    "family": "Lertwattanasakul",
+    "given": "N"
+   },
+   {
+    "family": "Suprayogi",
+    "given": ""
+   },
+   {
+    "family": "Murata",
+    "given": "M"
+   },
+   {
+    "family": "Rodrussamee",
+    "given": "N"
+   },
+   {
+    "family": "Limtong",
+    "given": "S"
+   },
+   {
+    "family": "Kosaka",
+    "given": "T"
+   },
+   {
+    "family": "Yamada",
+    "given": "M"
+   }
+  ],
+  "PMID": "23338601",
+  "issued": {
+   "date-parts": [
+    [
+     2013
+    ]
+   ]
+  },
+  "DOI": "10.1007/s10482-012-9874-0"
+ },
+ {
+  "id": "pmid:23344501",
+  "type": "article-journal",
+  "title": "Construction of lactose-consuming Saccharomyces cerevisiae for lactose fermentation into ethanol fuel.",
+  "container-title": "Journal of industrial microbiology & biotechnology",
+  "author": [
+   {
+    "family": "Zou",
+    "given": "J"
+   },
+   {
+    "family": "Guo",
+    "given": "X"
+   },
+   {
+    "family": "Shen",
+    "given": "T"
+   },
+   {
+    "family": "Dong",
+    "given": "J"
+   },
+   {
+    "family": "Zhang",
+    "given": "C"
+   },
+   {
+    "family": "Xiao",
+    "given": "D"
+   }
+  ],
+  "PMID": "23344501",
+  "issued": {
+   "date-parts": [
+    [
+     2013
+    ]
+   ]
+  },
+  "DOI": "10.1007/s10295-012-1227-5"
+ },
+ {
+  "id": "pmid:23392758",
+  "type": "article-journal",
+  "title": "Improving ethanol and xylitol fermentation at elevated temperature through substitution of xylose reductase in Kluyveromyces marxianus.",
+  "container-title": "Journal of industrial microbiology & biotechnology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Li",
+    "given": "L"
+   },
+   {
+    "family": "Zhang",
+    "given": "J"
+   },
+   {
+    "family": "Gao",
+    "given": "X"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "23392758",
+  "issued": {
+   "date-parts": [
+    [
+     2013
+    ]
+   ]
+  },
+  "DOI": "10.1007/s10295-013-1230-5"
+ },
+ {
+  "id": "pmid:23587421",
+  "type": "article-journal",
+  "title": "Thermal adaptability of Kluyveromyces marxianus in recombinant protein production.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Raimondi",
+    "given": "S"
+   },
+   {
+    "family": "Zanni",
+    "given": "E"
+   },
+   {
+    "family": "Amaretti",
+    "given": "A"
+   },
+   {
+    "family": "Palleschi",
+    "given": "C"
+   },
+   {
+    "family": "Uccelletti",
+    "given": "D"
+   },
+   {
+    "family": "Rossi",
+    "given": "M"
+   }
+  ],
+  "PMID": "23587421",
+  "issued": {
+   "date-parts": [
+    [
+     2013
+    ]
+   ]
+  },
+  "DOI": "10.1186/1475-2859-12-34",
+  "PMCID": "PMC3655038"
+ },
+ {
+  "id": "pmid:24150815",
+  "type": "article-journal",
+  "title": "Identification of auxotrophic mutants of the yeast Kluyveromyces marxianus by non-homologous end joining-mediated integrative transformation with genes from Saccharomyces cerevisiae.",
+  "container-title": "Yeast (Chichester, England)",
+  "author": [
+   {
+    "family": "Yarimizu",
+    "given": "T"
+   },
+   {
+    "family": "Nonklang",
+    "given": "S"
+   },
+   {
+    "family": "Nakamura",
+    "given": "J"
+   },
+   {
+    "family": "Tokuda",
+    "given": "S"
+   },
+   {
+    "family": "Nakagawa",
+    "given": "T"
+   },
+   {
+    "family": "Lorreungsil",
+    "given": "S"
+   },
+   {
+    "family": "Sutthikhumpha",
+    "given": "S"
+   },
+   {
+    "family": "Pukahuta",
+    "given": "C"
+   },
+   {
+    "family": "Kitagawa",
+    "given": "T"
+   },
+   {
+    "family": "Nakamura",
+    "given": "M"
+   },
+   {
+    "family": "Cha-Aim",
+    "given": "K"
+   },
+   {
+    "family": "Limtong",
+    "given": "S"
+   },
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   }
+  ],
+  "PMID": "24150815",
+  "issued": {
+   "date-parts": [
+    [
+     2013
+    ]
+   ]
+  },
+  "DOI": "10.1002/yea.2985"
+ },
+ {
+  "id": "pmid:24291795",
+  "type": "article-journal",
+  "title": "Xylitol production at high temperature by engineered Kluyveromyces marxianus.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "J"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Gao",
+    "given": "X"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "24291795",
+  "issued": {
+   "date-parts": [
+    [
+     2014
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2013.10.109"
+ },
+ {
+  "id": "pmid:24307396",
+  "type": "article-journal",
+  "title": "Non-homologous end joining-mediated functional marker selection for DNA cloning in the yeast Kluyveromyces marxianus.",
+  "container-title": "Yeast (Chichester, England)",
+  "author": [
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Murakami",
+    "given": "N"
+   },
+   {
+    "family": "Suzuki",
+    "given": "A"
+   },
+   {
+    "family": "Tamura",
+    "given": "R"
+   },
+   {
+    "family": "Asakawa",
+    "given": "J"
+   },
+   {
+    "family": "Abdel-Banat",
+    "given": "BM"
+   },
+   {
+    "family": "Nonklang",
+    "given": "S"
+   },
+   {
+    "family": "Nakamura",
+    "given": "M"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   }
+  ],
+  "PMID": "24307396",
+  "issued": {
+   "date-parts": [
+    [
+     2014
+    ]
+   ]
+  },
+  "DOI": "10.1002/yea.2993"
+ },
+ {
+  "id": "pmid:24521080",
+  "type": "article-journal",
+  "title": "A broad-range yeast expression system reveals Arxula adeninivorans expressing a fungal self-sufficient cytochrome P450 monooxygenase as an excellent whole-cell biocatalyst.",
+  "container-title": "FEMS yeast research",
+  "author": [
+   {
+    "family": "Theron",
+    "given": "CW"
+   },
+   {
+    "family": "Labuschagné",
+    "given": "M"
+   },
+   {
+    "family": "Gudiminchi",
+    "given": "R"
+   },
+   {
+    "family": "Albertyn",
+    "given": "J"
+   },
+   {
+    "family": "Smit",
+    "given": "MS"
+   }
+  ],
+  "PMID": "24521080",
+  "issued": {
+   "date-parts": [
+    [
+     2014
+    ]
+   ]
+  },
+  "DOI": "10.1111/1567-1364.12142"
+ },
+ {
+  "id": "pmid:24768798",
+  "type": "article-journal",
+  "title": "A biosynthetic pathway for hexanoic acid production in Kluyveromyces marxianus.",
+  "container-title": "Journal of biotechnology",
+  "author": [
+   {
+    "family": "Cheon",
+    "given": "Y"
+   },
+   {
+    "family": "Kim",
+    "given": "JS"
+   },
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Heo",
+    "given": "P"
+   },
+   {
+    "family": "Lim",
+    "given": "JH"
+   },
+   {
+    "family": "Jung",
+    "given": "GY"
+   },
+   {
+    "family": "Seo",
+    "given": "JH"
+   },
+   {
+    "family": "Park",
+    "given": "JH"
+   },
+   {
+    "family": "Koo",
+    "given": "HM"
+   },
+   {
+    "family": "Cho",
+    "given": "KM"
+   },
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Ha",
+    "given": "SJ"
+   },
+   {
+    "family": "Kweon",
+    "given": "DH"
+   }
+  ],
+  "PMID": "24768798",
+  "issued": {
+   "date-parts": [
+    [
+     2014
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jbiotec.2014.04.010"
+ },
+ {
+  "id": "pmid:24910335",
+  "type": "article-journal",
+  "title": "Biosynthesis of 2-phenylethanol from glucose with genetically engineered Kluyveromyces marxianus.",
+  "container-title": "Enzyme and microbial technology",
+  "author": [
+   {
+    "family": "Kim",
+    "given": "TY"
+   },
+   {
+    "family": "Lee",
+    "given": "SW"
+   },
+   {
+    "family": "Oh",
+    "given": "MK"
+   }
+  ],
+  "PMID": "24910335",
+  "issued": {
+   "date-parts": [
+    [
+     2014
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.enzmictec.2014.04.011"
+ },
+ {
+  "id": "pmid:25085614",
+  "type": "article-journal",
+  "title": "Construction of recombinant Kluyveromyces marxianus UFV-3 to express dengue virus type 1 nonstructural protein 1 (NS1).",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Bragança",
+    "given": "CR"
+   },
+   {
+    "family": "Colombo",
+    "given": "LT"
+   },
+   {
+    "family": "Roberti",
+    "given": "AS"
+   },
+   {
+    "family": "Alvim",
+    "given": "MC"
+   },
+   {
+    "family": "Cardoso",
+    "given": "SA"
+   },
+   {
+    "family": "Reis",
+    "given": "KC"
+   },
+   {
+    "family": "de Paula",
+    "given": "SO"
+   },
+   {
+    "family": "da Silveira",
+    "given": "WB"
+   },
+   {
+    "family": "Passos",
+    "given": "FM"
+   }
+  ],
+  "PMID": "25085614",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-014-5963-5"
+ },
+ {
+  "id": "pmid:25142154",
+  "type": "article-journal",
+  "title": "Optimizing promoters and secretory signal sequences for producing ethanol from inulin by recombinant Saccharomyces cerevisiae carrying Kluyveromyces marxianus inulinase.",
+  "container-title": "Bioprocess and biosystems engineering",
+  "author": [
+   {
+    "family": "Hong",
+    "given": "SJ"
+   },
+   {
+    "family": "Kim",
+    "given": "HJ"
+   },
+   {
+    "family": "Kim",
+    "given": "JW"
+   },
+   {
+    "family": "Lee",
+    "given": "DH"
+   },
+   {
+    "family": "Seo",
+    "given": "JH"
+   }
+  ],
+  "PMID": "25142154",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00449-014-1265-7"
+ },
+ {
+  "id": "pmid:25465792",
+  "type": "article-journal",
+  "title": "Improving xylitol production at elevated temperature with engineered Kluyveromyces marxianus through over-expressing transporters.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "J"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Gao",
+    "given": "X"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "25465792",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2014.10.150"
+ },
+ {
+  "id": "pmid:25852994",
+  "type": "article-journal",
+  "title": "Characterization of the Kluyveromyces marxianus strain DMB1 YGL157w gene product as a broad specificity NADPH-dependent aldehyde reductase.",
+  "container-title": "AMB Express",
+  "author": [
+   {
+    "family": "Akita",
+    "given": "H"
+   },
+   {
+    "family": "Watanabe",
+    "given": "M"
+   },
+   {
+    "family": "Suzuki",
+    "given": "T"
+   },
+   {
+    "family": "Nakashima",
+    "given": "N"
+   },
+   {
+    "family": "Hoshino",
+    "given": "T"
+   }
+  ],
+  "PMID": "25852994",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13568-015-0104-9",
+  "PMCID": "PMC4385108"
+ },
+ {
+  "id": "pmid:25889890",
+  "type": "article-journal",
+  "title": "Synthetic signal sequences that enable efficient secretory protein production in the yeast Kluyveromyces marxianus.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Yarimizu",
+    "given": "T"
+   },
+   {
+    "family": "Nakamura",
+    "given": "M"
+   },
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   }
+  ],
+  "PMID": "25889890",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.1186/s12934-015-0203-y",
+  "PMCID": "PMC4347551"
+ },
+ {
+  "id": "pmid:26043853",
+  "type": "article-journal",
+  "title": "Enhanced Xylitol Production by Mutant Kluyveromyces marxianus 36907-FMEL1 Due to Improved Xylose Reductase Activity.",
+  "container-title": "Applied biochemistry and biotechnology",
+  "author": [
+   {
+    "family": "Kim",
+    "given": "JS"
+   },
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Jang",
+    "given": "SW"
+   },
+   {
+    "family": "Ha",
+    "given": "SJ"
+   }
+  ],
+  "PMID": "26043853",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.1007/s12010-015-1694-z"
+ },
+ {
+  "id": "pmid:26129747",
+  "type": "article-journal",
+  "title": "Novel transporters from Kluyveromyces marxianus and Pichia guilliermondii expressed in Saccharomyces cerevisiae enable growth on L-arabinose and D-xylose.",
+  "container-title": "Yeast (Chichester, England)",
+  "author": [
+   {
+    "family": "Knoshaug",
+    "given": "EP"
+   },
+   {
+    "family": "Vidgren",
+    "given": "V"
+   },
+   {
+    "family": "Magalhães",
+    "given": "F"
+   },
+   {
+    "family": "Jarvis",
+    "given": "EE"
+   },
+   {
+    "family": "Franden",
+    "given": "MA"
+   },
+   {
+    "family": "Zhang",
+    "given": "M"
+   },
+   {
+    "family": "Singh",
+    "given": "A"
+   }
+  ],
+  "PMID": "26129747",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.1002/yea.3084"
+ },
+ {
+  "id": "pmid:26253204",
+  "type": "article-journal",
+  "title": "Rapid ethanol production at elevated temperatures by engineered thermotolerant Kluyveromyces marxianus via the NADP(H)-preferring xylose reductase-xylitol dehydrogenase pathway.",
+  "container-title": "Metabolic engineering",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "J"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Gao",
+    "given": "X"
+   },
+   {
+    "family": "Sun",
+    "given": "L"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "26253204",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.ymben.2015.07.008"
+ },
+ {
+  "id": "pmid:26571688",
+  "type": "article-journal",
+  "title": "[Heterologous expression, purification and characterization of exo-inulinase from Kluyveromyces marxianus YX01].",
+  "container-title": "Sheng wu gong cheng xue bao = Chinese journal of biotechnology",
+  "author": [
+   {
+    "family": "Li",
+    "given": "Y"
+   },
+   {
+    "family": "Gao",
+    "given": "J"
+   },
+   {
+    "family": "Yuan",
+    "given": "W"
+   },
+   {
+    "family": "Xiang",
+    "given": "R"
+   },
+   {
+    "family": "Hou",
+    "given": "S"
+   }
+  ],
+  "PMID": "26571688",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  }
+ },
+ {
+  "id": "pmid:27240239",
+  "type": "article-journal",
+  "title": "Simultaneous fermentation of glucose and xylose at elevated temperatures co-produces ethanol and xylitol through overexpression of a xylose-specific transporter in engineered Kluyveromyces marxianus.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Zhang",
+    "given": "J"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Han",
+    "given": "R"
+   },
+   {
+    "family": "Ding",
+    "given": "R"
+   },
+   {
+    "family": "Gao",
+    "given": "X"
+   },
+   {
+    "family": "Sun",
+    "given": "L"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "27240239",
+  "issued": {
+   "date-parts": [
+    [
+     2016
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2016.05.068"
+ },
+ {
+  "id": "pmid:27611676",
+  "type": "article-journal",
+  "title": "A Kluyveromyces marxianus 2-deoxyglucose-resistant mutant with enhanced activity of xylose utilization.",
+  "container-title": "International microbiology : the official journal of the Spanish Society for Microbiology",
+  "author": [
+   {
+    "family": "Suprayogi",
+    "given": "S"
+   },
+   {
+    "family": "Nguyen",
+    "given": "MT"
+   },
+   {
+    "family": "Lertwattanasakul",
+    "given": "N"
+   },
+   {
+    "family": "Rodrussamee",
+    "given": "N"
+   },
+   {
+    "family": "Limtong",
+    "given": "S"
+   },
+   {
+    "family": "Kosaka",
+    "given": "T"
+   },
+   {
+    "family": "Yamada",
+    "given": "M"
+   }
+  ],
+  "PMID": "27611676",
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "DOI": "10.2436/20.1501.01.255"
+ },
+ {
+  "id": "pmid:27867078",
+  "type": "article-journal",
+  "title": "Co-expression of two heterologous lactate dehydrogenases genes in Kluyveromyces marxianus for l-lactic acid production.",
+  "container-title": "Journal of biotechnology",
+  "author": [
+   {
+    "family": "Lee",
+    "given": "JW"
+   },
+   {
+    "family": "In",
+    "given": "JH"
+   },
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Shin",
+    "given": "J"
+   },
+   {
+    "family": "Park",
+    "given": "JH"
+   },
+   {
+    "family": "Sung",
+    "given": "BH"
+   },
+   {
+    "family": "Sohn",
+    "given": "JH"
+   },
+   {
+    "family": "Seo",
+    "given": "JH"
+   },
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Kim",
+    "given": "SR"
+   },
+   {
+    "family": "Kweon",
+    "given": "DH"
+   }
+  ],
+  "PMID": "27867078",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jbiotec.2016.11.015"
+ },
+ {
+  "id": "pmid:27955868",
+  "type": "article-journal",
+  "title": "Engineered Kluyveromyces marxianus for pyruvate production at elevated temperature with simultaneous consumption of xylose and glucose.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Zhu",
+    "given": "Y"
+   },
+   {
+    "family": "Zhang",
+    "given": "J"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Sun",
+    "given": "L"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "27955868",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2016.11.110"
+ },
+ {
+  "id": "pmid:28360937",
+  "type": "article-journal",
+  "title": "Enhanced fermentative performance under stresses of multiple lignocellulose-derived inhibitors by overexpression of a typical 2-Cys peroxiredoxin from Kluyveromyces marxianus.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Gao",
+    "given": "J"
+   },
+   {
+    "family": "Feng",
+    "given": "H"
+   },
+   {
+    "family": "Yuan",
+    "given": "W"
+   },
+   {
+    "family": "Li",
+    "given": "Y"
+   },
+   {
+    "family": "Hou",
+    "given": "S"
+   },
+   {
+    "family": "Zhong",
+    "given": "S"
+   },
+   {
+    "family": "Bai",
+    "given": "F"
+   }
+  ],
+  "PMID": "28360937",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-017-0766-4",
+  "PMCID": "PMC5370469"
+ },
+ {
+  "id": "pmid:28444380",
+  "type": "article-journal",
+  "title": "Polymorphisms in the LAC12 gene explain lactose utilisation variability in Kluyveromyces marxianus strains.",
+  "container-title": "FEMS yeast research",
+  "author": [
+   {
+    "family": "Varela",
+    "given": "JA"
+   },
+   {
+    "family": "Montini",
+    "given": "N"
+   },
+   {
+    "family": "Scully",
+    "given": "D"
+   },
+   {
+    "family": "Van der Ploeg",
+    "given": "R"
+   },
+   {
+    "family": "Oreb",
+    "given": "M"
+   },
+   {
+    "family": "Boles",
+    "given": "E"
+   },
+   {
+    "family": "Hirota",
+    "given": "J"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   },
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Morrissey",
+    "given": "JP"
+   }
+  ],
+  "PMID": "28444380",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1093/femsyr/fox021"
+ },
+ {
+  "id": "pmid:28827530",
+  "type": "article-journal",
+  "title": "Development of a comprehensive set of tools for genome engineering in a cold- and thermo-tolerant Kluyveromyces marxianus yeast strain.",
+  "container-title": "Scientific reports",
+  "author": [
+   {
+    "family": "Nambu-Nishida",
+    "given": "Y"
+   },
+   {
+    "family": "Nishida",
+    "given": "K"
+   },
+   {
+    "family": "Hasunuma",
+    "given": "T"
+   },
+   {
+    "family": "Kondo",
+    "given": "A"
+   }
+  ],
+  "PMID": "28827530",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1038/s41598-017-08356-5",
+  "PMCID": "PMC5566861"
+ },
+ {
+  "id": "pmid:28899484",
+  "type": "article-journal",
+  "title": "Rational design of Kluyveromyces marxianus ZJB14056 aldo-keto reductase KmAKR to enhance diastereoselectivity and activity.",
+  "container-title": "Enzyme and microbial technology",
+  "author": [
+   {
+    "family": "Wang",
+    "given": "YJ"
+   },
+   {
+    "family": "Ying",
+    "given": "BB"
+   },
+   {
+    "family": "Shen",
+    "given": "W"
+   },
+   {
+    "family": "Zheng",
+    "given": "RC"
+   },
+   {
+    "family": "Zheng",
+    "given": "YG"
+   }
+  ],
+  "PMID": "28899484",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.enzmictec.2017.07.012"
+ },
+ {
+  "id": "pmid:28922844",
+  "type": "article-journal",
+  "title": "Characterization of inulinase promoter from Kluyveromyces marxianus for intensive protein expression in industrial biotechnology.",
+  "container-title": "FEMS yeast research",
+  "author": [
+   {
+    "family": "Gao",
+    "given": "J"
+   },
+   {
+    "family": "Yuan",
+    "given": "W"
+   },
+   {
+    "family": "Li",
+    "given": "Y"
+   },
+   {
+    "family": "Bai",
+    "given": "F"
+   },
+   {
+    "family": "Jiang",
+    "given": "Y"
+   }
+  ],
+  "PMID": "28922844",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1093/femsyr/fox062"
+ },
+ {
+  "id": "pmid:28931206",
+  "type": "article-journal",
+  "title": "Metabolic engineering a yeast to produce astaxanthin.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Lin",
+    "given": "YJ"
+   },
+   {
+    "family": "Chang",
+    "given": "JJ"
+   },
+   {
+    "family": "Lin",
+    "given": "HY"
+   },
+   {
+    "family": "Thia",
+    "given": "C"
+   },
+   {
+    "family": "Kao",
+    "given": "YY"
+   },
+   {
+    "family": "Huang",
+    "given": "CC"
+   },
+   {
+    "family": "Li",
+    "given": "WH"
+   }
+  ],
+  "PMID": "28931206",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2017.07.116"
+ },
+ {
+  "id": "pmid:29038279",
+  "type": "article-journal",
+  "title": "A CTG Clade Candida Yeast Genetically Engineered for the Genotype-Phenotype Characterization of Azole Antifungal Resistance in Human-Pathogenic Yeasts.",
+  "container-title": "Antimicrobial agents and chemotherapy",
+  "author": [
+   {
+    "family": "Accoceberry",
+    "given": "I"
+   },
+   {
+    "family": "Rougeron",
+    "given": "A"
+   },
+   {
+    "family": "Biteau",
+    "given": "N"
+   },
+   {
+    "family": "Chevrel",
+    "given": "P"
+   },
+   {
+    "family": "Fitton-Ouhabi",
+    "given": "V"
+   },
+   {
+    "family": "Noël",
+    "given": "T"
+   }
+  ],
+  "PMID": "29038279",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1128/aac.01483-17",
+  "PMCID": "PMC5740319"
+ },
+ {
+  "id": "pmid:29208409",
+  "type": "article-journal",
+  "title": "Direct fermentation of Jerusalem artichoke tuber powder for production of l-lactic acid and d-lactic acid by metabolically engineered Kluyveromyces marxianus.",
+  "container-title": "Journal of biotechnology",
+  "author": [
+   {
+    "family": "Bae",
+    "given": "JH"
+   },
+   {
+    "family": "Kim",
+    "given": "HJ"
+   },
+   {
+    "family": "Kim",
+    "given": "MJ"
+   },
+   {
+    "family": "Sung",
+    "given": "BH"
+   },
+   {
+    "family": "Jeon",
+    "given": "JH"
+   },
+   {
+    "family": "Kim",
+    "given": "HS"
+   },
+   {
+    "family": "Jin",
+    "given": "YS"
+   },
+   {
+    "family": "Kweon",
+    "given": "DH"
+   },
+   {
+    "family": "Sohn",
+    "given": "JH"
+   }
+  ],
+  "PMID": "29208409",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jbiotec.2017.12.001"
+ },
+ {
+  "id": "pmid:29213328",
+  "type": "article-journal",
+  "title": "The transcription factors Hsf1 and Msn2 of thermotolerant Kluyveromyces marxianus promote cell growth and ethanol fermentation of Saccharomyces cerevisiae at high temperatures.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Li",
+    "given": "P"
+   },
+   {
+    "family": "Fu",
+    "given": "X"
+   },
+   {
+    "family": "Zhang",
+    "given": "L"
+   },
+   {
+    "family": "Zhang",
+    "given": "Z"
+   },
+   {
+    "family": "Li",
+    "given": "J"
+   },
+   {
+    "family": "Li",
+    "given": "S"
+   }
+  ],
+  "PMID": "29213328",
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-017-0984-9",
+  "PMCID": "PMC5713069"
+ },
+ {
+  "id": "pmid:29351565",
+  "type": "article-journal",
+  "title": "SUMO targeting of a stress-tolerant Ulp1 SUMO protease.",
+  "container-title": "PloS one",
+  "author": [
+   {
+    "family": "Peek",
+    "given": "J"
+   },
+   {
+    "family": "Harvey",
+    "given": "C"
+   },
+   {
+    "family": "Gray",
+    "given": "D"
+   },
+   {
+    "family": "Rosenberg",
+    "given": "D"
+   },
+   {
+    "family": "Kolla",
+    "given": "L"
+   },
+   {
+    "family": "Levy-Myers",
+    "given": "R"
+   },
+   {
+    "family": "Yin",
+    "given": "R"
+   },
+   {
+    "family": "McMurry",
+    "given": "JL"
+   },
+   {
+    "family": "Kerscher",
+    "given": "O"
+   }
+  ],
+  "PMID": "29351565",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1371/journal.pone.0191391",
+  "PMCID": "PMC5774762"
+ },
+ {
+  "id": "pmid:29644852",
+  "type": "article-journal",
+  "title": "Improving the Organoleptic Properties of a Craft Mezcal Beverage by Increasing Fatty Acid Ethyl Ester Contents through ATF1 Expression in an Engineered Kluyveromyces marxianus UMPe-1 Yeast.",
+  "container-title": "Journal of agricultural and food chemistry",
+  "author": [
+   {
+    "family": "Campos-García",
+    "given": "J"
+   },
+   {
+    "family": "Vargas",
+    "given": "A"
+   },
+   {
+    "family": "Farías-Rosales",
+    "given": "L"
+   },
+   {
+    "family": "Miranda",
+    "given": "AL"
+   },
+   {
+    "family": "Meza-Carmen",
+    "given": "V"
+   },
+   {
+    "family": "Díaz-Pérez",
+    "given": "AL"
+   }
+  ],
+  "PMID": "29644852",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1021/acs.jafc.8b00730"
+ },
+ {
+  "id": "pmid:29651657",
+  "type": "article-journal",
+  "title": "Genetic and physiological basis for antibody production by Kluyveromyces marxianus.",
+  "container-title": "AMB Express",
+  "author": [
+   {
+    "family": "Nambu-Nishida",
+    "given": "Y"
+   },
+   {
+    "family": "Nishida",
+    "given": "K"
+   },
+   {
+    "family": "Hasunuma",
+    "given": "T"
+   },
+   {
+    "family": "Kondo",
+    "given": "A"
+   }
+  ],
+  "PMID": "29651657",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13568-018-0588-1",
+  "PMCID": "PMC5897269"
+ },
+ {
+  "id": "pmid:29687334",
+  "type": "article-journal",
+  "title": "Cell regeneration and cyclic catalysis of engineered Kluyveromyces marxianus of a D-psicose-3-epimerase gene from Agrobacterium tumefaciens for D-allulose production.",
+  "container-title": "World journal of microbiology & biotechnology",
+  "author": [
+   {
+    "family": "Yang",
+    "given": "P"
+   },
+   {
+    "family": "Zhu",
+    "given": "X"
+   },
+   {
+    "family": "Zheng",
+    "given": "Z"
+   },
+   {
+    "family": "Mu",
+    "given": "D"
+   },
+   {
+    "family": "Jiang",
+    "given": "S"
+   },
+   {
+    "family": "Luo",
+    "given": "S"
+   },
+   {
+    "family": "Wu",
+    "given": "Y"
+   },
+   {
+    "family": "Du",
+    "given": "M"
+   }
+  ],
+  "PMID": "29687334",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1007/s11274-018-2451-6"
+ },
+ {
+  "id": "pmid:29743485",
+  "type": "article-journal",
+  "title": "Genome-wide prediction of CRISPR/Cas9 targets in Kluyveromyces marxianus and its application to obtain a stable haploid strain.",
+  "container-title": "Scientific reports",
+  "author": [
+   {
+    "family": "Lee",
+    "given": "MH"
+   },
+   {
+    "family": "Lin",
+    "given": "JJ"
+   },
+   {
+    "family": "Lin",
+    "given": "YJ"
+   },
+   {
+    "family": "Chang",
+    "given": "JJ"
+   },
+   {
+    "family": "Ke",
+    "given": "HM"
+   },
+   {
+    "family": "Fan",
+    "given": "WL"
+   },
+   {
+    "family": "Wang",
+    "given": "TY"
+   },
+   {
+    "family": "Li",
+    "given": "WH"
+   }
+  ],
+  "PMID": "29743485",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1038/s41598-018-25366-z",
+  "PMCID": "PMC5943413"
+ },
+ {
+  "id": "pmid:30061929",
+  "type": "article-journal",
+  "title": "Engineering TATA-binding protein Spt15 to improve ethanol tolerance and production in Kluyveromyces marxianus.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Li",
+    "given": "P"
+   },
+   {
+    "family": "Fu",
+    "given": "X"
+   },
+   {
+    "family": "Li",
+    "given": "S"
+   },
+   {
+    "family": "Zhang",
+    "given": "L"
+   }
+  ],
+  "PMID": "30061929",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-018-1206-9",
+  "PMCID": "PMC6058363"
+ },
+ {
+  "id": "pmid:30151682",
+  "type": "article-journal",
+  "title": "Systematic optimization of gene expression of pentose phosphate pathway enhances ethanol production from a glucose/xylose mixed medium in a recombinant Saccharomyces cerevisiae.",
+  "container-title": "AMB Express",
+  "author": [
+   {
+    "family": "Kobayashi",
+    "given": "Y"
+   },
+   {
+    "family": "Sahara",
+    "given": "T"
+   },
+   {
+    "family": "Ohgiya",
+    "given": "S"
+   },
+   {
+    "family": "Kamagata",
+    "given": "Y"
+   },
+   {
+    "family": "Fujimori",
+    "given": "KE"
+   }
+  ],
+  "PMID": "30151682",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13568-018-0670-8",
+  "PMCID": "PMC6111014"
+ },
+ {
+  "id": "pmid:30221113",
+  "type": "article-journal",
+  "title": "Efficient purification of a recombinant tag-free thermostable Kluyveromyces marxianus uricase by pH-induced self-cleavage of intein and expression in Escherichia coli.",
+  "container-title": "3 Biotech",
+  "author": [
+   {
+    "family": "Wang",
+    "given": "B"
+   },
+   {
+    "family": "Luo",
+    "given": "L"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Ding",
+    "given": "R"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "30221113",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1007/s13205-018-1422-9",
+  "PMCID": "PMC6128813"
+ },
+ {
+  "id": "pmid:30244424",
+  "type": "article-journal",
+  "title": "Ethanol production from xylose is highly increased by the Kluyveromyces marxianus mutant 17694-DH1.",
+  "container-title": "Bioprocess and biosystems engineering",
+  "author": [
+   {
+    "family": "Kwon",
+    "given": "DH"
+   },
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Hong",
+    "given": "E"
+   },
+   {
+    "family": "Ha",
+    "given": "SJ"
+   }
+  ],
+  "PMID": "30244424",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00449-018-2014-0"
+ },
+ {
+  "id": "pmid:30279722",
+  "type": "article-journal",
+  "title": "Improved secretory expression of lignocellulolytic enzymes in Kluyveromyces marxianus by promoter and signal sequence engineering.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Zhu",
+    "given": "P"
+   },
+   {
+    "family": "Hu",
+    "given": "X"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   }
+  ],
+  "PMID": "30279722",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-018-1232-7",
+  "PMCID": "PMC6116501"
+ },
+ {
+  "id": "pmid:30354074",
+  "type": "article-journal",
+  "title": "Highly Multiplexed CRISPRi Repression of Respiratory Functions Enhances Mitochondrial Localized Ethyl Acetate Biosynthesis in Kluyveromyces marxianus.",
+  "container-title": "ACS synthetic biology",
+  "author": [
+   {
+    "family": "Löbs",
+    "given": "AK"
+   },
+   {
+    "family": "Schwartz",
+    "given": "C"
+   },
+   {
+    "family": "Thorwall",
+    "given": "S"
+   },
+   {
+    "family": "Wheeldon",
+    "given": "I"
+   }
+  ],
+  "PMID": "30354074",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1021/acssynbio.8b00331"
+ },
+ {
+  "id": "pmid:30397769",
+  "type": "article-journal",
+  "title": "Functional analysis of Mig1 and Rag5 as expressional regulators in thermotolerant yeast Kluyveromyces marxianus.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Nurcholis",
+    "given": "M"
+   },
+   {
+    "family": "Nitiyon",
+    "given": "S"
+   },
+   {
+    "family": "Suprayogi",
+    "given": ""
+   },
+   {
+    "family": "Rodrussamee",
+    "given": "N"
+   },
+   {
+    "family": "Lertwattanasakul",
+    "given": "N"
+   },
+   {
+    "family": "Limtong",
+    "given": "S"
+   },
+   {
+    "family": "Kosaka",
+    "given": "T"
+   },
+   {
+    "family": "Yamada",
+    "given": "M"
+   }
+  ],
+  "PMID": "30397769",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-018-9462-y"
+ },
+ {
+  "id": "pmid:30447623",
+  "type": "article-journal",
+  "title": "Efficient l-lactic acid production from corncob residue using metabolically engineered thermo-tolerant yeast.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Kong",
+    "given": "X"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Hua",
+    "given": "Y"
+   },
+   {
+    "family": "Zhu",
+    "given": "Y"
+   },
+   {
+    "family": "Li",
+    "given": "W"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "30447623",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2018.11.018"
+ },
+ {
+  "id": "pmid:30605900",
+  "type": "article-journal",
+  "title": "Overexpression of an Inulinase Gene in an Oleaginous Yeast, Aureobasidium melanogenum P10, for Efficient Lipid Production from Inulin.",
+  "container-title": "Journal of molecular microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Li",
+    "given": "YF"
+   },
+   {
+    "family": "Jiang",
+    "given": "H"
+   },
+   {
+    "family": "Hu",
+    "given": "Z"
+   },
+   {
+    "family": "Liu",
+    "given": "GL"
+   },
+   {
+    "family": "Chi",
+    "given": "ZM"
+   },
+   {
+    "family": "Chi",
+    "given": "Z"
+   }
+  ],
+  "PMID": "30605900",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.1159/000493139"
+ },
+ {
+  "id": "pmid:30618252",
+  "type": "article-journal",
+  "title": "Xylitol Production from Lignocellulosic Pentosans: A Rational Strain Engineering Approach toward a Multiproduct Biorefinery.",
+  "container-title": "Journal of agricultural and food chemistry",
+  "author": [
+   {
+    "family": "Dasgupta",
+    "given": "D"
+   },
+   {
+    "family": "Junghare",
+    "given": "V"
+   },
+   {
+    "family": "Nautiyal",
+    "given": "AK"
+   },
+   {
+    "family": "Jana",
+    "given": "A"
+   },
+   {
+    "family": "Hazra",
+    "given": "S"
+   },
+   {
+    "family": "Ghosh",
+    "given": "D"
+   }
+  ],
+  "PMID": "30618252",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1021/acs.jafc.8b05509"
+ },
+ {
+  "id": "pmid:30687296",
+  "type": "article-journal",
+  "title": "Expansion and Diversification of MFS Transporters in Kluyveromyces marxianus.",
+  "container-title": "Frontiers in microbiology",
+  "author": [
+   {
+    "family": "Varela",
+    "given": "JA"
+   },
+   {
+    "family": "Puricelli",
+    "given": "M"
+   },
+   {
+    "family": "Montini",
+    "given": "N"
+   },
+   {
+    "family": "Morrissey",
+    "given": "JP"
+   }
+  ],
+  "PMID": "30687296",
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "DOI": "10.3389/fmicb.2018.03330",
+  "PMCID": "PMC6335341"
+ },
+ {
+  "id": "pmid:30709398",
+  "type": "article-journal",
+  "title": "Release of glucose repression on xylose utilization in Kluyveromyces marxianus to enhance glucose-xylose co-utilization and xylitol production from corncob hydrolysate.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Hua",
+    "given": "Y"
+   },
+   {
+    "family": "Wang",
+    "given": "J"
+   },
+   {
+    "family": "Zhu",
+    "given": "Y"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Kong",
+    "given": "X"
+   },
+   {
+    "family": "Li",
+    "given": "W"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "30709398",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1186/s12934-019-1068-2",
+  "PMCID": "PMC6359873"
+ },
+ {
+  "id": "pmid:30744615",
+  "type": "article-journal",
+  "title": "Production of high titer of citric acid from inulin.",
+  "container-title": "BMC biotechnology",
+  "author": [
+   {
+    "family": "Rakicka",
+    "given": "M"
+   },
+   {
+    "family": "Wolniak",
+    "given": "J"
+   },
+   {
+    "family": "Lazar",
+    "given": "Z"
+   },
+   {
+    "family": "Rymowicz",
+    "given": "W"
+   }
+  ],
+  "PMID": "30744615",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1186/s12896-019-0503-0",
+  "PMCID": "PMC6371587"
+ },
+ {
+  "id": "pmid:30905070",
+  "type": "article-journal",
+  "title": "Synthesis of polyketides from low cost substrates by the thermotolerant yeast Kluyveromyces marxianus.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "McTaggart",
+    "given": "TL"
+   },
+   {
+    "family": "Bever",
+    "given": "D"
+   },
+   {
+    "family": "Bassett",
+    "given": "S"
+   },
+   {
+    "family": "Da Silva",
+    "given": "NA"
+   }
+  ],
+  "PMID": "30905070",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1002/bit.26976"
+ },
+ {
+  "id": "pmid:31044003",
+  "type": "article-journal",
+  "title": "Alleviation of catabolite repression in Kluyveromyces marxianus: the thermotolerant SBK1 mutant simultaneously coferments glucose and xylose.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Kim",
+    "given": "SB"
+   },
+   {
+    "family": "Kwon",
+    "given": "DH"
+   },
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Ha",
+    "given": "SJ"
+   }
+  ],
+  "PMID": "31044003",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-019-1431-x",
+  "PMCID": "PMC6477723"
+ },
+ {
+  "id": "pmid:31044368",
+  "type": "article-journal",
+  "title": "Overexpression of Endogenous Xylose Reductase Enhanced Xylitol Productivity at 40 °C by Thermotolerant Yeast Kluyveromyces marxianus.",
+  "container-title": "Applied biochemistry and biotechnology",
+  "author": [
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Kim",
+    "given": "JS"
+   },
+   {
+    "family": "Kweon",
+    "given": "DH"
+   },
+   {
+    "family": "Kweon",
+    "given": "DH"
+   },
+   {
+    "family": "Seo",
+    "given": "JH"
+   },
+   {
+    "family": "Ha",
+    "given": "SJ"
+   }
+  ],
+  "PMID": "31044368",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1007/s12010-019-03019-9"
+ },
+ {
+  "id": "pmid:31220674",
+  "type": "article-journal",
+  "title": "Improving the catalytic efficiency of aldo-keto reductase KmAKR towards t-butyl 6-cyano-(3R,5R)-dihydroxyhexanoate via semi-rational design.",
+  "container-title": "Bioorganic chemistry",
+  "author": [
+   {
+    "family": "Yu",
+    "given": "H"
+   },
+   {
+    "family": "Qiu",
+    "given": "S"
+   },
+   {
+    "family": "Cheng",
+    "given": "F"
+   },
+   {
+    "family": "Cheng",
+    "given": "YN"
+   },
+   {
+    "family": "Wang",
+    "given": "YJ"
+   },
+   {
+    "family": "Zheng",
+    "given": "YG"
+   }
+  ],
+  "PMID": "31220674",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.bioorg.2019.103018"
+ },
+ {
+  "id": "pmid:31289320",
+  "type": "article-journal",
+  "title": "MIG1 as a positive regulator for the histidine biosynthesis pathway and as a global regulator in thermotolerant yeast Kluyveromyces marxianus.",
+  "container-title": "Scientific reports",
+  "author": [
+   {
+    "family": "Nurcholis",
+    "given": "M"
+   },
+   {
+    "family": "Murata",
+    "given": "M"
+   },
+   {
+    "family": "Limtong",
+    "given": "S"
+   },
+   {
+    "family": "Kosaka",
+    "given": "T"
+   },
+   {
+    "family": "Yamada",
+    "given": "M"
+   }
+  ],
+  "PMID": "31289320",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1038/s41598-019-46411-5",
+  "PMCID": "PMC6617469"
+ },
+ {
+  "id": "pmid:31307575",
+  "type": "article-journal",
+  "title": "High-temperature ethanol production by a series of recombinant xylose-fermenting Kluyveromyces marxianus strains.",
+  "container-title": "Enzyme and microbial technology",
+  "author": [
+   {
+    "family": "Suzuki",
+    "given": "T"
+   },
+   {
+    "family": "Hoshino",
+    "given": "T"
+   },
+   {
+    "family": "Matsushika",
+    "given": "A"
+   }
+  ],
+  "PMID": "31307575",
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.enzmictec.2019.109359"
+ },
+ {
+  "id": "pmid:31953261",
+  "type": "article-journal",
+  "title": "Constructing a yeast to express the largest cellulosome complex on the cell surface.",
+  "container-title": "Proceedings of the National Academy of Sciences of the United States of America",
+  "author": [
+   {
+    "family": "Anandharaj",
+    "given": "M"
+   },
+   {
+    "family": "Lin",
+    "given": "YJ"
+   },
+   {
+    "family": "Rani",
+    "given": "RP"
+   },
+   {
+    "family": "Nadendla",
+    "given": "EK"
+   },
+   {
+    "family": "Ho",
+    "given": "MC"
+   },
+   {
+    "family": "Huang",
+    "given": "CC"
+   },
+   {
+    "family": "Cheng",
+    "given": "JF"
+   },
+   {
+    "family": "Chang",
+    "given": "JJ"
+   },
+   {
+    "family": "Li",
+    "given": "WH"
+   }
+  ],
+  "PMID": "31953261",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1073/pnas.1916529117",
+  "PMCID": "PMC7007581"
+ },
+ {
+  "id": "pmid:32328168",
+  "type": "article-journal",
+  "title": "From Eat to trEat: engineering the mitochondrial Eat1 enzyme for enhanced ethyl acetate production in Escherichia coli.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Kruis",
+    "given": "AJ"
+   },
+   {
+    "family": "Bohnenkamp",
+    "given": "AC"
+   },
+   {
+    "family": "Nap",
+    "given": "B"
+   },
+   {
+    "family": "Nielsen",
+    "given": "J"
+   },
+   {
+    "family": "Mars",
+    "given": "AE"
+   },
+   {
+    "family": "Wijffels",
+    "given": "RH"
+   },
+   {
+    "family": "van der Oost",
+    "given": "J"
+   },
+   {
+    "family": "Kengen",
+    "given": "SWM"
+   },
+   {
+    "family": "Weusthuis",
+    "given": "RA"
+   }
+  ],
+  "PMID": "32328168",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-020-01711-1",
+  "PMCID": "PMC7168974"
+ },
+ {
+  "id": "pmid:32340345",
+  "type": "article-journal",
+  "title": "Engineering Yarrowia lipolytica for the Synthesis of Glutathione from Organic By-Products.",
+  "container-title": "Microorganisms",
+  "author": [
+   {
+    "family": "Do",
+    "given": "DTH"
+   },
+   {
+    "family": "Fickers",
+    "given": "P"
+   }
+  ],
+  "PMID": "32340345",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.3390/microorganisms8040611",
+  "PMCID": "PMC7232331"
+ },
+ {
+  "id": "pmid:32405771",
+  "type": "article-journal",
+  "title": "One-step utilization of inulin for docosahexaenoic acid (DHA) production by recombinant Aurantiochytrium sp. carrying Kluyveromyces marxianus inulinase.",
+  "container-title": "Bioprocess and biosystems engineering",
+  "author": [
+   {
+    "family": "Yu",
+    "given": "XJ"
+   },
+   {
+    "family": "Wang",
+    "given": "ZP"
+   },
+   {
+    "family": "Liang",
+    "given": "MJ"
+   },
+   {
+    "family": "Wang",
+    "given": "Z"
+   },
+   {
+    "family": "Liu",
+    "given": "XY"
+   },
+   {
+    "family": "Hu",
+    "given": "L"
+   },
+   {
+    "family": "Xia",
+    "given": "J"
+   }
+  ],
+  "PMID": "32405771",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00449-020-02371-z"
+ },
+ {
+  "id": "pmid:32469948",
+  "type": "article-journal",
+  "title": "Constructing a human complex type N-linked glycosylation pathway in Kluyveromyces marxianus.",
+  "container-title": "PloS one",
+  "author": [
+   {
+    "family": "Lee",
+    "given": "MH"
+   },
+   {
+    "family": "Hsu",
+    "given": "TL"
+   },
+   {
+    "family": "Lin",
+    "given": "JJ"
+   },
+   {
+    "family": "Lin",
+    "given": "YJ"
+   },
+   {
+    "family": "Kao",
+    "given": "YY"
+   },
+   {
+    "family": "Chang",
+    "given": "JJ"
+   },
+   {
+    "family": "Li",
+    "given": "WH"
+   }
+  ],
+  "PMID": "32469948",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1371/journal.pone.0233492",
+  "PMCID": "PMC7259728"
+ },
+ {
+  "id": "pmid:32706912",
+  "type": "article-journal",
+  "title": "Obtainment, selection and characterization of a mutant strain of Kluyveromyces marxianus that displays improved production of 2-phenylethanol and enhanced DAHP synthase activity.",
+  "container-title": "Journal of applied microbiology",
+  "author": [
+   {
+    "family": "de Lima",
+    "given": "LA"
+   },
+   {
+    "family": "Ventorim",
+    "given": "RZ"
+   },
+   {
+    "family": "Bianchini",
+    "given": "IA"
+   },
+   {
+    "family": "de Queiroz",
+    "given": "MV"
+   },
+   {
+    "family": "Fietto",
+    "given": "LG"
+   },
+   {
+    "family": "da Silveira",
+    "given": "WB"
+   }
+  ],
+  "PMID": "32706912",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1111/jam.14793"
+ },
+ {
+  "id": "pmid:32776206",
+  "type": "article-journal",
+  "title": "Functional analysis of PGI1 and ZWF1 in thermotolerant yeast Kluyveromyces marxianus.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Ren",
+    "given": "L"
+   },
+   {
+    "family": "Zeng",
+    "given": "S"
+   },
+   {
+    "family": "Zhang",
+    "given": "S"
+   },
+   {
+    "family": "Xu",
+    "given": "D"
+   },
+   {
+    "family": "Zeng",
+    "given": "X"
+   },
+   {
+    "family": "Li",
+    "given": "F"
+   }
+  ],
+  "PMID": "32776206",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-020-10808-4"
+ },
+ {
+  "id": "pmid:32850717",
+  "type": "article-journal",
+  "title": "Effect of a Novel Alpha/Beta Hydrolase Domain Protein on Tolerance of K. marxianus to Lignocellulosic Biomass Derived Inhibitors.",
+  "container-title": "Frontiers in bioengineering and biotechnology",
+  "author": [
+   {
+    "family": "Wu",
+    "given": "D"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "32850717",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.3389/fbioe.2020.00844",
+  "PMCID": "PMC7396682"
+ },
+ {
+  "id": "pmid:32891863",
+  "type": "article-journal",
+  "title": "Co-evolution of activity and thermostability of an aldo-keto reductase KmAKR for asymmetric synthesis of statin precursor dichiral diols.",
+  "container-title": "Bioorganic chemistry",
+  "author": [
+   {
+    "family": "Qiu",
+    "given": "S"
+   },
+   {
+    "family": "Cheng",
+    "given": "F"
+   },
+   {
+    "family": "Jin",
+    "given": "LJ"
+   },
+   {
+    "family": "Chen",
+    "given": "Y"
+   },
+   {
+    "family": "Li",
+    "given": "SF"
+   },
+   {
+    "family": "Wang",
+    "given": "YJ"
+   },
+   {
+    "family": "Zheng",
+    "given": "YG"
+   }
+  ],
+  "PMID": "32891863",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.bioorg.2020.104228"
+ },
+ {
+  "id": "pmid:32912693",
+  "type": "article-journal",
+  "title": "Glycerol uptake and synthesis systems contribute to the osmotic tolerance of Kluyveromyces marxianus.",
+  "container-title": "Enzyme and microbial technology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "B"
+   },
+   {
+    "family": "Ren",
+    "given": "L"
+   },
+   {
+    "family": "Wang",
+    "given": "H"
+   },
+   {
+    "family": "Xu",
+    "given": "D"
+   },
+   {
+    "family": "Zeng",
+    "given": "X"
+   },
+   {
+    "family": "Li",
+    "given": "F"
+   }
+  ],
+  "PMID": "32912693",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.enzmictec.2020.109641"
+ },
+ {
+  "id": "pmid:32995271",
+  "type": "article-journal",
+  "title": "Developing a broad-range promoter set for metabolic engineering in the thermotolerant yeast Kluyveromyces marxianus.",
+  "container-title": "Metabolic engineering communications",
+  "author": [
+   {
+    "family": "Lang",
+    "given": "X"
+   },
+   {
+    "family": "Besada-Lombana",
+    "given": "PB"
+   },
+   {
+    "family": "Li",
+    "given": "M"
+   },
+   {
+    "family": "Da Silva",
+    "given": "NA"
+   },
+   {
+    "family": "Wheeldon",
+    "given": "I"
+   }
+  ],
+  "PMID": "32995271",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.mec.2020.e00145",
+  "PMCID": "PMC7508702"
+ },
+ {
+  "id": "pmid:33034040",
+  "type": "article-journal",
+  "title": "Engineering better catalytic activity and acidic adaptation into Kluyveromyces marxianus exoinulinase using site-directed mutagenesis.",
+  "container-title": "Journal of the science of food and agriculture",
+  "author": [
+   {
+    "family": "Wang",
+    "given": "CH"
+   },
+   {
+    "family": "Xiong",
+    "given": "WP"
+   },
+   {
+    "family": "Huang",
+    "given": "C"
+   },
+   {
+    "family": "Li",
+    "given": "XM"
+   },
+   {
+    "family": "Wang",
+    "given": "QY"
+   },
+   {
+    "family": "Huang",
+    "given": "RB"
+   }
+  ],
+  "PMID": "33034040",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1002/jsfa.10873"
+ },
+ {
+  "id": "pmid:33046681",
+  "type": "article-journal",
+  "title": "Overexpression of Mutant Galactose Permease (ScGal2_N376F) Effective for Utilization of Glucose/Xylose or Glucose/ Galactose Mixture by Engineered Kluyveromyces marxianus.",
+  "container-title": "Journal of microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Kwon",
+    "given": "DH"
+   },
+   {
+    "family": "Kim",
+    "given": "SB"
+   },
+   {
+    "family": "Park",
+    "given": "JB"
+   },
+   {
+    "family": "Ha",
+    "given": "SJ"
+   }
+  ],
+  "PMID": "33046681",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.4014/jmb.2008.08035",
+  "PMCID": "PMC9728301"
+ },
+ {
+  "id": "pmid:33130889",
+  "type": "article-journal",
+  "title": "Anoxia-induced mitophagy in the yeast Kluyveromyces marxianus.",
+  "container-title": "FEMS yeast research",
+  "author": [
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Kagawa",
+    "given": "S"
+   },
+   {
+    "family": "Ogami",
+    "given": "K"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   }
+  ],
+  "PMID": "33130889",
+  "issued": {
+   "date-parts": [
+    [
+     2020
+    ]
+   ]
+  },
+  "DOI": "10.1093/femsyr/foaa057"
+ },
+ {
+  "id": "pmid:33407831",
+  "type": "article-journal",
+  "title": "CRISPR-mediated multigene integration enables Shikimate pathway refactoring for enhanced 2-phenylethanol biosynthesis in Kluyveromyces marxianus.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Li",
+    "given": "M"
+   },
+   {
+    "family": "Lang",
+    "given": "X"
+   },
+   {
+    "family": "Moran Cabrera",
+    "given": "M"
+   },
+   {
+    "family": "De Keyser",
+    "given": "S"
+   },
+   {
+    "family": "Sun",
+    "given": "X"
+   },
+   {
+    "family": "Da Silva",
+    "given": "N"
+   },
+   {
+    "family": "Wheeldon",
+    "given": "I"
+   }
+  ],
+  "PMID": "33407831",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-020-01852-3",
+  "PMCID": "PMC7788952"
+ },
+ {
+  "id": "pmid:33661900",
+  "type": "article-journal",
+  "title": "Construction of engineered RuBisCO Kluyveromyces marxianus for a dual microbial bioethanol production system.",
+  "container-title": "PloS one",
+  "author": [
+   {
+    "family": "Ha-Tran",
+    "given": "DM"
+   },
+   {
+    "family": "Lai",
+    "given": "RY"
+   },
+   {
+    "family": "Nguyen",
+    "given": "TTM"
+   },
+   {
+    "family": "Huang",
+    "given": "E"
+   },
+   {
+    "family": "Lo",
+    "given": "SC"
+   },
+   {
+    "family": "Huang",
+    "given": "CC"
+   }
+  ],
+  "PMID": "33661900",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1371/journal.pone.0247135",
+  "PMCID": "PMC7932148"
+ },
+ {
+  "id": "pmid:33757229",
+  "type": "article-journal",
+  "title": "Kluyveromyces marxianus flocculence and growth at high temperature is dependent on the presence of the protein p37.",
+  "container-title": "Microbiology (Reading, England)",
+  "author": [
+   {
+    "family": "Falcão Moreira",
+    "given": "R"
+   },
+   {
+    "family": "Fernandes",
+    "given": "PA"
+   },
+   {
+    "family": "Moradas-Ferreira",
+    "given": "P"
+   }
+  ],
+  "PMID": "33757229",
+  "issued": {
+   "date-parts": [
+    [
+     1998
+    ]
+   ]
+  },
+  "DOI": "10.1099/00221287-144-3-681"
+ },
+ {
+  "id": "pmid:33937967",
+  "type": "article-journal",
+  "title": "Uncoupling glucose sensing from GAL metabolism for heterologous lactose fermentation in Saccharomyces cerevisiae.",
+  "container-title": "Biotechnology letters",
+  "author": [
+   {
+    "family": "Zou",
+    "given": "J"
+   },
+   {
+    "family": "Chen",
+    "given": "X"
+   },
+   {
+    "family": "Hu",
+    "given": "Y"
+   },
+   {
+    "family": "Xiao",
+    "given": "D"
+   },
+   {
+    "family": "Guo",
+    "given": "X"
+   },
+   {
+    "family": "Chang",
+    "given": "X"
+   },
+   {
+    "family": "Zhou",
+    "given": "L"
+   }
+  ],
+  "PMID": "33937967",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1007/s10529-021-03136-8"
+ },
+ {
+  "id": "pmid:34125995",
+  "type": "article-journal",
+  "title": "Fluorescence-based screening for engineered aldo-keto reductase KmAKR with improved catalytic performance and extended substrate scope.",
+  "container-title": "Biotechnology journal",
+  "author": [
+   {
+    "family": "Qiu",
+    "given": "S"
+   },
+   {
+    "family": "Xu",
+    "given": "SY"
+   },
+   {
+    "family": "Li",
+    "given": "SF"
+   },
+   {
+    "family": "Meng",
+    "given": "KM"
+   },
+   {
+    "family": "Cheng",
+    "given": "F"
+   },
+   {
+    "family": "Wang",
+    "given": "YJ"
+   },
+   {
+    "family": "Zheng",
+    "given": "YG"
+   }
+  ],
+  "PMID": "34125995",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1002/biot.202100130"
+ },
+ {
+  "id": "pmid:34436762",
+  "type": "article-journal",
+  "title": "Tuning enzymatic properties by protein engineering toward catalytic tetrad of carbonyl reductase.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "Cheng",
+    "given": "F"
+   },
+   {
+    "family": "Zhai",
+    "given": "QY"
+   },
+   {
+    "family": "Gao",
+    "given": "XF"
+   },
+   {
+    "family": "Liu",
+    "given": "HT"
+   },
+   {
+    "family": "Qiu",
+    "given": "S"
+   },
+   {
+    "family": "Wang",
+    "given": "YJ"
+   },
+   {
+    "family": "Zheng",
+    "given": "YG"
+   }
+  ],
+  "PMID": "34436762",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1002/bit.27925"
+ },
+ {
+  "id": "pmid:34584841",
+  "type": "article-journal",
+  "title": "Elimination of aromatic fusel alcohols as by-products of Saccharomyces cerevisiae strains engineered for phenylpropanoid production by 2-oxo-acid decarboxylase replacement.",
+  "container-title": "Metabolic engineering communications",
+  "author": [
+   {
+    "family": "Hassing",
+    "given": "EJ"
+   },
+   {
+    "family": "Buijs",
+    "given": "J"
+   },
+   {
+    "family": "Blankerts",
+    "given": "N"
+   },
+   {
+    "family": "Luttik",
+    "given": "MA"
+   },
+   {
+    "family": "Hulster",
+    "given": "EA"
+   },
+   {
+    "family": "Pronk",
+    "given": "JT"
+   },
+   {
+    "family": "Daran",
+    "given": "JM"
+   }
+  ],
+  "PMID": "34584841",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.mec.2021.e00183",
+  "PMCID": "PMC8450241"
+ },
+ {
+  "id": "pmid:34791694",
+  "type": "article-journal",
+  "title": "Characterization and optimization of the LAC4 upstream region for low-leakage expression in Kluyveromyces marxianus.",
+  "container-title": "Yeast (Chichester, England)",
+  "author": [
+   {
+    "family": "Liu",
+    "given": "B"
+   },
+   {
+    "family": "Wu",
+    "given": "P"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yin",
+    "given": "A"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "34791694",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.1002/yea.3682"
+ },
+ {
+  "id": "pmid:34809677",
+  "type": "article-journal",
+  "title": "Coordinately express hemicellulolytic enzymes in Kluyveromyces marxianus to improve the saccharification and ethanol production from corncobs.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Lan",
+    "given": "Q"
+   },
+   {
+    "family": "Duan",
+    "given": "Y"
+   },
+   {
+    "family": "Wu",
+    "given": "P"
+   },
+   {
+    "family": "Li",
+    "given": "X"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Shi",
+    "given": "B"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "34809677",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-021-02070-1",
+  "PMCID": "PMC8607645"
+ },
+ {
+  "id": "pmid:34906221",
+  "type": "article-journal",
+  "title": "Characterization and modulation of endoplasmic reticulum stress response target genes in Kluyveromyces marxianus to improve secretory expressions of heterologous proteins.",
+  "container-title": "Biotechnology for biofuels",
+  "author": [
+   {
+    "family": "Shi",
+    "given": "T"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Xue",
+    "given": "A"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   },
+   {
+    "family": "He",
+    "given": "Y"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   }
+  ],
+  "PMID": "34906221",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.1186/s13068-021-02086-7",
+  "PMCID": "PMC8670139"
+ },
+ {
+  "id": "pmid:34960188",
+  "type": "article-journal",
+  "title": "A Single Vaccination of IBDV Subviral Particles Generated by Kluyveromyces marxianus Efficiently Protects Chickens against Novel Variant and Classical IBDV Strains.",
+  "container-title": "Vaccines",
+  "author": [
+   {
+    "family": "Yang",
+    "given": "D"
+   },
+   {
+    "family": "Zhang",
+    "given": "L"
+   },
+   {
+    "family": "Duan",
+    "given": "J"
+   },
+   {
+    "family": "Huang",
+    "given": "Q"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "34960188",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.3390/vaccines9121443",
+  "PMCID": "PMC8706917"
+ },
+ {
+  "id": "pmid:35072340",
+  "type": "article-journal",
+  "title": "Characterization of essential elements for improved episomal expressions in Kluyveromyces marxianus.",
+  "container-title": "Biotechnology journal",
+  "author": [
+   {
+    "family": "Wu",
+    "given": "P"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "35072340",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.1002/biot.202100382"
+ },
+ {
+  "id": "pmid:35087802",
+  "type": "article-journal",
+  "title": "Meiosis-Based Laboratory Evolution of the Thermal Tolerance in Kluyveromyces marxianus.",
+  "container-title": "Frontiers in bioengineering and biotechnology",
+  "author": [
+   {
+    "family": "Wu",
+    "given": "L"
+   },
+   {
+    "family": "Lyu",
+    "given": "Y"
+   },
+   {
+    "family": "Wu",
+    "given": "P"
+   },
+   {
+    "family": "Luo",
+    "given": "T"
+   },
+   {
+    "family": "Zeng",
+    "given": "J"
+   },
+   {
+    "family": "Shi",
+    "given": "T"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "35087802",
+  "issued": {
+   "date-parts": [
+    [
+     2021
+    ]
+   ]
+  },
+  "DOI": "10.3389/fbioe.2021.799756",
+  "PMCID": "PMC8786734"
+ },
+ {
+  "id": "pmid:35333706",
+  "type": "article-journal",
+  "title": "Identification of a novel gene required for competitive growth at high temperature in the thermotolerant yeast Kluyveromyces marxianus.",
+  "container-title": "Microbiology (Reading, England)",
+  "author": [
+   {
+    "family": "Montini",
+    "given": "N"
+   },
+   {
+    "family": "Doughty",
+    "given": "TW"
+   },
+   {
+    "family": "Domenzain",
+    "given": "I"
+   },
+   {
+    "family": "Fenton",
+    "given": "DA"
+   },
+   {
+    "family": "Baranov",
+    "given": "PV"
+   },
+   {
+    "family": "Harrington",
+    "given": "R"
+   },
+   {
+    "family": "Nielsen",
+    "given": "J"
+   },
+   {
+    "family": "Siewers",
+    "given": "V"
+   },
+   {
+    "family": "Morrissey",
+    "given": "JP"
+   }
+  ],
+  "PMID": "35333706",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.1099/mic.0.001148",
+  "PMCID": "PMC9558357"
+ },
+ {
+  "id": "pmid:35495719",
+  "type": "article-journal",
+  "title": "Correlation Between Improved Mating Efficiency and Weakened Scaffold-Kinase Interaction in the Mating Pheromone Response Pathway Revealed by Interspecies Complementation.",
+  "container-title": "Frontiers in microbiology",
+  "author": [
+   {
+    "family": "Shi",
+    "given": "T"
+   },
+   {
+    "family": "Zeng",
+    "given": "J"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "35495719",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.3389/fmicb.2022.865829",
+  "PMCID": "PMC9048679"
+ },
+ {
+  "id": "pmid:35526810",
+  "type": "article-journal",
+  "title": "Snf1p/Hxk2p/Mig1p pathway regulates hexose transporters transcript levels, affecting the exponential growth and mitochondrial respiration of Saccharomyces cerevisiae.",
+  "container-title": "Fungal genetics and biology : FG & B",
+  "author": [
+   {
+    "family": "Carrillo-Garmendia",
+    "given": "A"
+   },
+   {
+    "family": "Martinez-Ortiz",
+    "given": "C"
+   },
+   {
+    "family": "Martinez-Garfias",
+    "given": "JG"
+   },
+   {
+    "family": "Suarez-Sandoval",
+    "given": "SE"
+   },
+   {
+    "family": "González-Hernández",
+    "given": "JC"
+   },
+   {
+    "family": "Nava",
+    "given": "GM"
+   },
+   {
+    "family": "Dufoo-Hurtado",
+    "given": "MD"
+   },
+   {
+    "family": "Madrigal-Perez",
+    "given": "LA"
+   }
+  ],
+  "PMID": "35526810",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.fgb.2022.103701"
+ },
+ {
+  "id": "pmid:35744758",
+  "type": "article-journal",
+  "title": "Establishment of a Cre-loxP System Based on a Leaky LAC4 Promoter and an Unstable panARS Element in Kluyveromyces marxianus.",
+  "container-title": "Microorganisms",
+  "author": [
+   {
+    "family": "Ren",
+    "given": "H"
+   },
+   {
+    "family": "Yin",
+    "given": "A"
+   },
+   {
+    "family": "Wu",
+    "given": "P"
+   },
+   {
+    "family": "Zhou",
+    "given": "H"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "35744758",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.3390/microorganisms10061240",
+  "PMCID": "PMC9227491"
+ },
+ {
+  "id": "pmid:36055542",
+  "type": "article-journal",
+  "title": "Ergosterol production at elevated temperatures by Upc2-overexpressing Kluyveromyces marxianus using Jerusalem artichoke tubers as feedstock.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Liu",
+    "given": "Y"
+   },
+   {
+    "family": "Ren",
+    "given": "L"
+   },
+   {
+    "family": "Zhao",
+    "given": "J"
+   },
+   {
+    "family": "Xia",
+    "given": "Y"
+   },
+   {
+    "family": "Zhang",
+    "given": "Z"
+   },
+   {
+    "family": "Guan",
+    "given": "X"
+   },
+   {
+    "family": "Huang",
+    "given": "S"
+   },
+   {
+    "family": "Wang",
+    "given": "Q"
+   },
+   {
+    "family": "Wu",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Z"
+   },
+   {
+    "family": "Xu",
+    "given": "D"
+   },
+   {
+    "family": "Li",
+    "given": "F"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   }
+  ],
+  "PMID": "36055542",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2022.127878"
+ },
+ {
+  "id": "pmid:36163554",
+  "type": "article-journal",
+  "title": "Applicability of the heterologous yeast promoters for recombinant protein production in Pichia pastoris.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Erden-Karaoğlan",
+    "given": "F"
+   },
+   {
+    "family": "Karaoğlan",
+    "given": "M"
+   }
+  ],
+  "PMID": "36163554",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-022-12183-8"
+ },
+ {
+  "id": "pmid:36283669",
+  "type": "article-journal",
+  "title": "Improving glycerol utilization during high-temperature xylitol production with Kluyveromyces marxianus using a transient clustered regularly interspaced short palindromic repeats (CRISPR)/CRISPR-associated protein 9 system.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Ren",
+    "given": "L"
+   },
+   {
+    "family": "Liu",
+    "given": "Y"
+   },
+   {
+    "family": "Xia",
+    "given": "Y"
+   },
+   {
+    "family": "Huang",
+    "given": "Y"
+   },
+   {
+    "family": "Liu",
+    "given": "Y"
+   },
+   {
+    "family": "Wang",
+    "given": "Y"
+   },
+   {
+    "family": "Li",
+    "given": "P"
+   },
+   {
+    "family": "Chang",
+    "given": "K"
+   },
+   {
+    "family": "Xu",
+    "given": "D"
+   },
+   {
+    "family": "Li",
+    "given": "F"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   }
+  ],
+  "PMID": "36283669",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2022.128179"
+ },
+ {
+  "id": "pmid:36338133",
+  "type": "article-journal",
+  "title": "Lignocellulosic xylitol production from corncob using engineered Kluyveromyces marxianus.",
+  "container-title": "Frontiers in bioengineering and biotechnology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "J"
+   },
+   {
+    "family": "Xu",
+    "given": "T"
+   },
+   {
+    "family": "Wang",
+    "given": "X"
+   },
+   {
+    "family": "Jing",
+    "given": "X"
+   },
+   {
+    "family": "Zhang",
+    "given": "J"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   },
+   {
+    "family": "Xu",
+    "given": "J"
+   },
+   {
+    "family": "Wang",
+    "given": "J"
+   }
+  ],
+  "PMID": "36338133",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.3389/fbioe.2022.1029203",
+  "PMCID": "PMC9633946"
+ },
+ {
+  "id": "pmid:36419165",
+  "type": "article-journal",
+  "title": "Metabolic engineering of Clostridium autoethanogenum for ethyl acetate production from CO.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Dykstra",
+    "given": "JC"
+   },
+   {
+    "family": "van Oort",
+    "given": "J"
+   },
+   {
+    "family": "Yazdi",
+    "given": "AT"
+   },
+   {
+    "family": "Vossen",
+    "given": "E"
+   },
+   {
+    "family": "Patinios",
+    "given": "C"
+   },
+   {
+    "family": "van der Oost",
+    "given": "J"
+   },
+   {
+    "family": "Sousa",
+    "given": "DZ"
+   },
+   {
+    "family": "Kengen",
+    "given": "SWM"
+   }
+  ],
+  "PMID": "36419165",
+  "issued": {
+   "date-parts": [
+    [
+     2022
+    ]
+   ]
+  },
+  "DOI": "10.1186/s12934-022-01964-5",
+  "PMCID": "PMC9686113"
+ },
+ {
+  "id": "pmid:37150366",
+  "type": "article-journal",
+  "title": "Relevance of aromatic and polar amino acids in the specificity of Inulinase ISO3 from Kluyveromyces marxianus: A molecular dynamics approach with an experimental verification.",
+  "container-title": "International journal of biological macromolecules",
+  "author": [
+   {
+    "family": "Trapala",
+    "given": "J"
+   },
+   {
+    "family": "González-Andrade",
+    "given": "M"
+   },
+   {
+    "family": "Olvera",
+    "given": "C"
+   },
+   {
+    "family": "Cayetano-Cruz",
+    "given": "M"
+   },
+   {
+    "family": "Sanz-Aparicio",
+    "given": "J"
+   },
+   {
+    "family": "Jimenez-Ortega",
+    "given": "E"
+   },
+   {
+    "family": "Bustos-Jaimes",
+    "given": "I"
+   },
+   {
+    "family": "Montiel",
+    "given": "C"
+   }
+  ],
+  "PMID": "37150366",
+  "issued": {
+   "date-parts": [
+    [
+     2023
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.ijbiomac.2023.124734"
+ },
+ {
+  "id": "pmid:37196384",
+  "type": "article-journal",
+  "title": "Alternative secretory signal sequences for recombinant protein production in Pichia pastoris.",
+  "container-title": "Enzyme and microbial technology",
+  "author": [
+   {
+    "family": "Karaoğlan",
+    "given": "M"
+   }
+  ],
+  "PMID": "37196384",
+  "issued": {
+   "date-parts": [
+    [
+     2023
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.enzmictec.2023.110256"
+ },
+ {
+  "id": "pmid:37405435",
+  "type": "article-journal",
+  "title": "Genome engineering of Kluyveromyces marxianus for high D-( -)-lactic acid production under low pH conditions.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Gosalawit",
+    "given": "C"
+   },
+   {
+    "family": "Khunnonkwao",
+    "given": "P"
+   },
+   {
+    "family": "Jantama",
+    "given": "K"
+   }
+  ],
+  "PMID": "37405435",
+  "issued": {
+   "date-parts": [
+    [
+     2023
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-023-12658-2"
+ },
+ {
+  "id": "pmid:37430283",
+  "type": "article-journal",
+  "title": "The novel properties of Kluyveromyces marxianus glucose sensor/receptor repressor pathway and the construction of glucose repression-released strains.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Wang",
+    "given": "L"
+   },
+   {
+    "family": "Wang",
+    "given": "A"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "37430283",
+  "issued": {
+   "date-parts": [
+    [
+     2023
+    ]
+   ]
+  },
+  "DOI": "10.1186/s12934-023-02138-7",
+  "PMCID": "PMC10331984"
+ },
+ {
+  "id": "pmid:38264583",
+  "type": "article-journal",
+  "title": "High-level expression of leghemoglobin in Kluyveromyces marxianus by remodeling the heme metabolism pathway.",
+  "container-title": "Frontiers in bioengineering and biotechnology",
+  "author": [
+   {
+    "family": "Tian",
+    "given": "T"
+   },
+   {
+    "family": "Wu",
+    "given": "X"
+   },
+   {
+    "family": "Wu",
+    "given": "P"
+   },
+   {
+    "family": "Lu",
+    "given": "X"
+   },
+   {
+    "family": "Wang",
+    "given": "Q"
+   },
+   {
+    "family": "Lin",
+    "given": "Y"
+   },
+   {
+    "family": "Liu",
+    "given": "C"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "38264583",
+  "issued": {
+   "date-parts": [
+    [
+     2023
+    ]
+   ]
+  },
+  "DOI": "10.3389/fbioe.2023.1329016",
+  "PMCID": "PMC10804453"
+ },
+ {
+  "id": "pmid:38441729",
+  "type": "article-journal",
+  "title": "CRISPRi-induced transcriptional regulation of IAH1 gene and its influence on volatile compounds profile in Kluyveromyces marxianus DU3.",
+  "container-title": "World journal of microbiology & biotechnology",
+  "author": [
+   {
+    "family": "Muñoz-Miranda",
+    "given": "LA"
+   },
+   {
+    "family": "Zepeda-Peña",
+    "given": "AC"
+   },
+   {
+    "family": "Casas-Godoy",
+    "given": "L"
+   },
+   {
+    "family": "Pereira-Santana",
+    "given": "A"
+   },
+   {
+    "family": "Méndez-Zamora",
+    "given": "A"
+   },
+   {
+    "family": "Barrera-Martínez",
+    "given": "I"
+   },
+   {
+    "family": "Rodríguez-Zapata",
+    "given": "L"
+   },
+   {
+    "family": "Gschaedler-Mathis",
+    "given": "AC"
+   },
+   {
+    "family": "Figueroa-Yáñez",
+    "given": "LJ"
+   }
+  ],
+  "PMID": "38441729",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1007/s11274-023-03811-0"
+ },
+ {
+  "id": "pmid:38522677",
+  "type": "article-journal",
+  "title": "Enhancing simultaneous saccharification and co-fermentation of corncob by Kluyveromyces marxianus through overexpression of putative transcription regulator.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "K"
+   },
+   {
+    "family": "Jiang",
+    "given": "Z"
+   },
+   {
+    "family": "Li",
+    "given": "X"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "38522677",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2024.130627"
+ },
+ {
+  "id": "pmid:38554744",
+  "type": "article-journal",
+  "title": "Repurposing plant hormone receptors as chemically-inducible genetic switches for dynamic regulation in yeast.",
+  "container-title": "Metabolic engineering",
+  "author": [
+   {
+    "family": "Wei",
+    "given": "S"
+   },
+   {
+    "family": "Li",
+    "given": "M"
+   },
+   {
+    "family": "Lang",
+    "given": "X"
+   },
+   {
+    "family": "Robertson",
+    "given": "NR"
+   },
+   {
+    "family": "Park",
+    "given": "SY"
+   },
+   {
+    "family": "Cutler",
+    "given": "SR"
+   },
+   {
+    "family": "Wheeldon",
+    "given": "I"
+   }
+  ],
+  "PMID": "38554744",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.ymben.2024.03.006"
+ },
+ {
+  "id": "pmid:38592508",
+  "type": "article-journal",
+  "title": "Transcriptome analysis of Kluyveromyces marxianus under succinic acid stress and development of robust strains.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Zeng",
+    "given": "DW"
+   },
+   {
+    "family": "Yang",
+    "given": "YQ"
+   },
+   {
+    "family": "Wang",
+    "given": "Q"
+   },
+   {
+    "family": "Zhang",
+    "given": "FL"
+   },
+   {
+    "family": "Zhang",
+    "given": "MD"
+   },
+   {
+    "family": "Liao",
+    "given": "S"
+   },
+   {
+    "family": "Liu",
+    "given": "ZQ"
+   },
+   {
+    "family": "Fan",
+    "given": "YC"
+   },
+   {
+    "family": "Liu",
+    "given": "CG"
+   },
+   {
+    "family": "Zhang",
+    "given": "L"
+   },
+   {
+    "family": "Zhao",
+    "given": "XQ"
+   }
+  ],
+  "PMID": "38592508",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-024-13097-3",
+  "PMCID": "PMC11003901"
+ },
+ {
+  "id": "pmid:38845682",
+  "type": "article-journal",
+  "title": "Engineering a carbon source-responsive promoter for improved biosynthesis in the non-conventional yeast Kluyveromyces marxianus.",
+  "container-title": "Metabolic engineering communications",
+  "author": [
+   {
+    "family": "Bassett",
+    "given": "S"
+   },
+   {
+    "family": "Da Silva",
+    "given": "NA"
+   }
+  ],
+  "PMID": "38845682",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.mec.2024.e00238",
+  "PMCID": "PMC11153928"
+ },
+ {
+  "id": "pmid:39125891",
+  "type": "article-journal",
+  "title": "Molecular Modification Enhances Xylose Uptake by the Sugar Transporter KM_SUT5 of Kluyveromyces marxianus.",
+  "container-title": "International journal of molecular sciences",
+  "author": [
+   {
+    "family": "Luo",
+    "given": "X"
+   },
+   {
+    "family": "Tao",
+    "given": "X"
+   },
+   {
+    "family": "Ran",
+    "given": "G"
+   },
+   {
+    "family": "Deng",
+    "given": "Y"
+   },
+   {
+    "family": "Wang",
+    "given": "H"
+   },
+   {
+    "family": "Tan",
+    "given": "L"
+   },
+   {
+    "family": "Pang",
+    "given": "Z"
+   }
+  ],
+  "PMID": "39125891",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.3390/ijms25158322",
+  "PMCID": "PMC11312716"
+ },
+ {
+  "id": "pmid:39179325",
+  "type": "article-journal",
+  "title": "Lipase activity of recombinant KmYJR107Wp and KmLIP3p enzymes expressed in Saccharomyces cerevisiae BY4742 from Kluyveromyces marxianus L2029.",
+  "container-title": "Journal, genetic engineering & biotechnology",
+  "author": [
+   {
+    "family": "Martínez-Corona",
+    "given": "R"
+   },
+   {
+    "family": "Canizal-García",
+    "given": "R"
+   },
+   {
+    "family": "Madrigal-Perez",
+    "given": "LA"
+   },
+   {
+    "family": "Cortés-Penagos",
+    "given": "C"
+   },
+   {
+    "family": "de la Riva de la Riva",
+    "given": "GA"
+   },
+   {
+    "family": "González-Hernández",
+    "given": "JC"
+   }
+  ],
+  "PMID": "39179325",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jgeb.2024.100396",
+  "PMCID": "PMC11253516"
+ },
+ {
+  "id": "pmid:39335848",
+  "type": "article-journal",
+  "title": "High-Yield Expressed Human Ferritin Heavy-Chain Nanoparticles in K. marxianus for Functional Food Development.",
+  "container-title": "Foods (Basel, Switzerland)",
+  "author": [
+   {
+    "family": "Lu",
+    "given": "X"
+   },
+   {
+    "family": "Liu",
+    "given": "L"
+   },
+   {
+    "family": "Zhang",
+    "given": "H"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   },
+   {
+    "family": "Tian",
+    "given": "T"
+   },
+   {
+    "family": "Du",
+    "given": "B"
+   },
+   {
+    "family": "Li",
+    "given": "P"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "39335848",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.3390/foods13182919",
+  "PMCID": "PMC11431416"
+ },
+ {
+  "id": "pmid:39363175",
+  "type": "article-journal",
+  "title": "The superior growth of Kluyveromyces marxianus at very low potassium concentrations is enabled by the high-affinity potassium transporter Hak1.",
+  "container-title": "FEMS yeast research",
+  "author": [
+   {
+    "family": "Papouskova",
+    "given": "K"
+   },
+   {
+    "family": "Akinola",
+    "given": "J"
+   },
+   {
+    "family": "Ruiz-Castilla",
+    "given": "FJ"
+   },
+   {
+    "family": "Morrissey",
+    "given": "JP"
+   },
+   {
+    "family": "Ramos",
+    "given": "J"
+   },
+   {
+    "family": "Sychrova",
+    "given": "H"
+   }
+  ],
+  "PMID": "39363175",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1093/femsyr/foae031",
+  "PMCID": "PMC11484806"
+ },
+ {
+  "id": "pmid:39385269",
+  "type": "article-journal",
+  "title": "Altered sterol composition mediates multiple tolerance of Kluyveromyces marxianus for xylitol production.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Ren",
+    "given": "L"
+   },
+   {
+    "family": "Zha",
+    "given": "H"
+   },
+   {
+    "family": "Zhang",
+    "given": "Q"
+   },
+   {
+    "family": "Xie",
+    "given": "Y"
+   },
+   {
+    "family": "Li",
+    "given": "J"
+   },
+   {
+    "family": "Hu",
+    "given": "Z"
+   },
+   {
+    "family": "Tao",
+    "given": "X"
+   },
+   {
+    "family": "Xu",
+    "given": "D"
+   },
+   {
+    "family": "Li",
+    "given": "F"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   }
+  ],
+  "PMID": "39385269",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1186/s12934-024-02546-3",
+  "PMCID": "PMC11465571"
+ },
+ {
+  "id": "pmid:39466458",
+  "type": "article-journal",
+  "title": "Heterologous expressing melittin in a probiotic yeast to evaluate its function for promoting NSC-34 regeneration.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Huang",
+    "given": "HY"
+   },
+   {
+    "family": "Hsu",
+    "given": "HY"
+   },
+   {
+    "family": "Kuo",
+    "given": "CY"
+   },
+   {
+    "family": "Wu",
+    "given": "ML"
+   },
+   {
+    "family": "Lai",
+    "given": "CC"
+   },
+   {
+    "family": "Chang",
+    "given": "GR"
+   },
+   {
+    "family": "Lin",
+    "given": "YJ"
+   }
+  ],
+  "PMID": "39466458",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1007/s00253-024-13336-7",
+  "PMCID": "PMC11519230"
+ },
+ {
+  "id": "pmid:39489214",
+  "type": "article-journal",
+  "title": "Engineering peroxisomal surface display for enhanced biosynthesis in the emerging yeast Kluyveromyces marxianus.",
+  "container-title": "Metabolic engineering",
+  "author": [
+   {
+    "family": "Bassett",
+    "given": "S"
+   },
+   {
+    "family": "Suganda",
+    "given": "JC"
+   },
+   {
+    "family": "Da Silva",
+    "given": "NA"
+   }
+  ],
+  "PMID": "39489214",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.ymben.2024.10.014"
+ },
+ {
+  "id": "pmid:39522732",
+  "type": "article-journal",
+  "title": "Optimisation of coumaric acid production from aromatic amino acids in Kluyveromyces marxianus.",
+  "container-title": "Journal of biotechnology",
+  "author": [
+   {
+    "family": "Akinola",
+    "given": "JA"
+   },
+   {
+    "family": "Rajkumar",
+    "given": "AS"
+   },
+   {
+    "family": "Morrissey",
+    "given": "JP"
+   }
+  ],
+  "PMID": "39522732",
+  "issued": {
+   "date-parts": [
+    [
+     2024
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jbiotec.2024.11.002"
+ },
+ {
+  "id": "pmid:40033357",
+  "type": "article-journal",
+  "title": "Characterization and optimization of mnn11Δ-mediated enhancement in heterologous protein production in Kluyveromyces marxianus.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Zhou",
+    "given": "S"
+   },
+   {
+    "family": "Wu",
+    "given": "P"
+   },
+   {
+    "family": "Ren",
+    "given": "H"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "40033357",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1186/s12934-025-02676-2",
+  "PMCID": "PMC11877904"
+ },
+ {
+  "id": "pmid:40064453",
+  "type": "article-journal",
+  "title": "Metabolic engineering of Kluyveromyces marxianus to produce myo-inositol from starch.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Lan",
+    "given": "Q"
+   },
+   {
+    "family": "Wu",
+    "given": "P"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "40064453",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2025.132370"
+ },
+ {
+  "id": "pmid:40142402",
+  "type": "article-journal",
+  "title": "Alien Chromosome Serves as a Novel Platform for Multiple Gene Expression in Kluyveromyces marxianus.",
+  "container-title": "Microorganisms",
+  "author": [
+   {
+    "family": "Lyu",
+    "given": "Y"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "40142402",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.3390/microorganisms13030509",
+  "PMCID": "PMC11946330"
+ },
+ {
+  "id": "pmid:40238199",
+  "type": "article-journal",
+  "title": "Characterization of Guanine Deaminase from Kluyveromyces marxianus and Its Industrial Application to Reduce Guanine Content in Beer.",
+  "container-title": "Foods (Basel, Switzerland)",
+  "author": [
+   {
+    "family": "Zhou",
+    "given": "P"
+   },
+   {
+    "family": "Xu",
+    "given": "J"
+   },
+   {
+    "family": "Wang",
+    "given": "Z"
+   },
+   {
+    "family": "Li",
+    "given": "B"
+   },
+   {
+    "family": "Zhao",
+    "given": "Z"
+   }
+  ],
+  "PMID": "40238199",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.3390/foods14071085",
+  "PMCID": "PMC11988482"
+ },
+ {
+  "id": "pmid:40268099",
+  "type": "article-journal",
+  "title": "Enhanced expression of glycolysis regulators KmGcr1p and KmGcr2p in Kluyveromyces marxianus: An efficient strategy for high-temperature ethanol production from inulin.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Xu",
+    "given": "L"
+   },
+   {
+    "family": "Wang",
+    "given": "HM"
+   },
+   {
+    "family": "Li",
+    "given": "FY"
+   },
+   {
+    "family": "Zhao",
+    "given": "WH"
+   },
+   {
+    "family": "Yue",
+    "given": "D"
+   },
+   {
+    "family": "Chi",
+    "given": "ZM"
+   },
+   {
+    "family": "Liu",
+    "given": "GL"
+   }
+  ],
+  "PMID": "40268099",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2025.132559"
+ },
+ {
+  "id": "pmid:40742466",
+  "type": "article-journal",
+  "title": "Gene disruption via a transient hypercompact CRISPR-AsCas12f1 system in Kluyveromyces marxianus.",
+  "container-title": "Biotechnology letters",
+  "author": [
+   {
+    "family": "Zhang",
+    "given": "K"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hu",
+    "given": "S"
+   },
+   {
+    "family": "Li",
+    "given": "X"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "40742466",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1007/s10529-025-03626-z"
+ },
+ {
+  "id": "pmid:40760443",
+  "type": "article-journal",
+  "title": "Metabolic engineering and adaptive laboratory evolution of Kluyveromyces Marxianus for lactic acid production.",
+  "container-title": "Microbial cell factories",
+  "author": [
+   {
+    "family": "Smets",
+    "given": "J"
+   },
+   {
+    "family": "Godoy",
+    "given": "HE"
+   },
+   {
+    "family": "Goossenaerts",
+    "given": "J"
+   },
+   {
+    "family": "Van Bun",
+    "given": "E"
+   },
+   {
+    "family": "Deparis",
+    "given": "Q"
+   },
+   {
+    "family": "Bauwens",
+    "given": "J"
+   },
+   {
+    "family": "Ortiz-Merino",
+    "given": "RA"
+   },
+   {
+    "family": "Mancera",
+    "given": "E"
+   },
+   {
+    "family": "DeLuna",
+    "given": "A"
+   },
+   {
+    "family": "Verstrepen",
+    "given": "KJ"
+   }
+  ],
+  "PMID": "40760443",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1186/s12934-025-02805-x",
+  "PMCID": "PMC12320376"
+ },
+ {
+  "id": "pmid:40794386",
+  "type": "article-journal",
+  "title": "Engineering a modular pectin-to-lipids bioconversion system using two Kluyveromyces marxianus strains.",
+  "container-title": "Bioresources and bioprocessing",
+  "author": [
+   {
+    "family": "Yu",
+    "given": "B"
+   },
+   {
+    "family": "Qiao",
+    "given": "H"
+   },
+   {
+    "family": "Lang",
+    "given": "X"
+   }
+  ],
+  "PMID": "40794386",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1186/s40643-025-00927-z",
+  "PMCID": "PMC12343453"
+ },
+ {
+  "id": "pmid:40859812",
+  "type": "article-journal",
+  "title": "Restore the Activity and Stability of Nicotinamide Riboside Kinase by α-Helix Reconstruction and Semi-Rational Design.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "Cheng",
+    "given": "F"
+   },
+   {
+    "family": "Wu",
+    "given": "SS"
+   },
+   {
+    "family": "Liu",
+    "given": "HY"
+   },
+   {
+    "family": "Li",
+    "given": "H"
+   },
+   {
+    "family": "Gao",
+    "given": "YT"
+   },
+   {
+    "family": "Xue",
+    "given": "YP"
+   },
+   {
+    "family": "Zheng",
+    "given": "YG"
+   }
+  ],
+  "PMID": "40859812",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1002/bit.70054"
+ },
+ {
+  "id": "pmid:41042136",
+  "type": "article-journal",
+  "title": "Molecular Dynamics Simulation-Assisted Tuning of Key Sites to Alter the Substrate Specificity of the Aldo-Keto Reductase KmAKR.",
+  "container-title": "Biotechnology journal",
+  "author": [
+   {
+    "family": "Xu",
+    "given": "SY"
+   },
+   {
+    "family": "Chen",
+    "given": "YF"
+   },
+   {
+    "family": "Cui",
+    "given": "L"
+   },
+   {
+    "family": "Wu",
+    "given": "ZZ"
+   },
+   {
+    "family": "Zheng",
+    "given": "RC"
+   },
+   {
+    "family": "Zheng",
+    "given": "YG"
+   }
+  ],
+  "PMID": "41042136",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1002/biot.70130"
+ },
+ {
+  "id": "pmid:41069493",
+  "type": "article-journal",
+  "title": "Identification and functional analysis of ULP2 SUMO protease mutants of the stress-tolerant yeast Kluyveromyces marxianus.",
+  "container-title": "microPublication biology",
+  "author": [
+   {
+    "family": "Hutson",
+    "given": "C"
+   },
+   {
+    "family": "Li",
+    "given": "S"
+   },
+   {
+    "family": "Sweeney",
+    "given": "K"
+   },
+   {
+    "family": "Kerscher",
+    "given": "O"
+   }
+  ],
+  "PMID": "41069493",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.17912/micropub.biology.001816",
+  "PMCID": "PMC12505158"
+ },
+ {
+  "id": "pmid:41079773",
+  "type": "article-journal",
+  "title": "Development of a CRISPR/Cas12a genome editing toolbox in Kluyveromyces marxianus and its application in succinic acid biosynthesis.",
+  "container-title": "Synthetic and systems biotechnology",
+  "author": [
+   {
+    "family": "Zha",
+    "given": "H"
+   },
+   {
+    "family": "Li",
+    "given": "Y"
+   },
+   {
+    "family": "Hu",
+    "given": "Z"
+   },
+   {
+    "family": "Li",
+    "given": "J"
+   },
+   {
+    "family": "Xie",
+    "given": "Y"
+   },
+   {
+    "family": "Zhao",
+    "given": "M"
+   },
+   {
+    "family": "Ren",
+    "given": "L"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   }
+  ],
+  "PMID": "41079773",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.synbio.2025.09.015",
+  "PMCID": "PMC12510058"
+ },
+ {
+  "id": "pmid:41126396",
+  "type": "article-journal",
+  "title": "Characterization of Vector Elements and Soluble Expression of Pcv3 Cap Protein in Kluyveromyces Marxianus.",
+  "container-title": "Yeast (Chichester, England)",
+  "author": [
+   {
+    "family": "Li",
+    "given": "J"
+   },
+   {
+    "family": "Yang",
+    "given": "X"
+   },
+   {
+    "family": "Xu",
+    "given": "M"
+   },
+   {
+    "family": "Yin",
+    "given": "W"
+   },
+   {
+    "family": "Yang",
+    "given": "G"
+   },
+   {
+    "family": "Zheng",
+    "given": "Y"
+   },
+   {
+    "family": "Yang",
+    "given": "W"
+   },
+   {
+    "family": "Zhang",
+    "given": "W"
+   }
+  ],
+  "PMID": "41126396",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1002/yea.70005"
+ },
+ {
+  "id": "pmid:41277095",
+  "type": "article-journal",
+  "title": "Tri-Functional CRISPR Screen Reveals Overexpression of QDR2 and QDR3 Transporters Increase Fumaric Acid Production in Kluyveromyces marxianus.",
+  "container-title": "ACS synthetic biology",
+  "author": [
+   {
+    "family": "Thornbury",
+    "given": "M"
+   },
+   {
+    "family": "Omran",
+    "given": "RP"
+   },
+   {
+    "family": "Kumar",
+    "given": "L"
+   },
+   {
+    "family": "Knoops",
+    "given": "A"
+   },
+   {
+    "family": "Abushahin",
+    "given": "R"
+   },
+   {
+    "family": "Whiteway",
+    "given": "M"
+   },
+   {
+    "family": "Martin",
+    "given": "VJJ"
+   }
+  ],
+  "PMID": "41277095",
+  "issued": {
+   "date-parts": [
+    [
+     2025
+    ]
+   ]
+  },
+  "DOI": "10.1021/acssynbio.5c00689"
+ },
+ {
+  "id": "pmid:41507170",
+  "type": "article-journal",
+  "title": "Intergeneric chromosomal transfer in yeast results in improved phenotypes and widespread transcriptional responses.",
+  "container-title": "Nature communications",
+  "author": [
+   {
+    "family": "Lyu",
+    "given": "Y"
+   },
+   {
+    "family": "Shi",
+    "given": "Y"
+   },
+   {
+    "family": "Song",
+    "given": "K"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Chen",
+    "given": "H"
+   },
+   {
+    "family": "Li",
+    "given": "XC"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "41507170",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1038/s41467-025-68164-8",
+  "PMCID": "PMC12881598"
+ },
+ {
+  "id": "pmid:41529994",
+  "type": "article-journal",
+  "title": "Identification and overexpression of genes encoding sugar alcohol transporter and metabolic enzymes for accelerated utilization in the yeast Kluyveromyces marxianus.",
+  "container-title": "Journal of bioscience and bioengineering",
+  "author": [
+   {
+    "family": "Ebe",
+    "given": "S"
+   },
+   {
+    "family": "Nakamura",
+    "given": "H"
+   },
+   {
+    "family": "Matsuda",
+    "given": "M"
+   },
+   {
+    "family": "Terauchi",
+    "given": "Y"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   },
+   {
+    "family": "Hoshida",
+    "given": "H"
+   }
+  ],
+  "PMID": "41529994",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.jbiosc.2025.12.003"
+ },
+ {
+  "id": "pmid:41571921",
+  "type": "article-journal",
+  "title": "A modular single- and dual-gene expression toolkit for Kluyveromyces marxianus.",
+  "container-title": "World journal of microbiology & biotechnology",
+  "author": [
+   {
+    "family": "Lu",
+    "given": "Z"
+   },
+   {
+    "family": "Lv",
+    "given": "C"
+   },
+   {
+    "family": "Chen",
+    "given": "Z"
+   },
+   {
+    "family": "Zhu",
+    "given": "Z"
+   },
+   {
+    "family": "Ma",
+    "given": "X"
+   }
+  ],
+  "PMID": "41571921",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1007/s11274-026-04794-4"
+ },
+ {
+  "id": "pmid:41596828",
+  "type": "article-journal",
+  "title": "Enhancing the Signature Rose Aroma of Kluyveromyces marxianus-Fermented Milk Beer via Adaptive Laboratory Evolution.",
+  "container-title": "Foods (Basel, Switzerland)",
+  "author": [
+   {
+    "family": "Xing",
+    "given": "C"
+   },
+   {
+    "family": "Tan",
+    "given": "Y"
+   },
+   {
+    "family": "Jiang",
+    "given": "X"
+   },
+   {
+    "family": "Li",
+    "given": "W"
+   },
+   {
+    "family": "Wang",
+    "given": "Q"
+   },
+   {
+    "family": "Liu",
+    "given": "Z"
+   },
+   {
+    "family": "Zeng",
+    "given": "H"
+   },
+   {
+    "family": "Wang",
+    "given": "Y"
+   }
+  ],
+  "PMID": "41596828",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.3390/foods15020229",
+  "PMCID": "PMC12840503"
+ },
+ {
+  "id": "pmid:41624984",
+  "type": "article-journal",
+  "title": "Engineering Kluyveromyces marxianus for 3-hydroxypropionic acid production at elevated temperature from Jerusalem artichoke tubers and crude glycerol.",
+  "container-title": "Synthetic and systems biotechnology",
+  "author": [
+   {
+    "family": "Li",
+    "given": "J"
+   },
+   {
+    "family": "Hu",
+    "given": "Z"
+   },
+   {
+    "family": "Li",
+    "given": "Y"
+   },
+   {
+    "family": "Zha",
+    "given": "H"
+   },
+   {
+    "family": "Xie",
+    "given": "Y"
+   },
+   {
+    "family": "Zhao",
+    "given": "M"
+   },
+   {
+    "family": "Ren",
+    "given": "L"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   }
+  ],
+  "PMID": "41624984",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.synbio.2026.01.008",
+  "PMCID": "PMC12856427"
+ },
+ {
+  "id": "pmid:41737887",
+  "type": "article-journal",
+  "title": "Production of mannitol from molasses and Jerusalem artichoke tubers at elevated temperatures using engineered Kluyveromyces marxianus through consolidated bioprocessing.",
+  "container-title": "Current research in food science",
+  "author": [
+   {
+    "family": "Wang",
+    "given": "F"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hu",
+    "given": "S"
+   },
+   {
+    "family": "Li",
+    "given": "X"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "41737887",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.crfs.2026.101348",
+  "PMCID": "PMC12926981"
+ },
+ {
+  "id": "pmid:41740938",
+  "type": "article-journal",
+  "title": "Multistep engineering of the secretory pathway for enhanced leghemoglobin expression in Kluyveromyces marxianus.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Wu",
+    "given": "X"
+   },
+   {
+    "family": "Feng",
+    "given": "D"
+   },
+   {
+    "family": "Chen",
+    "given": "H"
+   },
+   {
+    "family": "Yin",
+    "given": "A"
+   },
+   {
+    "family": "Tian",
+    "given": "T"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   }
+  ],
+  "PMID": "41740938",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2026.134275"
+ },
+ {
+  "id": "pmid:41859729",
+  "type": "article-journal",
+  "title": "Valorization of xylose mother liquor into salidroside by engineered Kluyveromyces marxianus.",
+  "container-title": "Synthetic and systems biotechnology",
+  "author": [
+   {
+    "family": "Wang",
+    "given": "L"
+   },
+   {
+    "family": "Wang",
+    "given": "D"
+   },
+   {
+    "family": "Hong",
+    "given": "J"
+   }
+  ],
+  "PMID": "41859729",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.synbio.2026.03.002",
+  "PMCID": "PMC12996981"
+ },
+ {
+  "id": "pmid:41899404",
+  "type": "article-journal",
+  "title": "Expression of Endonuclease RsaI Induces Chromosomal Rearrangement in the Yeast Kluyveromyces marxianus.",
+  "container-title": "Current issues in molecular biology",
+  "author": [
+   {
+    "family": "Abdel-Banat",
+    "given": "BMA"
+   },
+   {
+    "family": "Munir",
+    "given": "M"
+   },
+   {
+    "family": "Hoshida",
+    "given": "H"
+   },
+   {
+    "family": "Akada",
+    "given": "R"
+   }
+  ],
+  "PMID": "41899404",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.3390/cimb48030252",
+  "PMCID": "PMC13025109"
+ },
+ {
+  "id": "pmid:42089356",
+  "type": "article-journal",
+  "title": "Screening and Engineering of Hyperactive Yeast Aquaporins for Xylitol Transport Using Biosensors.",
+  "container-title": "Biotechnology and bioengineering",
+  "author": [
+   {
+    "family": "Sips",
+    "given": "LM"
+   },
+   {
+    "family": "Sánchez",
+    "given": "LRJ"
+   },
+   {
+    "family": "Coture",
+    "given": "J"
+   },
+   {
+    "family": "Van Bogaert",
+    "given": "INA"
+   }
+  ],
+  "PMID": "42089356",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1002/bit.70227"
+ },
+ {
+  "id": "pmid:42537838",
+  "type": "article-journal",
+  "title": "Humanization of N-glycan-dependent protein quality-control system in Kluyveromyces marxianus promotes glycoprotein secretion.",
+  "container-title": "Metabolic engineering",
+  "author": [
+   {
+    "family": "Ai",
+    "given": "Y"
+   },
+   {
+    "family": "He",
+    "given": "Y"
+   },
+   {
+    "family": "Zhao",
+    "given": "L"
+   },
+   {
+    "family": "Li",
+    "given": "M"
+   },
+   {
+    "family": "Wang",
+    "given": "Y"
+   },
+   {
+    "family": "Zhou",
+    "given": "J"
+   },
+   {
+    "family": "Lu",
+    "given": "H"
+   },
+   {
+    "family": "Yu",
+    "given": "Y"
+   }
+  ],
+  "PMID": "42537838",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.ymben.2026.102519"
+ },
+ {
+  "id": "pmid:42537933",
+  "type": "article-journal",
+  "title": "ROS signaling mediates aeration-dependent thermotolerance in Kluyveromyces marxianus for high-temperature xylitol production.",
+  "container-title": "Bioresource technology",
+  "author": [
+   {
+    "family": "Hu",
+    "given": "Z"
+   },
+   {
+    "family": "Li",
+    "given": "Y"
+   },
+   {
+    "family": "Dong",
+    "given": "N"
+   },
+   {
+    "family": "Zhao",
+    "given": "M"
+   },
+   {
+    "family": "Gao",
+    "given": "B"
+   },
+   {
+    "family": "Zhao",
+    "given": "J"
+   },
+   {
+    "family": "Tao",
+    "given": "X"
+   },
+   {
+    "family": "Ren",
+    "given": "L"
+   },
+   {
+    "family": "Zhang",
+    "given": "B"
+   }
+  ],
+  "PMID": "42537933",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1016/j.biortech.2026.135531"
+ },
+ {
+  "id": "pmid:42570228",
+  "type": "article-journal",
+  "title": "Reprogramming a Hgt-family Kluyveromyces marxianus sugar transporter by site-directed mutagenesis to enable co-consumption of glucose and xylose.",
+  "container-title": "FEMS yeast research",
+  "author": [
+   {
+    "family": "Donzella",
+    "given": "L"
+   },
+   {
+    "family": "Belloch-Molina",
+    "given": "C"
+   },
+   {
+    "family": "Morrissey",
+    "given": "JP"
+   },
+   {
+    "family": "Sousa",
+    "given": "MJ"
+   }
+  ],
+  "PMID": "42570228",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1093/femsyr/foag035",
+  "PMCID": "PMC13487788"
+ },
+ {
+  "id": "pmid:42683907",
+  "type": "article-journal",
+  "title": "Bifunctional Enzymes for Deoxynivalenol Degradation in Prokaryotic and Eukaryotic Chassis.",
+  "container-title": "Journal of agricultural and food chemistry",
+  "author": [
+   {
+    "family": "Liu",
+    "given": "M"
+   },
+   {
+    "family": "Guo",
+    "given": "M"
+   },
+   {
+    "family": "Tian",
+    "given": "Y"
+   },
+   {
+    "family": "Lin",
+    "given": "H"
+   },
+   {
+    "family": "Yan",
+    "given": "Z"
+   },
+   {
+    "family": "Jia",
+    "given": "B"
+   },
+   {
+    "family": "Sun",
+    "given": "X"
+   },
+   {
+    "family": "De Saeger",
+    "given": "S"
+   },
+   {
+    "family": "Lootens",
+    "given": "O"
+   },
+   {
+    "family": "De Rycke",
+    "given": "E"
+   },
+   {
+    "family": "Diana Di Mavungu",
+    "given": "J"
+   },
+   {
+    "family": "Yu",
+    "given": "D"
+   },
+   {
+    "family": "Wu",
+    "given": "A"
+   }
+  ],
+  "PMID": "42683907",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1021/acs.jafc.6c10441"
+ },
+ {
+  "id": "pmid:42799968",
+  "type": "article-journal",
+  "title": "HOM2 and TPK1 are associated with Kluyveromyces marxianus growth under high-temperature and reduced-aeration conditions.",
+  "container-title": "World journal of microbiology & biotechnology",
+  "author": [
+   {
+    "family": "Wang",
+    "given": "H"
+   },
+   {
+    "family": "Sun",
+    "given": "Z"
+   },
+   {
+    "family": "Ni",
+    "given": "Z"
+   },
+   {
+    "family": "Qi",
+    "given": "Y"
+   },
+   {
+    "family": "Feng",
+    "given": "X"
+   },
+   {
+    "family": "Shi",
+    "given": "Y"
+   },
+   {
+    "family": "Xiao",
+    "given": "H"
+   },
+   {
+    "family": "Li",
+    "given": "C"
+   }
+  ],
+  "PMID": "42799968",
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "DOI": "10.1007/s11274-026-05267-4"
+ },
+ {
+  "id": "pmid:7764385",
+  "type": "article-journal",
+  "title": "Expression of an alpha-galactosidase gene under control of the homologous inulinase promoter in Kluyveromyces marxianus.",
+  "container-title": "Applied microbiology and biotechnology",
+  "author": [
+   {
+    "family": "Bergkamp",
+    "given": "RJ"
+   },
+   {
+    "family": "Bootsman",
+    "given": "TC"
+   },
+   {
+    "family": "Toschka",
+    "given": "HY"
+   },
+   {
+    "family": "Mooren",
+    "given": "AT"
+   },
+   {
+    "family": "Kox",
+    "given": "L"
+   },
+   {
+    "family": "Verbakel",
+    "given": "JM"
+   },
+   {
+    "family": "Geerse",
+    "given": "RH"
+   },
+   {
+    "family": "Planta",
+    "given": "RJ"
+   }
+  ],
+  "PMID": "7764385",
+  "issued": {
+   "date-parts": [
+    [
+     1993
+    ]
+   ]
+  },
+  "DOI": "10.1007/bf00170386"
+ },
+ {
+  "id": "pmid:8485163",
+  "type": "article-journal",
+  "title": "Sequence of a gene coding for a cytoplasmic alcohol dehydrogenase from Kluyveromyces marxianus ATCC 12424.",
+  "container-title": "Biochimica et biophysica acta",
+  "author": [
+   {
+    "family": "Ladrière",
+    "given": "JM"
+   },
+   {
+    "family": "Delcour",
+    "given": "J"
+   },
+   {
+    "family": "Vandenhaute",
+    "given": "J"
+   }
+  ],
+  "PMID": "8485163",
+  "issued": {
+   "date-parts": [
+    [
+     1993
+    ]
+   ]
+  },
+  "DOI": "10.1016/0167-4781(93)90252-9"
+ },
+ {
+  "id": "pmid:8662215",
+  "type": "article-journal",
+  "title": "Isolation and characterization of mutants as an approach to a transformation system in Kluyveromyces marxianus.",
+  "container-title": "Current genetics",
+  "author": [
+   {
+    "family": "Basabe",
+    "given": "L"
+   },
+   {
+    "family": "Cabrera",
+    "given": "N"
+   },
+   {
+    "family": "Yong",
+    "given": "V"
+   },
+   {
+    "family": "Menéndez",
+    "given": "J"
+   },
+   {
+    "family": "Delgado",
+    "given": "JM"
+   },
+   {
+    "family": "Rodríguez",
+    "given": "L"
+   }
+  ],
+  "PMID": "8662215",
+  "issued": {
+   "date-parts": [
+    [
+     1996
+    ]
+   ]
+  },
+  "DOI": "10.1007/s002940050105"
+ },
+ {
+  "id": "pmid:8818270",
+  "type": "article-journal",
+  "title": "High-level secretion of human alpha 1-antitrypsin from Saccharomyces cerevisiae using inulinase signal sequence.",
+  "container-title": "Journal of biotechnology",
+  "author": [
+   {
+    "family": "Kang",
+    "given": "HA"
+   },
+   {
+    "family": "Nam",
+    "given": "SW"
+   },
+   {
+    "family": "Kwon",
+    "given": "KS"
+   },
+   {
+    "family": "Chung",
+    "given": "BH"
+   },
+   {
+    "family": "Yu",
+    "given": "MH"
+   }
+  ],
+  "PMID": "8818270",
+  "issued": {
+   "date-parts": [
+    [
+     1996
+    ]
+   ]
+  },
+  "DOI": "10.1016/0168-1656(96)01391-0"
+ },
+ {
+  "id": "pmid:9230894",
+  "type": "article-journal",
+  "title": "Comparative analysis in three fungi reveals structurally and functionally conserved regions in the Mig1 repressor.",
+  "container-title": "Molecular & general genetics : MGG",
+  "author": [
+   {
+    "family": "Cassart",
+    "given": "JP"
+   },
+   {
+    "family": "Ostling",
+    "given": "J"
+   },
+   {
+    "family": "Ronne",
+    "given": "H"
+   },
+   {
+    "family": "Vandenhaute",
+    "given": "J"
+   }
+  ],
+  "PMID": "9230894",
+  "issued": {
+   "date-parts": [
+    [
+     1997
+    ]
+   ]
+  },
+  "DOI": "10.1007/s004380050469"
+ },
+ {
+  "id": "pmid:9345783",
+  "type": "article-journal",
+  "title": "Single strand breaks and mutagenesis in yeast induced by photodynamic treatment with chloroaluminum phthalocyanine.",
+  "container-title": "Journal of photochemistry and photobiology. B, Biology",
+  "author": [
+   {
+    "family": "Paardekooper",
+    "given": "M"
+   },
+   {
+    "family": "De Bruijne",
+    "given": "AW"
+   },
+   {
+    "family": "Van Gompel",
+    "given": "AE"
+   },
+   {
+    "family": "Verhage",
+    "given": "RA"
+   },
+   {
+    "family": "Averbeck",
+    "given": "D"
+   },
+   {
+    "family": "Dubbelman",
+    "given": "TM"
+   },
+   {
+    "family": "Van den Broek",
+    "given": "PJ"
+   }
+  ],
+  "PMID": "9345783",
+  "issued": {
+   "date-parts": [
+    [
+     1997
+    ]
+   ]
+  },
+  "DOI": "10.1016/s1011-1344(97)00038-9"
+ },
+ {
+  "id": "pmid:9862481",
+  "type": "article-journal",
+  "title": "Four hydrophobic amino acid residues in the C-terminal effector domain of the yeast Mig1p repressor are important for its in vivo activity.",
+  "container-title": "Molecular & general genetics : MGG",
+  "author": [
+   {
+    "family": "Ostling",
+    "given": "J"
+   },
+   {
+    "family": "Cassart",
+    "given": "JP"
+   },
+   {
+    "family": "Vandenhaute",
+    "given": "J"
+   },
+   {
+    "family": "Ronne",
+    "given": "H"
+   }
+  ],
+  "PMID": "9862481",
+  "issued": {
+   "date-parts": [
+    [
+     1998
+    ]
+   ]
+  },
+  "DOI": "10.1007/s004380050895"
+ }
+]

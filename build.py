@@ -1,0 +1,513 @@
+#!/usr/bin/env python3
+"""MarxBase static site builder (Python standard library only; no network, no installs).
+
+  python3 build.py --bundle ../releases/1.0 --out dist
+
+Reads ONLY a released bundle (CSV files written by kmarx.release), never the research database, and writes a complete
+static website: an interactive search page plus one stable page per gene, strain, paper, product and result.
+User-derived text is HTML-escaped; only the pre-sanitised <i>, <sub>, <sup> markup is passed through.
+"""
+import argparse
+import csv
+import html
+import json
+import re
+import shutil
+import sys
+import pages
+from collections import defaultdict
+from pathlib import Path
+
+HERE = Path(__file__).parent
+SRC = HERE / "src"
+KIND_LABEL = {
+    "locus_tagged": "Locus-tagged K. marxianus gene", "scerevisiae_gene": "S. cerevisiae gene", "undetermined_paralog": "Undetermined paralog",
+    "enzyme_or_protein_label": "Enzyme or protein label, not a gene symbol", "heterologous_gene": "Heterologous gene",
+    "unmapped_name": "Name without a genome identifier"}
+KIND_HELP = {
+    "undetermined_paralog": "K. marxianus has several copies of this gene and the papers do not say which one was used.",
+    "enzyme_or_protein_label": "The paper's own name for an enzyme or protein, not an established gene symbol; no locus tag is assigned.",
+    "unmapped_name": "No reliable genome identifier could be assigned to this name.",
+    "heterologous_gene": "A gene from another species, expressed in the host recorded for each result."}
+CLASS_LABEL = {"positive": "Positive", "negative": "Negative", "context-dependent": "Context-dependent"}
+CLASS_ICON = {"positive": "+", "negative": "−", "context-dependent": "∼"}
+QUAL = {"greater_than": "> ", "less_than": "< ", "approx": "≈ ", "exact": "", "": ""}
+LIMITS = ("Results come from paper abstracts only. In a re-run on reviewed papers the extraction recovered roughly 72–83% of the results a person "
+          "had found; it is weakest for heterologous protein or enzyme expression and promoter or signal-sequence work. A strain is recorded for "
+          "only about a third of results.")
+
+
+def load_config(path):
+    """Supabase address and public (anon) key for the report form, from site-config.json; None when absent."""
+    if not path or not Path(path).exists():
+        return None
+    cfg = json.loads(Path(path).read_text(encoding="utf-8"))
+    url, key = (cfg.get("supabaseUrl") or "").strip(), (cfg.get("supabaseAnonKey") or "").strip()
+    if not (url.startswith("https://") and key):
+        raise SystemExit(f"{path}: supabaseUrl must start with https:// and supabaseAnonKey must be set (use the public anon key, never the service key).")
+    if "service" in key.lower() or key.startswith("sb_secret_"):
+        raise SystemExit(f"{path}: that looks like a service key; only the public anon key belongs here.")
+    return {"supabaseUrl": url.rstrip("/"), "supabaseAnonKey": key}
+
+
+def esc(s) -> str:
+    return html.escape("" if s is None else str(s), quote=True)
+
+
+def safe_html(html_value, plain_value) -> str:
+    """Pre-sanitised HTML if it only contains <i>, <sub>, <sup> and valid entities; otherwise the escaped plain text."""
+    v = html_value or ""
+    tags = re.findall(r"<[^>]*>", v)
+    if all(re.fullmatch(r"</?(i|sub|sup)>", t) for t in tags) and not re.search(r"&(?!amp;|lt;|gt;|quot;|#39;)", v) and "<" not in re.sub(r"<[^>]*>", "", v):
+        return v
+    return esc(plain_value)
+
+
+def read_csv(path: Path) -> list:
+    with open(path, newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
+
+def num(s):
+    if s in (None, ""):
+        return None
+    try:
+        x = float(s)
+    except ValueError:
+        return None
+    return int(x) if x == int(x) else round(x, 6)
+
+
+def slug(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
+def plural(n, word: str) -> str:
+    return f"{n} {word}" + ("" if str(n) == "1" else "s")
+
+
+def pretty(s) -> str:
+    return (s or "").replace("_", " ")
+
+
+class Site:
+    def __init__(self, bundle: Path, out: Path, csp: bool = False, config: Path = None, public: bool = False):
+        self.bundle, self.out, self.csp, self.public = bundle, out, csp or public, public
+        self.config = load_config(config)
+        names = ["results", "genes", "gene_orthologs", "gene_aliases", "gene_candidate_loci", "strains", "strain_aliases", "citations", "products", "comparisons"]
+        self.t = {n: read_csv(bundle / f"{n}.csv") for n in names}
+        notes = (bundle / "RELEASE_NOTES.md").read_text(encoding="utf-8") if (bundle / "RELEASE_NOTES.md").exists() else ""
+        m = re.match(r"# MarxBase release (\S+) \(([^)]+)\)", notes)
+        self.version, self.date = (m.group(1), m.group(2)) if m else (bundle.name, "")
+        for r in self.t["results"]:
+            for k in ("new_value", "baseline_value", "percent_change", "fold_change", "temperature_c", "ph", "volume_l", "cultivation_time_h", "n_replicates", "year", "n_members"):
+                r[k] = num(r.get(k))
+        self.results = self.t["results"]
+        self.by_id = {r["public_id"]: r for r in self.results}
+        self.genes = {g["gene_id"]: g for g in self.t["genes"]}
+        self.strains = {s["strain_id"]: s for s in self.t["strains"]}
+        self.papers = {c["pmid"]: c for c in self.t["citations"]}
+        self.products = {p["product_name"]: p for p in self.t["products"]}
+        self.findings = defaultdict(list)
+        for r in self.results:
+            self.findings[r["finding_id"]].append(r)
+        self.aliases = defaultdict(list)
+        for a in self.t["gene_aliases"]:
+            self.aliases[a["gene_id"]].append(a)
+        self.orthologs = defaultdict(list)
+        for o in self.t["gene_orthologs"]:
+            self.orthologs[o["gene_id"]].append(o)
+        self.cands = defaultdict(list)
+        for c in self.t["gene_candidate_loci"]:
+            self.cands[c["gene_id"]].append(c)
+        self.salias = defaultdict(list)
+        for a in self.t["strain_aliases"]:
+            self.salias[a["strain_id"]].append(a)
+        self.comps = defaultdict(list)
+        for c in self.t["comparisons"]:
+            self.comps[c["public_id"]].append(c)
+        self.children = defaultdict(list)
+        for s in self.strains.values():
+            if s["parent_strain_id"]:
+                self.children[s["parent_strain_id"]].append(s["strain_id"])
+        self.strain_root = {sid: self._root(sid) for sid in self.strains}
+        self.count = 0
+        self.has_evidence = any(r.get("evidence_sentence") for r in self.t["results"])
+        import hashlib
+        self.asset_tag = hashlib.sha256(b''.join((SRC / f).read_bytes() for f in ('style.css', 'app.js', 'cite.js', 'search-core.js'))).hexdigest()[:8]
+
+    def _root(self, sid: str) -> str:
+        seen = set()
+        while sid not in seen and self.strains[sid]["parent_strain_id"] in self.strains:
+            seen.add(sid)
+            sid = self.strains[sid]["parent_strain_id"]
+        return sid
+
+    def strain_link(self, sid: str, depth: int) -> str:
+        root = self.strain_root[sid]
+        return f'<a href="{"../" * depth}strain/{esc(root)}.html">{esc(self.strains[root]["strain_name"])}</a>'
+
+    # ----- helpers -----
+    def write(self, rel: str, text: str) -> None:
+        p = self.out / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(text, encoding="utf-8")
+        self.count += 1
+
+    def layout(self, title: str, body: str, depth: int, active: str = "", suggest: tuple = None) -> str:
+        root = "../" * depth
+        if suggest and self.config:
+            body += (f'<section id="suggest-box" data-page-type="{esc(suggest[0])}" data-target-id="{esc(suggest[1])}" data-release="{esc(self.version)}"></section>'
+                     f'<script src="{root}config.js"></script><script src="{root}suggest.js"></script>')
+        nav = "".join(f'<a href="{root}{href}"{" aria-current=\"page\"" if key == active else ""}>{label}</a>' for key, href, label in (
+            ("search", "index.html", "Search"), ("genes", "genes.html", "Genes"), ("strains", "strains.html", "Strains"),
+            ("papers", "papers.html", "Papers"), ("products", "products.html", "Products"), ("summary", "summary.html", "Summary"), ("methods", "methods.html", "Methods"),
+            ("downloads", "downloads.html", "Downloads"), ("about", "about.html", "About &amp; limits")))
+        return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+                + (f'<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; img-src \'self\' data:; style-src \'self\'; script-src \'self\'{"; connect-src \'self\' " + self.config["supabaseUrl"] if self.config else ""}">' if self.csp else '') +
+                f'<title>{esc(title)} – MarxBase</title><link rel="stylesheet" href="{root}style.css?v={esc(self.version)}-{self.asset_tag}"></head><body>'
+                f'<a class="skip" href="#main">Skip to content</a>'
+                f'<header class="top"><a class="brand" href="{root}index.html">MarxBase</a><span class="tag">K. marxianus metabolic engineering results</span>'
+                f'<nav aria-label="Main">{nav}</nav></header><main id="main">{body}</main>'
+                f'<footer><p>Release {esc(self.version)} ({esc(self.date)}) · {len(self.results)} results from {len(self.papers)} papers. {esc(LIMITS)} '
+                f'<a href="{root}about.html">More</a></p></footer></body></html>')
+
+    def chip(self, cls: str) -> str:
+        return f'<span class="chip chip-{esc(cls)}"><span aria-hidden="true">{CLASS_ICON.get(cls, "")}</span> {esc(CLASS_LABEL.get(cls, cls))}</span>'
+
+    def kind_badge(self, g: dict) -> str:
+        kind = g["gene_kind"]
+        label = KIND_LABEL.get(kind, kind)
+        if kind == "heterologous_gene":
+            label = f"Heterologous gene from {g.get('organism') or g.get('gene_organism')}"
+        elif kind == "locus_tagged" and g.get("locus_tag"):
+            label = f"Locus tag {g['locus_tag']}"
+        return f'<span class="badge badge-{esc(kind)}" title="{esc(KIND_HELP.get(kind, ""))}">{esc(label)}</span>'
+
+    def value_text(self, r: dict) -> str:
+        parts = []
+        if r["new_value"] is not None:
+            parts.append(f"{QUAL.get(r['value_qualifier'], '')}{r['new_value']} {r['value_unit']}".strip())
+            if r["baseline_value"] is not None:
+                parts.append(f"(baseline {r['baseline_value']} {r['value_unit']}".strip() + (f", {r['comparator']}" if r["comparator"] else "") + ")")
+        if r["percent_change"] is not None:
+            parts.append(f"{r['percent_change']}% change" + (f" vs {r['comparator']}" if r["comparator"] and r["new_value"] is None else ""))
+        if r["fold_change"] is not None:
+            parts.append(f"{r['fold_change']}-fold" + (f" vs {r['comparator']}" if r["comparator"] and r["new_value"] is None else ""))
+        return " ".join(parts) or ""
+
+    def gene_link(self, r: dict, depth: int) -> str:
+        return f'<a href="{"../" * depth}gene/{esc(r["gene_id"])}.html">{esc(r["gene_name"])}</a>'
+
+    def paper_cite(self, pmid: str) -> str:
+        p = self.papers.get(pmid, {})
+        first = (p.get("first_author") or (p.get("authors") or "").split(";")[0]).strip()
+        return f"{first or 'Unknown'} {p.get('year') or ''}".strip()
+
+    def finding_line(self, rows: list, depth: int, current_gene: str = "") -> str:
+        r0 = rows[0]
+        members = " + ".join(f'{self.gene_link(m, depth)} <span class="chg">{esc(pretty(m["intervention_type"]))}</span>' for m in rows)
+        meta = [f"host {esc(r0['host_organism'])}"]
+        if r0["strain_name"]:
+            meta.append(f'strain {self.strain_link(r0["strain_id"], depth)}')
+        meta.append(f'<a href="{"../" * depth}paper/{esc(r0["pmid"])}.html">{esc(self.paper_cite(r0["pmid"]))}</a>')
+        val = self.value_text(r0)
+        return (f'<li class="finding"><div class="fl1">{members} → <strong>{esc(r0["effect_direction"])}</strong> {esc(r0["phenotype"])} {self.chip(r0["result_class"])}</div>'
+                f'<div class="fl2">{" · ".join(meta)}{(" · " + esc(val)) if val else ""} · '
+                f'<a href="{"../" * depth}result/{esc(r0["public_id"])}.html">details</a></div></li>')
+
+    def findings_list(self, rows: list, depth: int) -> str:
+        seen, items = set(), []
+        for r in sorted(rows, key=lambda x: (x["result_class"] == "positive", -(x["year"] or 0), x["public_id"])):
+            if r["finding_id"] in seen:
+                continue
+            seen.add(r["finding_id"])
+            items.append(self.finding_line(self.findings[r["finding_id"]], depth))
+        return f'<ul class="findings">{"".join(items)}</ul>' if items else "<p>No results.</p>"
+
+    def class_counts(self, rows: list) -> str:
+        fids = {}
+        for r in rows:
+            fids[r["finding_id"]] = r["result_class"]
+        c = {k: sum(1 for v in fids.values() if v == k) for k in CLASS_LABEL}
+        return ", ".join(f"{n} {CLASS_LABEL[k].lower()}" for k, n in c.items() if n) or "none"
+
+    # ----- pages -----
+    def build_result_page(self, r: dict) -> None:
+        g = self.genes[r["gene_id"]]
+        gd = {**g, "gene_organism": g["organism"]}
+        rows = [("Gene", f'{self.gene_link(r, 1)} {self.kind_badge(gd)}'),
+                ("Name in the paper", esc(r["reported_gene_name"]) if r["reported_gene_name"] else ""),
+                ("Gene from", esc(r["gene_organism"])), ("Change", esc(pretty(r["intervention_type"]))),
+                ("Effect", esc(r["effect_direction"])), ("Phenotype", f'{esc(r["phenotype"])} ({esc(pretty(r["phenotype_category"]))})'),
+                ("Class", self.chip(r["result_class"])), ("Host", esc(r["host_organism"])),
+                ("Strain", (self.strain_link(r["strain_id"], 1) + (f' <span class="small">(recorded as {esc(r["strain_name"])})</span>' if self.strain_root[r["strain_id"]] != r["strain_id"] else "")) if r["strain_id"] else "not stated"),
+                ("Product", f'<a href="../product/{slug(r["product"])}.html">{esc(r["product"])}</a> ({esc(r["product_class"])})' if r["product"] else ""),
+                ("Condition tag", esc(r["condition_label"]) if r["condition_label"] and r["condition_label"] != "default" else "")]
+        quant = [("Value", esc(self.value_text(r))), ("Size as written", esc(r["effect_magnitude_text"])), ("Metric", esc(pretty(r["metric_type"]))),
+                 ("Statistics", esc(pretty(r["statistics_reported"]))), ("Replicates", esc(r["n_replicates"]))]
+        cond_fields = [("Temperature", f'{r["temperature_c"]} °C' if r["temperature_c"] is not None else r["temperature_note"]),
+                       ("pH", r["ph"]), ("Scale", pretty(r["scale"])), ("Volume (L)", r["volume_l"]), ("Process", pretty(r["process_mode"])),
+                       ("Carbon source", r["carbon_source"]), ("Medium", r["feedstock_medium"]), ("Oxygen", r["oxygen_level"]),
+                       ("Time (h)", r["cultivation_time_h"]), ("Stressor", " ".join(x for x in (r["stressor_type"], r["stressor_level"]) if x))]
+
+        cond_fields = [(k, esc(v)) for k, v in cond_fields]
+
+        def table(items):
+            body = "".join(f"<tr><th scope='row'>{k}</th><td>{v}</td></tr>" for k, v in items if v not in ("", None))
+            return f"<table class='kv'>{body}</table>" if body else ""
+        p = self.papers.get(r["pmid"], {})
+        links = [f'<a href="https://pubmed.ncbi.nlm.nih.gov/{esc(r["pmid"])}/">PubMed</a>']
+        if p.get("doi"):
+            links.append(f'<a href="https://doi.org/{esc(p["doi"])}">DOI</a>')
+        if p.get("pmcid"):
+            links.append(f'<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/{esc(p["pmcid"])}/">PMC</a>')
+        others = [m for m in self.findings[r["finding_id"]] if m["public_id"] != r["public_id"]]
+        combo = ""
+        if others:
+            combo = "<h2>Changed together</h2><ul>" + "".join(
+                f'<li>{self.gene_link(m, 1)} {esc(pretty(m["intervention_type"]))} (<a href="{esc(m["public_id"])}.html">{esc(m["public_id"])}</a>)</li>' for m in others) + "</ul>"
+        comp = ""
+        if self.comps.get(r["public_id"]):
+            comp = "<h2>Compared with other yeasts (authors' statement)</h2><ul>" + "".join(
+                f'<li><strong>{esc(pretty(c["relation"]))}</strong> vs {esc(c["other_organism"])}' + (f': “{safe_html(c["evidence_sentence_html"], c["evidence_sentence"])}”' if c["evidence_sentence"] else "") + '</li>'
+                for c in self.comps[r["public_id"]]) + "</ul>"
+        evidence = (f'<blockquote>{safe_html(r["evidence_sentence_html"], r["evidence_sentence"])}</blockquote><p class="small">From the abstract. '
+                    f'Evidence sentences are third-party text and are not covered by the data licence.</p>'
+                    if r["evidence_sentence"] else f'<p>{esc(r["provenance_note"])}</p>')
+        body = (f'<h1>{esc(r["gene_name"])} {esc(pretty(r["intervention_type"]))}: {esc(r["phenotype"])}</h1>'
+                f'<p>{self.chip(r["result_class"])} <span class="badge">{esc(r["provenance"])}</span> <span class="small">{esc(r["public_id"])}</span></p>'
+                f'{table(rows)}<h2>Measured</h2>{table(quant) or "<p>No quantified value stated.</p>"}'
+                f'{("<h2>Conditions</h2>" + table(cond_fields)) if table(cond_fields) else ""}{combo}{comp}'
+                f'<h2>Evidence</h2>{evidence}<h2>Paper</h2><p><a href="../paper/{esc(r["pmid"])}.html">{safe_html(p.get("title_html"), p.get("title"))}</a><br>'
+                f'{esc(p.get("authors"))}<br>{esc(p.get("journal"))} {esc(p.get("year"))} · {" · ".join(links)}</p>'
+                f'<p class="small">Cite as: MarxBase result {esc(r["public_id"])}, release {esc(self.version)}.</p>')
+        self.write(f"result/{r['public_id']}.html", self.layout(f"{r['gene_name']} {pretty(r['intervention_type'])}", body, 1, suggest=("result", r["public_id"])))
+
+    def build_gene_page(self, g: dict) -> None:
+        rows = [r for r in self.results if r["gene_id"] == g["gene_id"]]
+        gd = {**g, "gene_organism": g["organism"]}
+        ident = [("Organism", g["organism"]), ("Locus tag", g["locus_tag"]), ("Identity method", pretty(g["id_method"])), ("Confidence", g["id_confidence"])]
+        ident_html = "".join(f"<tr><th scope='row'>{k}</th><td>{esc(v)}</td></tr>" for k, v in ident if v)
+        al = [a["alias_name"] for a in self.aliases.get(g["gene_id"], [])]
+        reported = sorted({r["reported_gene_name"] for r in rows if r["reported_gene_name"]})
+        orth = self.orthologs.get(g["gene_id"], [])
+        orth_html = ("<h2>S. cerevisiae ortholog</h2><table class='kv'><tr><th>Gene</th><th>ID</th><th>Identity</th><th>Coverage</th><th>Rank</th><th>Confidence</th></tr>" +
+                     "".join(f"<tr><td>{esc(o['ortholog_gene_name'])}</td><td>{esc(o['ortholog_systematic_id'])}</td><td>{esc(o['identity_pct'])}%</td><td>{esc(o['coverage_pct'])}%</td>"
+                             f"<td>{esc(o['rank'])}</td><td>{esc(o['confidence'])}</td></tr>" for o in orth) + "</table>") if orth else ""
+        cand = self.cands.get(g["gene_id"], [])
+        cand_html = ""
+        if g["gene_kind"] == "undetermined_paralog" and cand:
+            cand_html = ("<h2>Candidate loci</h2><p><strong>Undetermined:</strong> the papers do not say which copy was used.</p><ul>" +
+                         "".join(f"<li>{esc(c['locus_tag'])} – {esc(c['product'])}{(' (' + esc(c['hint']) + ')') if c['hint'] else ''}</li>" for c in cand) + "</ul>")
+        by_cat = defaultdict(list)
+        for r in rows:
+            by_cat[r["phenotype_category"]].append(r)
+        sections = "".join(f"<h3>{esc(pretty(cat))} <span class='small'>({self.class_counts(rs)})</span></h3>{self.findings_list(rs, 1)}" for cat, rs in sorted(by_cat.items()))
+        body = (f'<h1>{esc(g["gene_name"])}</h1><p>{self.kind_badge(gd)} <span class="small">{esc(g["gene_id"])}</span></p>'
+                f'<p>{len({r["finding_id"] for r in rows})} findings ({self.class_counts(rows)}).</p>'
+                f'<table class="kv">{ident_html}</table>'
+                f'{("<p>Also known as: " + esc(", ".join(al)) + "</p>") if al else ""}'
+                f'{("<p>Named in the papers as: " + esc(", ".join(reported)) + "</p>") if reported else ""}'
+                f'{("<p>" + esc(g["identity_note"]) + "</p>") if g["identity_note"] else ""}'
+                f'{("<p class=\"small\">" + esc(KIND_HELP[g["gene_kind"]]) + "</p>") if g["gene_kind"] in KIND_HELP else ""}'
+                f'{orth_html}{cand_html}<h2>Results</h2>{sections}')
+        self.write(f"gene/{g['gene_id']}.html", self.layout(g["gene_name"], body, 1, "genes", suggest=("gene", g["gene_id"])))
+
+    def build_strain_page(self, s: dict) -> None:
+        sid = s["strain_id"]
+        root = self.strain_root[sid]
+        if root != sid:       # a derived strain: its results are compiled under the root strain
+            r = self.strains[root]
+            body = (f'<h1>{esc(s["strain_name"])}</h1><p>Results from this strain are included under '
+                    f'<a href="{esc(root)}.html">{esc(r["strain_name"])}</a>.</p>')
+            self.write(f"strain/{sid}.html", self.layout(s["strain_name"], body, 1, "strains"))
+            return
+        members = [x for x in self.strains if self.strain_root[x] == sid]
+        rows = [r for r in self.results if r["strain_id"] in members]
+        derived = [self.strains[x]["strain_name"] for x in members if x != sid]
+        al = self.salias.get(sid, [])
+        body = (f'<h1>{esc(s["strain_name"])}</h1><p class="small">{esc(sid)}{(" \u00b7 " + esc(s["species"])) if s["species"] else ""}</p>'
+                f'{("<h2>Other designations</h2><p>" + esc(", ".join(a["alias"] for a in al)) + "</p>") if al else ""}'
+                f'{("<p class=\"small\">Includes results recorded under derived strains: " + esc(", ".join(sorted(derived))) + ".</p>") if derived else ""}'
+                f'<h2>Results ({len({r["finding_id"] for r in rows})} findings)</h2>'
+                f'{self.findings_list(rows, 1) if rows else "<p>No result in the current release uses this strain directly.</p>"}')
+        self.write(f"strain/{sid}.html", self.layout(s["strain_name"], body, 1, "strains", suggest=("strain", sid)))
+
+    def build_paper_page(self, p: dict) -> None:
+        rows = [r for r in self.results if r["pmid"] == p["pmid"]]
+        links = [f'<a href="https://pubmed.ncbi.nlm.nih.gov/{esc(p["pmid"])}/">PubMed</a>']
+        if p["doi"]:
+            links.append(f'<a href="https://doi.org/{esc(p["doi"])}">DOI</a>')
+        if p["pmcid"]:
+            links.append(f'<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/{esc(p["pmcid"])}/">PMC</a>')
+        body = (f'<h1>{safe_html(p["title_html"], p["title"])}</h1><p>{esc(p["authors"])}<br>{esc(p["journal"])} {esc(p["year"])}'
+                f'{(" · " + esc(p["country"])) if p["country"] else ""} · {" · ".join(links)}</p>'
+                f'<h2>Results ({len({r["finding_id"] for r in rows})} findings)</h2>{self.findings_list(rows, 1)}'
+                f'<h2>Cite this paper</h2><div id="paper-cite"><noscript><p>{esc(p["authors"])}. {esc(p["title"])}. {esc(p["journal"])}. {esc(p["year"])}.'
+                f'{(" doi:" + esc(p["doi"])) if p["doi"] else ""}</p></noscript></div>'
+                + '<script type="application/json" id="paper-data">' + json.dumps({k: p[k] for k in ("pmid", "title", "authors", "journal", "year", "doi", "pmcid")}, ensure_ascii=False).replace("</", "<\\/") + '</script>'
+                '<script src="../cite.js"></script><script src="../paperpage.js"></script>')
+        self.write(f"paper/{p['pmid']}.html", self.layout(p["title"] or p["pmid"], body, 1, "papers", suggest=("paper", p["pmid"])))
+
+    def build_product_page(self, name: str, p: dict) -> None:
+        rows = [r for r in self.results if r["product"] == name]
+        worked = [r for r in rows if r["result_class"] == "positive"]
+        failed = [r for r in rows if r["result_class"] != "positive"]
+        body = (f'<p><a href="../product-class/{self.class_slug(p["product_class"])}.html">\u2190 {esc(p["product_class"])}</a></p><h1>{esc(name)}</h1><p class="small">{esc(p["product_class"])} · {len({r["finding_id"] for r in rows})} findings ({self.class_counts(rows)})</p>'
+                f'<h2>What worked</h2>{self.findings_list(worked, 1)}<h2>What failed or depended on conditions</h2>{self.findings_list(failed, 1)}')
+        self.write(f"product/{slug(name)}.html", self.layout(name, body, 1, "products", suggest=("product", name)))
+
+    def km_strain_ids(self) -> set:
+        """Strains used in K. marxianus hosts, plus their ancestors (so a lineage is never cut)."""
+        ids = {r["strain_id"] for r in self.results if r["strain_id"] and r["host_organism"] == "K. marxianus"}
+        for sid in list(ids):
+            cur = self.strains[sid]["parent_strain_id"]
+            while cur and cur in self.strains and cur not in ids:
+                ids.add(cur)
+                cur = self.strains[cur]["parent_strain_id"]
+        return ids
+
+    def class_slug(self, name: str) -> str:
+        return slug(name)
+
+    def build_lists(self) -> None:
+        def page(title, key, body_html, intro=""):
+            self.write(f"{key}.html", self.layout(title, f"<h1>{esc(title)}</h1>{intro}{body_html}", 0, key))
+        # genes: K. marxianus genes / other species' genes expressed in K. marxianus / genes only studied in other hosts
+        km_host_genes = {r["gene_id"] for r in self.results if r["host_organism"] == "K. marxianus"}
+        genes = sorted(self.genes.values(), key=lambda g: g["gene_name"].lower())
+
+        def gene_item(g, show_org):
+            extra = [esc(g["organism"])] if show_org else []
+            extra += [esc(KIND_LABEL.get(g["gene_kind"], "")), plural(g["n_results"], "result")]
+            return f'<li><a href="gene/{esc(g["gene_id"])}.html">{esc(g["gene_name"])}</a> <span class="small">{" \u00b7 ".join(extra)}</span></li>'
+        A = [g for g in genes if g["organism"] == "K. marxianus" and g["gene_kind"] != "enzyme_or_protein_label"]
+        B = [g for g in genes if g["organism"] != "K. marxianus" and g["gene_id"] in km_host_genes]
+        body = (f'<details open><summary>K. marxianus genes ({len(A)})</summary><ul class="plain">{"".join(gene_item(g, False) for g in A)}</ul></details>'
+                f'<details><summary>Genes from other species expressed in K. marxianus ({len(B)})</summary>'
+                f'<ul class="plain">{"".join(gene_item(g, True) for g in B)}</ul></details>')
+        page("Genes", "genes", body)
+        # strains: K. marxianus strains only; derived strains are compiled under their parent and not listed
+        keep = self.km_strain_ids()
+        roots = sorted({self.strain_root[sid] for sid in keep}, key=lambda k: self.strains[k]["strain_name"].lower())
+        items = []
+        for rid in roots:
+            n = sum(1 for r in self.results if r["strain_id"] and self.strain_root[r["strain_id"]] == rid)
+            items.append(f'<li><a href="strain/{esc(rid)}.html">{esc(self.strains[rid]["strain_name"])}</a> <span class="small">{plural(n, "result")}</span></li>')
+        page("Strains", "strains", f'<p class="small">K. marxianus strains. Results from derived strains are included under their parent strain. '
+             f'Strains used only in other host organisms are not listed here; they appear in search results when other hosts are switched on.</p>'
+             f'<ul class="plain">{"".join(items)}</ul>')
+        by_year = defaultdict(list)
+        for p in self.papers.values():
+            by_year[num(p["year"]) or 0].append(p)
+        blocks = []
+        for yr in sorted(by_year, reverse=True):
+            ps = sorted(by_year[yr], key=lambda p: p["pmid"])
+            lis = "".join(f'<li><a href="paper/{esc(p["pmid"])}.html">{safe_html(p["title_html"], p["title"])}</a> <span class="small">{esc(p["authors"].split(";")[0] if p["authors"] else "")} \u00b7 {plural(p["n_results"], "result")}</span></li>' for p in ps)
+            blocks.append(f'<h2>{yr or "Year unknown"} <span class="small">({plural(len(ps), "paper")})</span></h2><ul class="plain">{lis}</ul>')
+        page("Papers", "papers", f'<p class="small">{plural(len(self.papers), "paper")}, newest first.</p>' + "".join(blocks))
+        # products: general classes first; each class page lists its specific products
+        by_class = defaultdict(list)
+        for n, p in self.products.items():
+            by_class[p["product_class"]].append(n)
+        items = []
+        for cls in sorted(by_class):
+            fids = {r["finding_id"] for r in self.results if r["product"] in by_class[cls]}
+            items.append(f'<li><a href="product-class/{self.class_slug(cls)}.html">{esc(cls)}</a> <span class="small">{plural(len(by_class[cls]), "product")} \u00b7 {plural(len(fids), "finding")}</span></li>')
+            lis = []
+            for n in sorted(by_class[cls]):
+                rows = [r for r in self.results if r["product"] == n]
+                lis.append(f'<li><a href="../product/{slug(n)}.html">{esc(n)}</a> <span class="small">{len({r["finding_id"] for r in rows})} findings ({self.class_counts(rows)})</span></li>')
+            self.write(f"product-class/{self.class_slug(cls)}.html", self.layout(cls, f'<p><a href="../products.html">\u2190 All product classes</a></p><h1>{esc(cls)}</h1>'
+                       f'<p class="small">{plural(len(fids), "finding")} across {plural(len(by_class[cls]), "product")}.</p><ul class="plain">{"".join(lis)}</ul>', 1, "products"))
+        page("Products", "products", f'<p class="small">Product classes. Open a class to see its specific products.</p><ul class="plain">{"".join(items)}</ul>')
+
+    def build_about(self) -> None:
+        cls = {k: sum(1 for r in self.results if r["result_class"] == k) for k in CLASS_LABEL}
+        body = (f'<h1>About &amp; limits</h1><p>MarxBase collects gene–phenotype results for <em>Kluyveromyces marxianus</em> metabolic engineering. '
+                f'Release {esc(self.version)} ({esc(self.date)}) holds {len(self.results)} results ({len(self.findings)} findings, counting a multi-gene combination once): '
+                f'{cls["positive"]} positive, {cls["negative"]} negative, {cls["context-dependent"]} context-dependent, from {len(self.papers)} papers.</p>'
+                f'<h2>Limits</h2><ul><li>{esc(LIMITS)}</li><li>Temperature, scale and other conditions are recorded only when the abstract states them.</li>'
+                f'<li>Some gene names are enzyme or protein labels used by authors, not gene symbols; they are marked. Some K. marxianus genes have several copies and the paper '
+                f'does not say which one was used; they are marked as undetermined.</li><li>Negative results are scarce in abstracts, so absence of a failed attempt is not evidence that it worked.</li></ul>'
+                f'<h2>Reporting a problem</h2><p>On a result, gene, paper or strain page, <strong>Report or suggest</strong> sends a message to the MarxBase maintainers: something looks wrong, a field should change, a result is missing, or a gene identifier is known. Messages are anonymous unless you add a name or email so we can reply, are read only by the maintainers and are never shown on this site. A suggestion changes nothing by itself; the maintainer checks it against the paper before any change reaches a later release.</p>'
+                f'<p class="small">This is a development build. See <a href="methods.html">Methods</a> for how the data were made and <a href="downloads.html">Downloads</a> for the files.</p>')
+        self.write("about.html", self.layout("About and limits", body, 0, "about"))
+
+    def data_js(self) -> str:
+        hide = {"evidence_sentence_html"} | (set() if self.has_evidence else {"evidence_sentence", "evidence_source"})
+        cols = [c for c in self.t["results"][0].keys() if c not in hide]
+        self.csv_columns = cols
+        home = self.km_strain_ids()
+        data = {
+            "version": self.version, "date": self.date, "hasEvidence": self.has_evidence,
+            "columns": cols,
+            "results": [{k: r[k] for k in cols if r.get(k) not in ("", None)} for r in self.results],
+            "genes": {gid: {"name": g["gene_name"], "organism": g["organism"], "kind": g["gene_kind"], "locus": g["locus_tag"],
+                            "aliases": [a["alias_name"] for a in self.aliases.get(gid, [])],
+                            "orthologs": [[o["ortholog_gene_name"], o["ortholog_systematic_id"]] for o in self.orthologs.get(gid, [])]} for gid, g in self.genes.items()},
+            "strains": {sid: {"name": s["strain_name"], "parent": s["parent_strain_id"], "species": s["species"], "home": sid in home, "root": self.strain_root[sid],
+                              "aliases": [a["alias"] for a in self.salias.get(sid, [])]} for sid, s in self.strains.items()},
+            "papers": {pm: {"pmid": pm, "title": p["title"], "authors": p["authors"], "journal": p["journal"], "year": num(p["year"]), "country": p["country"],
+                            "first_author": p["first_author"], "doi": p["doi"], "pmcid": p["pmcid"]} for pm, p in self.papers.items()}}
+        return "window.MARXBASE = " + json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/") + ";\n"
+
+    def build(self) -> int:
+        if self.out.exists():
+            shutil.rmtree(self.out)
+        self.out.mkdir(parents=True)
+        for f in ("style.css", "search-core.js", "cite.js", "app.js", "paperpage.js", "suggest.js"):
+            shutil.copy(SRC / f, self.out / f)
+        self.write("data.js", self.data_js())
+        if self.config:
+            self.write("config.js", "window.MARXBASE_CONFIG = " + json.dumps(self.config) + ";\n")
+        index = (f'<h1>Search results</h1><p class="small">{esc(LIMITS)}</p><div id="app"><noscript>This page needs JavaScript. '
+                 f'You can still browse <a href="genes.html">genes</a>, <a href="strains.html">strains</a>, <a href="papers.html">papers</a> and <a href="products.html">products</a>.</noscript></div>'
+                 f'<script src="data.js"></script><script src="search-core.js"></script><script src="cite.js"></script><script src="app.js"></script>')
+        self.write("index.html", self.layout("Search", index, 0, "search"))
+        for r in self.results:
+            self.build_result_page(r)
+        for g in self.genes.values():
+            self.build_gene_page(g)
+        for s in self.strains.values():
+            self.build_strain_page(s)
+        for p in self.papers.values():
+            self.build_paper_page(p)
+        for n, p in self.products.items():
+            self.build_product_page(n, p)
+        self.build_lists()
+        self.build_about()
+        self.write("summary.html", self.layout("Summary", pages.build_summary(self), 0, "summary"))
+        self.write("methods.html", self.layout("Methods", pages.build_methods(self), 0, "methods"))
+        pages.build_data_zip(self)
+        self.write("downloads.html", self.layout("Downloads", pages.downloads_body(self, False), 0, "downloads"))
+        if not self.public:                       # the public build carries no test pages or gate answers
+            import gate_questions
+            gate_questions.write_all(self, HERE / "gate", self.out)
+            shutil.copy(SRC / "tests.js", self.out / "tests.js")
+        pages.build_offline_zip(self)
+        if not self.public:
+          self.write("tests.html", "<!doctype html><meta charset=utf-8><title>MarxBase tests</title><style>.ok{color:#0a6b2f}.bad{color:#a1260b;font-weight:700}body{font:15px system-ui;margin:20px}</style>"
+                   "<h1>Search-core tests</h1><p id=summary>running...</p><ul id=out></ul><script src=data.js></script><script src=search-core.js></script><script src=cite.js></script><script src=suggest.js></script>"
+                   "<script src=expected.js></script><script src=tests.js></script>")
+        return self.count
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--bundle", required=True, help="a releases/<version> folder")
+    ap.add_argument("--out", default=str(HERE / "dist"))
+    ap.add_argument("--config", default=str(HERE / "site-config.json"), help="site-config.json with supabaseUrl and supabaseAnonKey (public anon key only); optional")
+    ap.add_argument("--public", action="store_true", help="the hosted build: content-security policy on, no test pages or gate files")
+    ap.add_argument("--csp", action="store_true", help="add a Content-Security-Policy meta tag (for the hosted build; test it before use: some browsers apply 'self' differently to file:// pages)")
+    a = ap.parse_args(argv)
+    site = Site(Path(a.bundle), Path(a.out), csp=a.csp, config=Path(a.config), public=a.public)
+    n = site.build()
+    print(f"built {n} files into {a.out} from release {site.version}: {len(site.results)} results, {len(site.findings)} findings, "
+          f"{len(site.genes)} genes, {len(site.strains)} strains, {len(site.papers)} papers, {len(site.products)} products")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

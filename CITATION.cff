@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use MarxBase, please cite it as below. Add the DOI once the release is archived at Zenodo."
+title: "MarxBase: gene-phenotype results for Kluyveromyces marxianus metabolic engineering"
+version: "1.0"
+type: dataset
+authors:
+  - family-names: Eichelberger
+    given-names: Sidney
+    orcid: "https://orcid.org/0000-0001-8049-8686"
+    affiliation: "University of California, Irvine"
+repository-code: "https://github.com/marxbase/marxbase"
+url: "https://marxbase.org"
+license: "CC-BY-4.0"
+keywords:
+  - Kluyveromyces marxianus
+  - metabolic engineering
+  - yeast
+  - gene-phenotype database
+# doi: add after the first release is archived at Zenodo
+# date-released: set on the day of the GitHub release

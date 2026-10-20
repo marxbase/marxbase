@@ -1,0 +1,52 @@
+/* Plain, high-contrast placeholder styling; the look and feel is to be revisited later. */
+:root { --bg:#fff; --fg:#1a1a1a; --muted:#555; --line:#c9c9c9; --link:#0b4f9c; --pos:#0f6b2f; --neg:#a1260b; --ctx:#6b4f00; --accent:#0b4f9c; }
+* { box-sizing: border-box; }
+[hidden] { display:none !important; }
+body { margin:0; font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--fg); background:var(--bg); }
+a { color:var(--link); }
+.skip { position:absolute; left:-999px; } .skip:focus { left:8px; top:8px; background:#fff; padding:6px; z-index:10; }
+header.top { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 20px; padding:10px 16px; border-bottom:2px solid var(--fg); }
+.brand { font-weight:700; font-size:1.4rem; text-decoration:none; color:var(--fg); }
+.tag { color:var(--muted); font-size:.9rem; }
+nav { display:flex; flex-wrap:wrap; gap:4px 14px; } nav a { margin:0; } nav a[aria-current] { font-weight:700; color:var(--fg); text-decoration:none; border-bottom:2px solid var(--accent); }
+main { max-width:1180px; margin:0 auto; padding:12px 16px 40px; }
+footer { border-top:1px solid var(--line); padding:12px 16px; color:var(--muted); font-size:.85rem; }
+h1 { font-size:1.5rem; margin:.4em 0; } h2 { font-size:1.15rem; margin:1.2em 0 .3em; } h3 { font-size:1rem; margin:1em 0 .2em; text-transform:capitalize; }
+.small { color:var(--muted); font-size:.85rem; }
+table.kv { border-collapse:collapse; margin:.4em 0; } table.kv th, table.kv td { text-align:left; padding:3px 12px 3px 0; vertical-align:top; border-bottom:1px solid #eee; }
+blockquote { margin:.4em 0; padding:6px 12px; border-left:4px solid var(--line); background:#f6f6f6; }
+ul.plain { list-style:none; padding:0; } ul.plain li { padding:3px 0; }
+.chip { display:inline-block; padding:0 8px; border-radius:10px; border:1px solid currentColor; font-size:.8rem; font-weight:600; white-space:nowrap; }
+.chip-positive { color:var(--pos); } .chip-negative { color:var(--neg); background:#fdeeea; } .chip-context-dependent { color:var(--ctx); background:#fdf5da; }
+.badge { display:inline-block; padding:0 8px; border-radius:4px; background:#eef2f7; border:1px solid #c5d0de; font-size:.78rem; }
+.badge-undetermined_paralog, .badge-enzyme_or_protein_label, .badge-unmapped_name { background:#fff4e0; border-color:#e0b66a; }
+.chg { color:var(--muted); } .combo { color:var(--muted); font-size:.85rem; }
+ul.findings, ol.findings { list-style:none; padding:0; margin:.4em 0; }
+li.finding { padding:8px 0; border-bottom:1px solid #e4e4e4; } .fl2, .fl3 { font-size:.88rem; color:var(--muted); } .fl3:empty { display:none; }
+.searchbar { display:grid; gap:6px; margin:8px 0; } .searchbar input[type=search] { width:100%; padding:8px 10px; font-size:1rem; border:2px solid var(--fg); border-radius:4px; }
+.toggles { display:flex; flex-wrap:wrap; gap:6px 20px; } label.inline { font-size:.92rem; }
+.weak { background:#fff4e0; border:1px solid #e0b66a; padding:6px 10px; border-radius:4px; }
+.layout { display:grid; grid-template-columns:270px minmax(0,1fr); gap:24px; align-items:start; } .layout > * { min-width:0; }
+#filters { display:grid; gap:10px; } #filters fieldset { border:1px solid var(--line); padding:6px 10px; margin:0; } #filters legend { font-weight:600; padding:0 4px; }
+.opt { display:block; font-size:.9rem; } .opt .n { color:var(--muted); } .row { display:grid; gap:2px; } select { width:100%; max-width:100%; padding:3px; } li.finding, td, th, blockquote, h1 { overflow-wrap:anywhere; } table.kv { max-width:100%; }
+#filters input[type=number] { width:5.5em; } button { padding:6px 12px; font:inherit; cursor:pointer; } button.more { margin:12px 0; }
+summary { cursor:pointer; font-weight:600; }
+@media (max-width: 760px) { .layout { grid-template-columns:minmax(0,1fr); } }
+@media print { header nav, #filters, .searchbar, footer { display:none; } }
+.hostswitch { border:2px solid var(--accent); background:#eef4fb; padding:8px 10px; border-radius:4px; }
+.countbar { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; } .countbar p { margin:.5em 0; }
+button.linklike { background:none; border:none; color:var(--link); text-decoration:underline; padding:0; font:inherit; cursor:pointer; }
+.combo { position:relative; } .suggest { position:absolute; left:0; right:0; top:100%; z-index:20; margin:2px 0 0; padding:0; list-style:none; background:#fff; border:2px solid var(--fg); border-radius:4px; max-height:320px; overflow:auto; box-shadow:0 4px 10px rgba(0,0,0,.15); }
+.suggest li { padding:6px 10px; cursor:pointer; border-bottom:1px solid #eee; } .suggest li:last-child { border-bottom:none; } .suggest li.active, .suggest li:hover { background:#e6eefa; } .suggest .hint { color:var(--muted); font-size:.85rem; }
+details > summary { margin:.6em 0; font-size:1.15rem; }
+.pick { float:right; margin-left:8px; } .exportbox { margin:8px 0; padding:4px 10px; border:1px solid var(--line); border-radius:4px; } .exportbox summary { font-size:1rem; }
+.exportbox .row { display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center; } .exportbox select { width:auto; }
+/* charts: colours validated for colour-blind separation (blue / orange / aqua); every chart has direct totals and a table */
+:root { --c-positive:#2a78d6; --c-negative:#eb6834; --c-context:#1baf7a; --axis:#52514e; --gridc:#e4e4e4; }
+.seg-positive { fill:var(--c-positive); } .seg-negative { fill:var(--c-negative); } .seg-context-dependent { fill:var(--c-context); }
+svg.viz { width:100%; max-width:760px; height:auto; display:block; } svg.viz text { font:12px system-ui,sans-serif; fill:var(--fg); } svg.viz .axl { fill:var(--axis); } svg.viz .grid { stroke:var(--gridc); }
+figure { margin:.6em 0; } .legend { display:flex; flex-wrap:wrap; gap:4px 16px; } .lg { white-space:nowrap; }
+/* report / suggest form */
+.sg-wrap { margin:24px 0 8px; padding:4px 10px; border:1px solid var(--line); border-radius:4px; } .sg-wrap summary { font-size:1rem; }
+.sg-form .row { margin:8px 0; } .sg-form textarea, .sg-form input[type=text] { width:100%; padding:6px; font:inherit; } .sg-form select { width:auto; max-width:100%; }
+.sg-trap { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }

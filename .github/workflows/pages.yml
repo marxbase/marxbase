@@ -1,0 +1,54 @@
+# Builds the site from the committed release bundle and publishes it with GitHub Pages.
+# One-time setup in the repository: Settings > Pages > Source: GitHub Actions; Settings > Secrets and variables > Actions > Variables:
+#   SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY (both are public values; never use the secret key here).
+# Action versions below are from memory: check that they still exist when this first runs.
+name: Build and publish the site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run the generator tests
+        run: python -m unittest discover -s tests
+      - name: Write the site configuration (public values only)
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          python - <<'PY'
+          import json, os
+          url, key = os.environ.get("SUPABASE_URL", ""), os.environ.get("SUPABASE_PUBLISHABLE_KEY", "")
+          if url and key:
+              json.dump({"supabaseUrl": url, "supabaseAnonKey": key}, open("site-config.json", "w"))
+          else:
+              print("No Supabase variables set: building without the report form.")
+          PY
+      - name: Build the site
+        run: python build.py --bundle "releases/$(cat CURRENT_RELEASE)" --out dist --public
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
