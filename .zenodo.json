@@ -1,0 +1,18 @@
+{
+  "title": "MarxBase: gene-phenotype results for Kluyveromyces marxianus metabolic engineering",
+  "upload_type": "dataset",
+  "description": "<p>MarxBase is a searchable, citable collection of gene-phenotype results for <i>Kluyveromyces marxianus</i> metabolic engineering. Each result was extracted from a published paper's abstract and checked by a person. This archive holds the website code and the released data bundle (CSV, SQLite, CSL-JSON, data dictionary, checksums). Website: https://marxbase.org</p><p>Data are released under CC BY 4.0; the website code is MIT licensed. Release 1.0 does not include quoted evidence sentences.</p>",
+  "creators": [
+    {
+      "name": "Eichelberger, Sidney",
+      "affiliation": "University of California, Irvine",
+      "orcid": "0000-0001-8049-8686"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "keywords": ["Kluyveromyces marxianus", "metabolic engineering", "yeast", "gene-phenotype database"],
+  "communities": [{"identifier": "marxbase"}],
+  "related_identifiers": [
+    {"relation": "isSupplementTo", "identifier": "https://marxbase.org", "scheme": "url"}
+  ]
+}
