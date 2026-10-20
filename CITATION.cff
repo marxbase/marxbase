@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use MarxBase, please cite it as below. Add the DOI once the release is archived at Zenodo."
+message: "If you use MarxBase, please cite it as below."
 title: "MarxBase: gene-phenotype results for Kluyveromyces marxianus metabolic engineering"
 version: "1.0"
 type: dataset
@@ -16,5 +16,5 @@ keywords:
   - metabolic engineering
   - yeast
   - gene-phenotype database
-# doi: add after the first release is archived at Zenodo
-# date-released: set on the day of the GitHub release
+doi: "10.5281/zenodo.23519772"
+date-released: "2026-10-21"

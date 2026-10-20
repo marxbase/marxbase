@@ -213,9 +213,13 @@ and publishers and is NOT covered by the data licence. Cite the original paper w
 NO_EVIDENCE_NOTE = "This release does not include quoted evidence sentences; every result links to its source paper.\n"
 
 
+def doi_html(site) -> str:
+    return f'DOI <a href="https://doi.org/{esc(site.doi)}">{esc(site.doi)}</a>.' if site.doi else "DOI pending."
+
+
 def citation_text(site) -> str:
     return (f"Eichelberger S. MarxBase: gene–phenotype results for Kluyveromyces marxianus metabolic engineering, release {site.version}. "
-            f"{site.date[:4]}. DOI pending.")
+            f"{site.date[:4]}. " + (f"https://doi.org/{site.doi}" if site.doi else "DOI pending."))
 
 
 def data_zip_name(site) -> str:
@@ -260,7 +264,7 @@ def downloads_body(site, offline: bool) -> str:
         off = (f'<h2>Use MarxBase without internet</h2><p><a href="downloads/{esc(oz)}">{esc(oz)}</a> (about 2–3 MB) is a copy of this whole website. '
                f'Unzip it, open the folder and double-click <code>index.html</code>. Search, filters and downloads all work without a connection; '
                f'links to PubMed and DOIs need internet. If your browser blocks the search page from a local file, use Chrome, Firefox or Safari.</p>')
-    return (f'<h1>Downloads</h1><p class="small">Release {esc(site.version)} ({esc(site.date)}). DOI pending.</p>'
+    return (f'<h1>Downloads</h1><p class="small">Release {esc(site.version)} ({esc(site.date)}). {doi_html(site)}</p>'
             f'<h2>Data files</h2><p><a href="downloads/{esc(dz)}">{esc(dz)}</a> ({kb(size)}) holds the results, genes, orthologs, strains, papers (without abstracts), '
             f'products and comparisons as CSV files that open in Excel, a SQLite database, citations in CSL-JSON, a data dictionary, checksums and a licence notice.</p>'
             f'<p>From the search page you can also download <strong>the results you are looking at</strong> as a CSV file, and export the papers behind them as references '

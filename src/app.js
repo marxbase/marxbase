@@ -183,7 +183,7 @@
   }
   csvBtn.addEventListener('click', () => {
     const items = lastView.items, rows = items.flatMap((f) => f.rows);
-    const line = 'MarxBase release ' + data.version + ' (' + data.date + '), DOI pending. ' + items.length + ' findings, ' + rows.length + ' results. Filters: ' + describeState(state) + '. ' + (data.hasEvidence ? 'Evidence sentences are not covered by the data licence. ' : '') + 'Data: CC BY 4.0.';
+    const line = 'MarxBase release ' + data.version + ' (' + data.date + '), ' + (data.doi ? 'DOI ' + data.doi + '. ' : 'DOI pending. ') + ' + items.length + ' findings, ' + rows.length + ' results. Filters: ' + describeState(state) + '. ' + (data.hasEvidence ? 'Evidence sentences are not covered by the data licence. ' : '') + 'Data: CC BY 4.0.';
     C.download('marxbase-' + stamp() + '-results.csv', C.toCSV(rows, data.columns, line), 'text/csv');
     exportMsg.textContent = 'Downloaded ' + rows.length + ' results.';
   });

@@ -132,6 +132,8 @@ class Site:
                 self.children[s["parent_strain_id"]].append(s["strain_id"])
         self.strain_root = {sid: self._root(sid) for sid in self.strains}
         self.count = 0
+        doi_file = HERE / "DOI"
+        self.doi = doi_file.read_text(encoding="utf-8").strip() if doi_file.exists() else ""   # the Zenodo DOI of this release; empty = "DOI pending"
         self.has_evidence = any(r.get("evidence_sentence") for r in self.t["results"])
         import hashlib
         self.asset_tag = hashlib.sha256(b''.join((SRC / f).read_bytes() for f in ('style.css', 'app.js', 'cite.js', 'search-core.js'))).hexdigest()[:8]
@@ -441,7 +443,7 @@ class Site:
         self.csv_columns = cols
         home = self.km_strain_ids()
         data = {
-            "version": self.version, "date": self.date, "hasEvidence": self.has_evidence,
+            "version": self.version, "date": self.date, "hasEvidence": self.has_evidence, "doi": self.doi,
             "columns": cols,
             "results": [{k: r[k] for k in cols if r.get(k) not in ("", None)} for r in self.results],
             "genes": {gid: {"name": g["gene_name"], "organism": g["organism"], "kind": g["gene_kind"], "locus": g["locus_tag"],

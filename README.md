@@ -4,9 +4,9 @@ MarxBase is a searchable, citable collection of gene–phenotype results for *Kl
 Each result was extracted from a published paper's abstract and checked by a person. The site is a static website; the data
 are released as versioned snapshots.
 
-- Website: https://marxbase.org (not live until the first release is published)
-- Cite: Eichelberger S. MarxBase: gene–phenotype results for *Kluyveromyces marxianus* metabolic engineering, release 1.0. 2026. DOI pending.
-  The DOI is added after the first GitHub release is archived at Zenodo (see `CITATION.cff`).
+- Website: https://marxbase.org
+- Cite: Eichelberger S. MarxBase: gene–phenotype results for *Kluyveromyces marxianus* metabolic engineering, release 1.0. 2026. https://doi.org/10.5281/zenodo.23519772
+  (the DOI of release 1.0; `CITATION.cff` has the same reference).
 - Report a problem or suggest a change: use "Report or suggest" on any result, gene, paper or strain page.
 - Made in the Da Silva Lab, University of California, Irvine.
 

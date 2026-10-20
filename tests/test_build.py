@@ -266,6 +266,17 @@ class BuiltSiteTests(unittest.TestCase):
         self.assertEqual(text.count("<svg viewBox"), 4)
         self.assertEqual(text.count("Show as a table"), 4)
 
+    def test_doi_appears_in_the_citation_and_the_data_when_a_doi_file_exists(self):
+        doi = (HERE / "DOI").read_text(encoding="utf-8").strip() if (HERE / "DOI").exists() else ""
+        down = (self.out / "downloads.html").read_text(encoding="utf-8")
+        data = (self.out / "data.js").read_text(encoding="utf-8").replace(" ", "")
+        if doi:
+            self.assertIn(f"https://doi.org/{doi}", down)
+            self.assertIn(f'"doi":"{doi}"', data)
+            self.assertNotIn("DOI pending", down)
+        else:
+            self.assertIn("DOI pending", down)
+
     def test_papers_page_has_year_headings_with_counts(self):
         text = (self.out / "papers.html").read_text(encoding="utf-8")
         years = re.findall(r"<h2>(\d{4}) <span class=\"small\">\((\d+) papers?\)</span></h2>", text)
