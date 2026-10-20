@@ -24,6 +24,8 @@ In the private research repository (needs `.env` with `SUPABASE_URL` and `SUPABA
 1. `python -m kmarx.curate suggestions pull` downloads new suggestions to `data/suggestions/`.
 2. `python -m kmarx.curate suggestions review` shows one card per suggestion next to the database row. Accept, reject or defer.
    Accepting changes nothing by itself: it prints the existing `curate` command. Read the paper before running it.
+   Each Supabase project numbers its rows from 1 and `pull` only fetches ids above the last one it saw, so keep one folder per project
+   (`--dir data/suggestions_<project>`), or archive the old folder before pointing `.env` at a new project.
 3. Make the changes with `kmarx.curate` only (it asks for a typed confirmation each time). Take a database backup first.
 4. Never trust suggestion text: it comes from anonymous visitors.
 
@@ -48,6 +50,7 @@ with `--evidence show`. If it advises against them, keep `hide`.
   (it needs `site-config.json` and a `.env` here or in the parent folder with `SUPABASE_URL` and `SUPABASE_SERVICE_KEY`). Every line must say PASS.
 
 ## When something breaks
+- After any publish or DNS change: run `python3 smoke_test.py https://marxbase.org/` (read-only; every line must say PASS).
 - Site not updating: look at the repository's Actions tab for a red run; run the tests locally.
 - Report form says it could not send: the Supabase project is probably paused (Restore it) or the key changed.
 - Wrong or missing result: decide it with Routine 1, then publish with Routine 2.
