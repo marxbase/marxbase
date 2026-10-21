@@ -43,7 +43,7 @@ In the private research repository (needs `.env` with `SUPABASE_URL` and `SUPABA
 6. Create a GitHub release tagged `vX.Y`. Zenodo archives it and mints the DOI. Put the new DOI in the file `DOI` (it feeds the site), and in
    `CITATION.cff` (`doi`, `version`, `date-released`) and `README.md`; then push again. The site shows "DOI pending" if `DOI` is empty.
 
-Zenodo gives each release its own **version DOI** (release 1.0: 10.5281/zenodo.23519772) and one **concept DOI** that always points to the
+Zenodo gives each release its own **version DOI** (release 1.0: 10.5281/zenodo.23519772; release 1.1: 10.5281/zenodo.23548295) and one **concept DOI** that always points to the
 latest version (10.5281/zenodo.23519771). Cite a specific release with its version DOI; the concept DOI is for "the current MarxBase".
 The record for 1.0 is not in the Zenodo community `marxbase`: the `.zenodo.json` community entry was ignored and the Edit form offered no community field,
 and no request appeared in https://zenodo.org/me/requests. The community is optional (the DOI and citation work without it); if wanted, ask Zenodo support to add the record.
@@ -81,6 +81,6 @@ renews automatically while the records stay as above.
 - [x] `marxbase.org` pointed at GitHub Pages, HTTPS enforced, `http://` and `www` redirect (2026-10-20)
 - [x] Live smoke test passed on https://marxbase.org/; one real report received through the live form (2026-10-20); delete the test row in the Supabase table editor
 - [x] Release `v1.0` tagged and archived at Zenodo, DOI 10.5281/zenodo.23519772 added (2026-10-20)
-- [ ] Release `v1.1` (all text-mined papers listed): tagged and archived at Zenodo; version DOI to be recorded here **TO FILL**
+- [x] Release `v1.1` (all text-mined papers listed): tagged and archived at Zenodo, version DOI 10.5281/zenodo.23548295 added (2026-10-21)
 - [ ] PI sign-off and copyright answer recorded **TO FILL**
 - [ ] Successor has owner access to GitHub, Cloudflare, Supabase and Zenodo **TO FILL**

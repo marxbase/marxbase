@@ -2,6 +2,7 @@
 """Smoke test of a LIVE MarxBase site (a network call; read-only GET requests only).
 
   python3 smoke_test.py https://marxbase.org/          (or the GitHub Pages address)
+  python3 smoke_test.py https://marxbase.org/ --full   (every page; slow, and the host may answer 429 "too many requests" if you run it twice in a row)
 
 Crawls every internal link from the home page and checks: all pages answer 200; the hosted-build rules hold (security policy meta tag, no
 test pages or gate files, the report form is configured and points only at the Supabase address); data.js and the two zip files download and
@@ -33,14 +34,25 @@ class Refs(HTMLParser):
                 self.refs.append(d[k])
 
 
-def get(url, tries=3):
+PAUSE = 0.15          # seconds between requests per connection (GitHub Pages answers 429 to a fast crawler)
+
+
+def get(url, tries=8):
     """GET with a short retry on network errors (a status of 0 means the request itself failed, not that the page is missing)."""
     for attempt in range(tries):
+        time.sleep(PAUSE)
         req = urllib.request.Request(url, headers={"User-Agent": "marxbase-smoke-test"})
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
                 return r.status, r.read(), dict(r.headers)
         except urllib.error.HTTPError as e:
+            if e.code in (429, 503) and attempt < tries - 1:        # the host asks us to slow down: wait as long as it says (or a few seconds) and try again
+                try:
+                    wait = float(e.headers.get("Retry-After", ""))
+                except ValueError:
+                    wait = 5.0
+                time.sleep(min(wait, 60) + attempt)
+                continue
             return e.code, b"", {}
         except (urllib.error.URLError, OSError) as e:
             last = str(e).encode()
@@ -48,7 +60,7 @@ def get(url, tries=3):
     return 0, last, {}
 
 
-def main(base):
+def main(base, full=False):
     base = base.rstrip("/") + "/"
     results = []
 
@@ -75,8 +87,12 @@ def main(base):
     while queue:
         batch, queue = queue, []
         batch = [u for u in batch if u not in seen]
+        if not full:                                           # a polite default: every list and information page, but only a sample of the detail pages
+            detail = sorted(u for u in batch if re.search(r"/(result|gene|paper|strain|product)/[^/]+\.html$", u))
+            keep = set(detail[:: max(1, len(detail) // 60)])
+            batch = [u for u in batch if u not in detail or u in keep]
         seen.update(batch)
-        with ThreadPoolExecutor(8) as ex:
+        with ThreadPoolExecutor(2) as ex:
             fetched = list(ex.map(get, batch))
         for url, (st, body, h) in zip(batch, fetched):
             if st != 200:
@@ -118,4 +134,5 @@ def main(base):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else "https://marxbase.org/"))
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    sys.exit(main(args[0] if args else "https://marxbase.org/", full="--full" in sys.argv))

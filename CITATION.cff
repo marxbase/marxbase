@@ -16,5 +16,5 @@ keywords:
   - metabolic engineering
   - yeast
   - gene-phenotype database
-doi: "10.5281/zenodo.23519771"   # the concept DOI: it always points to the latest release
-date-released: "2026-10-21"
+doi: "10.5281/zenodo.23548295"   # the version DOI of release 1.1 (all versions: 10.5281/zenodo.23519771)
+date-released: "2026-10-22"
