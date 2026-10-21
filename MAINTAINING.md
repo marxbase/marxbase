@@ -41,7 +41,8 @@ In the private research repository (needs `.env` with `SUPABASE_URL` and `SUPABA
 
 Zenodo gives each release its own **version DOI** (release 1.0: 10.5281/zenodo.23519772) and one **concept DOI** that always points to the
 latest version (10.5281/zenodo.23519771). Cite a specific release with its version DOI; the concept DOI is for "the current MarxBase".
-After each GitHub release, open the new Zenodo record, click Edit, add the community `marxbase` and save (the `.zenodo.json` community entry is ignored).
+The record for 1.0 is not in the Zenodo community `marxbase`: the `.zenodo.json` community entry was ignored and the Edit form offered no community field,
+and no request appeared in https://zenodo.org/me/requests. The community is optional (the DOI and citation work without it); if wanted, ask Zenodo support to add the record.
 
 ## Routine 3: the evidence-sentence switch
 Release 1.0 hides quoted abstract sentences while the UCI Libraries copyright answer is pending. When it allows them, build the next release
