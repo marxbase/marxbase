@@ -35,7 +35,10 @@ In the private research repository (needs `.env` with `SUPABASE_URL` and `SUPABA
    sentences). The release gate must say PASSED. The folder `releases/X.Y/` is written, with a `private/` subfolder that stays private.
 3. Copy `releases/X.Y/` **without** `private/` into this repository's `releases/X.Y/`. Put `X.Y` in `CURRENT_RELEASE`.
 4. Update `CITATION.cff` (`version`), `README.md` and the citation text if they name a version. Run `python -m unittest discover -s tests`.
-5. Commit and push to `main`. The GitHub Action builds and publishes the site. Check https://marxbase.org.
+5. Commit and push to `main`. The GitHub Action builds and publishes the site (it runs the tests first, including a parse check of every browser script).
+   When the run is green, **open https://marxbase.org in a browser and look**: search for `ku70` (6 findings), open a paper page, open the browser's
+   console and confirm there are no red errors. `smoke_test.py` only fetches files and cannot see a script that crashes in the browser. A crashed
+   `app.js` once blanked the search page. Then run `python3 smoke_test.py https://marxbase.org/`. Scripts carry a version tag, so a fixed file reaches visitors at once.
 6. Create a GitHub release tagged `vX.Y`. Zenodo archives it and mints the DOI. Put the new DOI in the file `DOI` (it feeds the site), and in
    `CITATION.cff` (`doi`, `version`, `date-released`) and `README.md`; then push again. The site shows "DOI pending" if `DOI` is empty.
 

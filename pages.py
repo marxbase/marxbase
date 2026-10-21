@@ -18,7 +18,7 @@ OFFLINE_SKIP = {"config.js", "suggest.js"}        # the offline copy has no repo
 
 def strip_report_form(text: str) -> str:
     text = re.sub(r'<section id="suggest-box"[^>]*></section>', "", text)
-    return re.sub(r'<script src="[^"]*(?:config|suggest)\.js"></script>', "", text)
+    return re.sub(r'<script src="[^"]*(?:config|suggest)\.js[^"]*"></script>', "", text)
 
 
 def esc(s) -> str:

@@ -78,7 +78,7 @@ class BuiltSiteTests(unittest.TestCase):
             p = Links()
             p.feed(text)
             self.assertEqual(p.inline_scripts, 0, page.name)
-            self.assertTrue(all(Path(s).name in own for s in p.scripts), (page.name, p.scripts))
+            self.assertTrue(all(Path(s.split("?")[0]).name in own for s in p.scripts), (page.name, p.scripts))
             self.assertFalse([a for a in p.attrs if a.startswith("on")], page.name)
             self.assertNotIn("javascript:", text.lower())
 
@@ -276,6 +276,17 @@ class BuiltSiteTests(unittest.TestCase):
             self.assertNotIn("DOI pending", down)
         else:
             self.assertIn("DOI pending", down)
+
+    def test_every_script_and_stylesheet_carries_the_same_version_tag(self):
+        tags = set()
+        for page in [self.out / "index.html", next((self.out / "paper").glob("*.html")), next((self.out / "result").glob("*.html")), self.out / "genes.html"]:
+            text = page.read_text(encoding="utf-8")
+            refs = re.findall(r'(?:<script src|<link rel="stylesheet" href)="([^"]+)"', text)
+            self.assertTrue(refs, page.name)
+            for ref in refs:
+                self.assertRegex(ref, r"\.(js|css)\?v=1\.0-[0-9a-f]{8}$", f"{page.name}: {ref}")
+                tags.add(ref.split("?v=")[1])
+        self.assertEqual(len(tags), 1, tags)
 
     def test_papers_page_has_year_headings_with_counts(self):
         text = (self.out / "papers.html").read_text(encoding="utf-8")

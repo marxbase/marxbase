@@ -9,6 +9,7 @@ User-derived text is HTML-escaped; only the pre-sanitised <i>, <sub>, <sup> mark
 """
 import argparse
 import csv
+import hashlib
 import html
 import json
 import re
@@ -135,8 +136,7 @@ class Site:
         doi_file = HERE / "DOI"
         self.doi = doi_file.read_text(encoding="utf-8").strip() if doi_file.exists() else ""   # the Zenodo DOI of this release; empty = "DOI pending"
         self.has_evidence = any(r.get("evidence_sentence") for r in self.t["results"])
-        import hashlib
-        self.asset_tag = hashlib.sha256(b''.join((SRC / f).read_bytes() for f in ('style.css', 'app.js', 'cite.js', 'search-core.js'))).hexdigest()[:8]
+        self.asset_tag = ""            # set at the start of build(): a hash of every browser file, so a changed file is never served from a visitor's cache
 
     def _root(self, sid: str) -> str:
         seen = set()
@@ -156,18 +156,22 @@ class Site:
         p.write_text(text, encoding="utf-8")
         self.count += 1
 
+    def asset(self, name: str, root: str = "") -> str:
+        """A file address with a version tag, so a browser fetches a changed file at once instead of reusing its cached copy."""
+        return f"{root}{name}?v={esc(self.version)}-{self.asset_tag}"
+
     def layout(self, title: str, body: str, depth: int, active: str = "", suggest: tuple = None) -> str:
         root = "../" * depth
         if suggest and self.config:
             body += (f'<section id="suggest-box" data-page-type="{esc(suggest[0])}" data-target-id="{esc(suggest[1])}" data-release="{esc(self.version)}"></section>'
-                     f'<script src="{root}config.js"></script><script src="{root}suggest.js"></script>')
+                     f'<script src="{self.asset("config.js", root)}"></script><script src="{self.asset("suggest.js", root)}"></script>')
         nav = "".join(f'<a href="{root}{href}"{" aria-current=\"page\"" if key == active else ""}>{label}</a>' for key, href, label in (
             ("search", "index.html", "Search"), ("genes", "genes.html", "Genes"), ("strains", "strains.html", "Strains"),
             ("papers", "papers.html", "Papers"), ("products", "products.html", "Products"), ("summary", "summary.html", "Summary"), ("methods", "methods.html", "Methods"),
             ("downloads", "downloads.html", "Downloads"), ("about", "about.html", "About &amp; limits")))
         return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
                 + (f'<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; img-src \'self\' data:; style-src \'self\'; script-src \'self\'{"; connect-src \'self\' " + self.config["supabaseUrl"] if self.config else ""}">' if self.csp else '') +
-                f'<title>{esc(title)} – MarxBase</title><link rel="stylesheet" href="{root}style.css?v={esc(self.version)}-{self.asset_tag}"></head><body>'
+                f'<title>{esc(title)} – MarxBase</title><link rel="stylesheet" href="{self.asset("style.css", root)}"></head><body>'
                 f'<a class="skip" href="#main">Skip to content</a>'
                 f'<header class="top"><a class="brand" href="{root}index.html">MarxBase</a><span class="tag">K. marxianus metabolic engineering results</span>'
                 f'<nav aria-label="Main">{nav}</nav></header><main id="main">{body}</main>'
@@ -349,7 +353,7 @@ class Site:
                 f'<h2>Cite this paper</h2><div id="paper-cite"><noscript><p>{esc(p["authors"])}. {esc(p["title"])}. {esc(p["journal"])}. {esc(p["year"])}.'
                 f'{(" doi:" + esc(p["doi"])) if p["doi"] else ""}</p></noscript></div>'
                 + '<script type="application/json" id="paper-data">' + json.dumps({k: p[k] for k in ("pmid", "title", "authors", "journal", "year", "doi", "pmcid")}, ensure_ascii=False).replace("</", "<\\/") + '</script>'
-                '<script src="../cite.js"></script><script src="../paperpage.js"></script>')
+                f'<script src="{self.asset("cite.js", "../")}"></script><script src="{self.asset("paperpage.js", "../")}"></script>')
         self.write(f"paper/{p['pmid']}.html", self.layout(p["title"] or p["pmid"], body, 1, "papers", suggest=("paper", p["pmid"])))
 
     def build_product_page(self, name: str, p: dict) -> None:
@@ -459,14 +463,17 @@ class Site:
         if self.out.exists():
             shutil.rmtree(self.out)
         self.out.mkdir(parents=True)
-        for f in ("style.css", "search-core.js", "cite.js", "app.js", "paperpage.js", "suggest.js"):
+        files = ("style.css", "search-core.js", "cite.js", "app.js", "paperpage.js", "suggest.js")
+        data_text = self.data_js()
+        self.asset_tag = hashlib.sha256(b"".join((SRC / f).read_bytes() for f in files) + data_text.encode("utf-8") + json.dumps(self.config).encode("utf-8")).hexdigest()[:8]
+        for f in files:
             shutil.copy(SRC / f, self.out / f)
-        self.write("data.js", self.data_js())
+        self.write("data.js", data_text)
         if self.config:
             self.write("config.js", "window.MARXBASE_CONFIG = " + json.dumps(self.config) + ";\n")
         index = (f'<h1>Search results</h1><p class="small">{esc(LIMITS)}</p><div id="app"><noscript>This page needs JavaScript. '
                  f'You can still browse <a href="genes.html">genes</a>, <a href="strains.html">strains</a>, <a href="papers.html">papers</a> and <a href="products.html">products</a>.</noscript></div>'
-                 f'<script src="data.js"></script><script src="search-core.js"></script><script src="cite.js"></script><script src="app.js"></script>')
+                 f'<script src="{self.asset("data.js")}"></script><script src="{self.asset("search-core.js")}"></script><script src="{self.asset("cite.js")}"></script><script src="{self.asset("app.js")}"></script>')
         self.write("index.html", self.layout("Search", index, 0, "search"))
         for r in self.results:
             self.build_result_page(r)
