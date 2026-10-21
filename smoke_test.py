@@ -34,6 +34,7 @@ class Refs(HTMLParser):
                 self.refs.append(d[k])
 
 
+MAX_SECONDS = 900     # the crawl gives up (and says so) after this long, so a test can never hang
 PAUSE = 0.15          # seconds between requests per connection (GitHub Pages answers 429 to a fast crawler)
 
 
@@ -83,17 +84,21 @@ def main(base, full=False):
         check(f"{path} is not published", get(base + path)[0] == 404)
 
     # crawl
-    seen, queue, bad = set(), [base], []
+    seen, queue, bad, started, fetched_count = set(), [base], [], time.time(), []
     while queue:
         batch, queue = queue, []
-        batch = [u for u in batch if u not in seen]
+        if time.time() - started > MAX_SECONDS:
+            bad.append(("time limit reached", 0))
+            break
+        batch = [u for u in dict.fromkeys(batch) if u not in seen]
+        seen.update(batch)                                      # everything found counts as seen, so a skipped page is not queued again
         if not full:                                           # a polite default: every list and information page, but only a sample of the detail pages
             detail = sorted(u for u in batch if re.search(r"/(result|gene|paper|strain|product)/[^/]+\.html$", u))
             keep = set(detail[:: max(1, len(detail) // 60)])
             batch = [u for u in batch if u not in detail or u in keep]
-        seen.update(batch)
         with ThreadPoolExecutor(2) as ex:
             fetched = list(ex.map(get, batch))
+        fetched_count.extend(batch)
         for url, (st, body, h) in zip(batch, fetched):
             if st != 200:
                 bad.append((url, st))
@@ -107,7 +112,7 @@ def main(base, full=False):
                     target = urllib.parse.urldefrag(urllib.parse.urljoin(url, ref))[0].split("?")[0]
                     if target.startswith(base) and target not in seen:
                         queue.append(target)
-    check(f"crawled {len(seen)} internal URLs and all answer 200", not bad, bad[:5])
+    check(f"checked {len(fetched_count)} internal URLs (of {len(seen)} found) and all answer 200", not bad, bad[:5])
 
     # downloads
     st, body, _ = get(base + "downloads.html")
