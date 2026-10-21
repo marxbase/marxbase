@@ -419,6 +419,28 @@ class EvidenceSwitchTests(unittest.TestCase):
             self.assertIn('"hasEvidence":true', (out / "data.js").read_text(encoding="utf-8").replace(" ", ""))
 
 
+class BrowserScriptSyntaxTests(unittest.TestCase):
+    """Every script the browser loads must parse. (A syntax error in app.js once blanked the live search page.)
+    Uses Node if present (GitHub's runners have it) or macOS's built-in JavaScript engine; skipped where neither exists."""
+
+    def test_scripts_parse(self):
+        import shutil as sh
+        import subprocess
+        files = sorted(str(p) for p in (HERE / "src").glob("*.js"))
+        self.assertTrue(files)
+        node, osa = sh.which("node"), sh.which("osascript")
+        if node:
+            for f in files:
+                r = subprocess.run([node, "--check", f], capture_output=True, text=True)
+                self.assertEqual(r.returncode, 0, f"{f}: {r.stderr}")
+        elif osa:
+            r = subprocess.run([osa, "-l", "JavaScript", str(HERE / "tests" / "syntax_check.js"), *files], capture_output=True, text=True)
+            self.assertNotIn("FAIL", r.stdout + r.stderr, r.stdout + r.stderr)
+            self.assertEqual(r.stdout.count("OK"), len(files), r.stdout + r.stderr)
+        else:
+            self.skipTest("neither node nor osascript is available")
+
+
 class HelperTests(unittest.TestCase):
     def test_safe_html_and_numbers(self):
         self.assertEqual(build.safe_html("a <i>b</i> 10<sup>6</sup>", "x"), "a <i>b</i> 10<sup>6</sup>")
