@@ -5,10 +5,10 @@ Each result was extracted from a published paper's abstract and checked by a per
 are released as versioned snapshots.
 
 - Website: https://marxbase.org
-- Cite: Eichelberger S. MarxBase: gene–phenotype results for *Kluyveromyces marxianus* metabolic engineering, release 1.0. 2026. https://doi.org/10.5281/zenodo.23519772
-  (the DOI of release 1.0; `CITATION.cff` has the same reference).
+- Cite: Eichelberger S. MarxBase: gene–phenotype results for *Kluyveromyces marxianus* metabolic engineering, release 1.1. 2026. https://doi.org/10.5281/zenodo.23519771
+  (this DOI always points to the latest release; each release also has its own version DOI, listed on the Zenodo record; `CITATION.cff` has the same reference).
 - Report a problem or suggest a change: use "Report or suggest" on any result, gene, paper or strain page.
-- Made in the Da Silva Lab, University of California, Irvine.
+- Made in the Da Silva Lab, University of California, Irvine. Home page photograph of *K. marxianus* colonies: © Sidney Eichelberger.
 
 ## What is in this repository
 | Path | What it is |

@@ -14,7 +14,17 @@ HERE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(HERE))
 import build  # noqa: E402
 
-BUNDLE = next((p for p in (HERE / "releases" / "1.0", HERE.parent / "releases" / "1.0") if p.exists()), HERE.parent / "releases" / "1.0")
+def _bundle() -> Path:
+    """The release the site is built from: the one named in CURRENT_RELEASE, in releases/ here (public repository) or next to this folder (development)."""
+    ver = (HERE / "CURRENT_RELEASE").read_text(encoding="utf-8").strip() if (HERE / "CURRENT_RELEASE").exists() else "1.0"
+    for base in (HERE / "releases", HERE.parent / "releases"):
+        if (base / ver).exists():
+            return base / ver
+    return HERE.parent / "releases" / ver
+
+
+BUNDLE = _bundle()
+VERSION = BUNDLE.name
 
 
 class Links(HTMLParser):
@@ -72,7 +82,7 @@ class BuiltSiteTests(unittest.TestCase):
         self.assertEqual(bad[:5], [])
 
     def test_only_our_own_scripts_and_no_event_handlers(self):
-        own = {"data.js", "search-core.js", "cite.js", "app.js", "paperpage.js", "suggest.js", "config.js", "expected.js", "tests.js"}
+        own = {"data.js", "search-core.js", "cite.js", "app.js", "paperpage.js", "suggest.js", "site.js", "papers.js", "config.js", "expected.js", "tests.js"}
         for page in self.out.rglob("*.html"):
             text = page.read_text(encoding="utf-8")
             p = Links()
@@ -151,11 +161,11 @@ class BuiltSiteTests(unittest.TestCase):
         s = self.site
         page = (self.out / "genes.html").read_text(encoding="utf-8")
         self.assertEqual(page.count("<details"), 2)
-        self.assertIn("<details open><summary>K. marxianus genes (", page)                         # the first section is open and can be folded
-        self.assertIn("<details><summary>Genes from other species expressed in K. marxianus (", page)
+        self.assertIn("<details open><summary><i>K. marxianus</i> genes (", page)                         # the first section is open and can be folded
+        self.assertIn("<details><summary>Genes from other species expressed in <i>K. marxianus</i> (", page)
         self.assertNotIn("Genes studied only in other host organisms", page)
         self.assertNotIn("the result was obtained in a K. marxianus host", page)
-        a, b = page.index("K. marxianus genes ("), page.index("Genes from other species expressed in K. marxianus")
+        a, b = page.index("<i>K. marxianus</i> genes ("), page.index("Genes from other species expressed in <i>K. marxianus</i>")
         km_host = {r["gene_id"] for r in s.results if r["host_organism"] == "K. marxianus"}
         for g in s.genes.values():
             listed = f'href="gene/{g["gene_id"]}.html"' in page
@@ -263,7 +273,7 @@ class BuiltSiteTests(unittest.TestCase):
         self.assertEqual(sum(d["years"].values()), d["n_papers"])
         text = (self.out / "summary.html").read_text(encoding="utf-8")
         self.assertIn(f'{d["n"]} findings from {d["n_papers"]} papers', text)
-        self.assertEqual(text.count("<svg viewBox"), 4)
+        self.assertEqual(text.count('class="viz"'), 4)
         self.assertEqual(text.count("Show as a table"), 4)
 
     def test_doi_appears_in_the_citation_and_the_data_when_a_doi_file_exists(self):
@@ -284,15 +294,80 @@ class BuiltSiteTests(unittest.TestCase):
             refs = re.findall(r'(?:<script src|<link rel="stylesheet" href)="([^"]+)"', text)
             self.assertTrue(refs, page.name)
             for ref in refs:
-                self.assertRegex(ref, r"\.(js|css)\?v=1\.0-[0-9a-f]{8}$", f"{page.name}: {ref}")
+                self.assertRegex(ref, r"\.(js|css)\?v=" + re.escape(VERSION) + r"-[0-9a-f]{8}$", f"{page.name}: {ref}")
                 tags.add(ref.split("?v=")[1])
         self.assertEqual(len(tags), 1, tags)
 
-    def test_papers_page_has_year_headings_with_counts(self):
+    def test_home_page_boxes_match_the_pages_they_link_to(self):
+        home = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="hero"', home)
+        boxes = {label: (int(n.replace(",", "")), href) for href, n, label in re.findall(r'<li><a href="([^"]+)"><b>([\d,]+)</b><strong>(\w+)</strong>', home)}
+        self.assertEqual(set(boxes), {"Findings", "Genes", "Strains", "Papers", "Products"})
+        self.assertEqual(boxes["Papers"][0], len(self.site.papers))
+        self.assertEqual(boxes["Products"][0], len(self.site.products))
+        self.assertEqual(boxes["Genes"][0], int(re.search(r"K\. marxianus</i> genes \((\d+)\)", (self.out / "genes.html").read_text(encoding="utf-8")).group(1)))
+        self.assertEqual(boxes["Strains"][0], (self.out / "strains.html").read_text(encoding="utf-8").count('<li><a href="strain/'))
+        for label, (n, href) in boxes.items():
+            self.assertTrue((self.out / href.split("?")[0]).exists(), href)
+        km_findings = {r["finding_id"] for r in self.site.results if r["host_organism"] == "K. marxianus"}
+        self.assertEqual(boxes["Findings"], (len(km_findings), "index.html?browse=1"))
+        self.assertNotIn("Browse all", home)
+        self.assertIn("<h1><i>Kluyveromyces marxianus</i> metabolic engineering database</h1>", home)
+        for example in build.Site.EXAMPLES:
+            self.assertIn(f'index.html?q={build.urllib.parse.quote(example)}"', home)
+
+    def test_landing_page_structure(self):
+        home = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<body class="home">', home)                      # the navigation bar is hidden on the home page by this class
+        # centered headline and the examples first, then the search app, then the scrolling sections
+        self.assertLess(home.index('id="hero"'), home.index('class="examples"'))
+        self.assertLess(home.index('class="examples"'), home.index('id="app"'))
+        self.assertLess(home.index('id="app"'), home.index('id="hero-extras"'))
+        self.assertLess(home.index('id="hero-extras"'), home.index("<script src=\"data.js"))
+        self.assertNotIn("Read from paper abstracts", home)
+        extras = home[home.index('id="hero-extras"'):]
+        self.assertLess(extras.index("Browse the data"), extras.index("About MarxBase"))
+        about = extras[extras.index("About MarxBase"):]
+        for page in ("summary.html", "methods.html", "downloads.html", "about.html"):
+            self.assertIn(f'<a href="{page}">', about)
+        self.assertNotIn('class="examples"', extras)
+        # every other page keeps its navigation and is not a "home" page
+        self.assertNotIn('<body class="home">', (self.out / "genes.html").read_text(encoding="utf-8"))
+
+    def test_home_page_photo_is_the_background_of_the_about_band_and_resized(self):
+        home = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("photo-band", home)
+        self.assertNotIn("<img", re.sub(r'<svg.*?</svg>', "", home, flags=re.S))      # the picture is a CSS background, not an image element
+        self.assertIn('<section class="band band-photo" aria-labelledby="h-about">', home)
+        css = (self.out / "style.css").read_text(encoding="utf-8")
+        for name in ("km-colonies-wide.jpg", "km-colonies-tall.jpg"):
+            self.assertIn(f"img/{name}", css)
+            f = self.out / "img" / name
+            self.assertTrue(f.exists(), name)
+            self.assertLess(f.stat().st_size, 250_000, f"{name} is resized for the web")
+        self.assertEqual(sorted(p.name for p in (self.out / "img").iterdir()), ["km-colonies-tall.jpg", "km-colonies-wide.jpg"])   # no full-size original, no stale files
+        self.assertFalse((self.out / "Km_colonies_1.jpeg").exists())
+        # the heading is white over a dark veil, and the boxes are in front
+        self.assertRegex(css, r"\.band-photo::before \{[^}]*rgba\(0, 0, 0, \.5\)")
+        self.assertRegex(css, r"\.band-photo \.inner \{ position: relative; \}")
+
+    def test_every_page_has_the_menu_button_and_the_site_script(self):
+        for page in [self.out / "index.html", self.out / "genes.html", next((self.out / "paper").glob("*.html")), next((self.out / "result").glob("*.html"))]:
+            text = page.read_text(encoding="utf-8")
+            self.assertIn('id="menu-toggle"', text, page.name)
+            self.assertIn('id="site-nav"', text, page.name)
+            self.assertRegex(text, r'<script src="[^"]*site\.js\?v=' + re.escape(VERSION) + r'-[0-9a-f]{8}"></script></head>', page.name)
+
+    def test_papers_page_has_year_headings_with_counts_and_the_toggle(self):
         text = (self.out / "papers.html").read_text(encoding="utf-8")
-        years = re.findall(r"<h2>(\d{4}) <span class=\"small\">\((\d+) papers?\)</span></h2>", text)
+        years = re.findall(r'<section class="year"><h2>(\d{4}) <span class="small count">\((\d+) papers?\)</span></h2>', text)
         self.assertEqual(sum(int(n) for _, n in years), len(self.site.papers))
         self.assertEqual([y for y, _ in years], sorted((y for y, _ in years), reverse=True))
+        self.assertIn('id="only-findings" class="switch" checked', text)           # a switch, on by default
+        self.assertIn("dot-yes", text); self.assertIn("dot-no", text)               # the key beside the switch
+        self.assertNotIn("papers-summary", text)                                    # the two summary lines were removed
+        self.assertNotIn("newest first", text)
+        self.assertRegex(text, r'<script src="papers\.js\?v=' + re.escape(VERSION) + r'-[0-9a-f]{8}"></script>')
 
     def test_data_js_carries_every_result_column_and_paper_citation_fields(self):
         js = (self.out / "data.js").read_text(encoding="utf-8")
@@ -367,7 +442,7 @@ class ReportFormTests(unittest.TestCase):
             for folder in ("result", "gene", "paper", "strain", "product"):
                 page = next((out / folder).glob("*.html")).read_text(encoding="utf-8")
                 self.assertIn('id="suggest-box"', page, folder)
-                self.assertIn('data-release="1.0"', page, folder)
+                self.assertIn(f'data-release="{VERSION}"', page, folder)
                 self.assertIn("connect-src 'self' https://abc.supabase.co", page, folder)
             self.assertNotIn("suggest-box", (out / "genes.html").read_text(encoding="utf-8"))
             # the offline zip has no form, no keys, and no dangling script references
@@ -428,6 +503,170 @@ class EvidenceSwitchTests(unittest.TestCase):
             self.assertIn("A sentence from the abstract.", page)
             self.assertIn("third-party text", page)
             self.assertIn('"hasEvidence":true', (out / "data.js").read_text(encoding="utf-8").replace(" ", ""))
+
+
+def _lum(hexcolor):
+    h = hexcolor.lstrip("#")
+    r, g, b = (int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    f = lambda c: c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+    return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
+
+
+def contrast(a, b):
+    la, lb = sorted((_lum(a), _lum(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
+class LookTests(unittest.TestCase):
+    """The two looks: every text pair meets WCAG AA, the result-class colors are shared, fonts are self-hosted, and nothing is fetched from outside."""
+
+    TEXT_PAIRS = [("--bar-ink", "--bar"), ("--bar-ink-2", "--bar"), ("--accent-ink", "--accent"), ("--accent-ink", "--accent-hover"), ("--ink", "--bg"), ("--ink", "--surface"),
+                  ("--heading", "--bg"), ("--heading", "--surface"), ("--muted", "--bg"), ("--muted", "--surface"), ("--link", "--bg"), ("--link", "--surface"), ("--bar-accent", "--bar")]
+    UI_PAIRS = [("--line-strong", "--bg")]
+
+    def test_every_text_pair_meets_AA_in_both_looks(self):
+        for look in build.LOOKS:
+            tok = build.look_tokens(look)
+            for a, b in self.TEXT_PAIRS:
+                need = 3.0 if a == "--bar-accent" else 4.5
+                self.assertGreaterEqual(contrast(tok[a], tok[b]), need, f"{look}: {a} on {b}")
+            for a, b in self.UI_PAIRS:
+                self.assertGreaterEqual(contrast(tok[a], tok[b]), 3.0, f"{look}: {a} on {b}")
+            for cls in ("pos", "neg", "ctx"):
+                self.assertGreaterEqual(contrast(tok[f"--{cls}-ink"], tok[f"--{cls}-tint"]), 4.5, f"{look}: {cls} chip")
+                self.assertGreaterEqual(contrast(tok[f"--{cls}-ink"], "#ffffff"), 4.5, f"{look}: {cls} ink on white")
+
+    def test_class_colors_are_the_same_in_both_looks(self):
+        a, b = build.look_tokens("neutral"), build.look_tokens("uci")
+        for k in ("--pos", "--neg", "--ctx", "--pos-ink", "--neg-ink", "--ctx-ink"):
+            self.assertEqual(a[k], b[k], k)
+
+    def test_both_looks_build_with_favicon_and_only_uci_ships_fonts(self):
+        for look in build.LOOKS:
+            with tempfile.TemporaryDirectory() as d:
+                site = build.Site(BUNDLE, Path(d) / "dist", look=look, preview=True)
+                site.build()
+                out = Path(d) / "dist"
+                self.assertIn(build.look_tokens(look)["--accent"], (out / "favicon.svg").read_text(encoding="utf-8"))
+                self.assertIn('rel="icon"', (out / "index.html").read_text(encoding="utf-8"))
+                self.assertTrue((out / "_look.html").exists())
+                css = (out / "style.css").read_text(encoding="utf-8")
+                self.assertIn("--accent:", css)
+                self.assertIn(".brand", css)
+                if look == "uci":
+                    self.assertTrue((out / "fonts" / "OFL.txt").exists() and (out / "fonts" / "montserrat-latin.woff2").exists())
+                    self.assertIn("fonts/montserrat-latin.woff2", css)
+                else:
+                    self.assertFalse((out / "fonts").exists())
+                    self.assertNotIn("Montserrat", css)
+                # nothing is loaded from another server
+                self.assertFalse(re.findall(r"url\(\s*['\"]?https?:", css))
+                self.assertFalse(re.findall(r"@import", css))
+
+    def test_public_build_has_no_style_tile_and_keeps_the_policy(self):
+        with tempfile.TemporaryDirectory() as d:
+            site = build.Site(BUNDLE, Path(d) / "dist", public=True, preview=True)
+            site.build()
+            self.assertFalse((Path(d) / "dist" / "_look.html").exists())
+            self.assertIn("Content-Security-Policy", (Path(d) / "dist" / "index.html").read_text(encoding="utf-8"))
+
+    def test_an_unknown_look_is_refused(self):
+        with self.assertRaises(SystemExit):
+            build.Site(BUNDLE, Path("x"), look="neon")
+
+
+class SpeciesItalicsTests(unittest.TestCase):
+    """Species names are italicised in page text only: never in tags, attributes, scripts or dropdown options."""
+
+    NAMES = None
+
+    @classmethod
+    def setUpClass(cls):
+        import species
+        cls.sp = species
+        cls.names = species.names_from(["K. marxianus", "Homo sapiens", "Gerbera hybrida", "Other"])
+
+    def test_names_in_text_are_wrapped(self):
+        out = self.sp.italicize("<p>Host K. marxianus and S. cerevisiae; Gerbera hybrida &amp; Homo sapiens.</p>", self.names)
+        for n in ("K. marxianus", "S. cerevisiae", "Gerbera hybrida", "Homo sapiens"):
+            self.assertIn(f"<i>{n}</i>", out)
+
+    def test_nothing_is_touched_in_tags_attributes_scripts_or_options(self):
+        html_in = ('<a href="x" title="K. marxianus">link</a><script>var a="K. marxianus"</script><select><option>K. marxianus</option></select>'
+                   '<code>S. cerevisiae</code><i>E. coli</i><svg><text>K. marxianus</text></svg><title>K. marxianus</title>')
+        self.assertEqual(self.sp.italicize(html_in, self.names), html_in)
+
+    def test_word_boundaries_and_idempotence(self):
+        self.assertEqual(self.sp.italicize("<p>NotK. marxianusX and K. marxianusish</p>", self.names), "<p>NotK. marxianusX and K. marxianusish</p>")
+        once = self.sp.italicize("<p>K. marxianus</p>", self.names)
+        self.assertEqual(self.sp.italicize(once, self.names), once)
+
+    def test_the_built_site_italicises_hosts_and_genes_page_sections(self):
+        site = build.Site(BUNDLE, Path(tempfile.mkdtemp()) / "dist")
+        site.build()
+        genes = (site.out / "genes.html").read_text(encoding="utf-8")
+        self.assertIn("<i>K. marxianus</i> genes (", genes)
+        result = (site.out / "result" / f"{site.results[0]['public_id']}.html").read_text(encoding="utf-8")
+        self.assertIn("<i>K. marxianus</i>", result)
+        data = (site.out / "data.js").read_text(encoding="utf-8")
+        self.assertIn('"species":[', data.replace(" ", ""))
+        shutil.rmtree(site.out.parent, ignore_errors=True)
+
+
+class MinedPapersTests(unittest.TestCase):
+    """Papers that were text-mined but have no finding are listed (Papers page, their own pages) and counted in the Papers box, but stay out of the
+    search data and of the 'results from N papers' counts."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.mkdtemp()
+        bundle = Path(cls.tmp) / "b"
+        shutil.copytree(BUNDLE, bundle, ignore=shutil.ignore_patterns("private", "*.sqlite"))
+        path = bundle / "citations.csv"
+        with open(path, newline="", encoding="utf-8-sig") as f:
+            rows = list(csv.DictReader(f))
+        cols = list(rows[0])
+        cls.n_with = sum(1 for r in rows if int(r["n_results"] or 0) > 0)        # the bundle may already list text-mined papers without findings
+        cls.n_all = len(rows)
+        for i, (year, title) in enumerate(((2024, "A mined paper about <i>K. marxianus</i> without findings"), (1999, "An old mined paper"))):
+            r = dict.fromkeys(cols, "")
+            r.update(pmid=f"9000000{i}", title=title, title_html=title, authors="Nobody N; Else E", journal="J Test", year=str(year), n_results="0", doi="", pmcid="", first_author="Nobody N")
+            rows.append(r)
+        with open(path, "w", newline="", encoding="utf-8-sig") as f:
+            w = csv.DictWriter(f, cols)
+            w.writeheader()
+            w.writerows(rows)
+        cls.site = build.Site(bundle, Path(cls.tmp) / "dist")
+        cls.site.build()
+        cls.out = Path(cls.tmp) / "dist"
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(cls.tmp, ignore_errors=True)
+
+    def test_counts(self):
+        self.assertEqual(len(self.site.papers), self.n_all + 2)
+        self.assertEqual(len(self.site.papers_with), self.n_with)
+        home = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertIn(f"<b>{self.n_all + 2:,}</b><strong>Papers</strong><span>Abstracts text-mined; {self.n_with} with findings</span>", home)
+        self.assertIn(f"results from {self.n_with} papers", home)                   # the footer counts papers with findings only
+
+    def test_papers_page_lists_them_marked_and_the_pages_exist(self):
+        text = (self.out / "papers.html").read_text(encoding="utf-8")
+        self.assertEqual(text.count('<li class="nofind">'), self.n_all - self.n_with + 2)
+        self.assertEqual(text.count("No findings extracted"), 0)                 # not repeated on every row: a hollow marker says it
+        self.assertIn("1999", text)
+        for pmid in ("90000000", "90000001"):
+            page = (self.out / "paper" / f"{pmid}.html").read_text(encoding="utf-8")
+            self.assertIn("No findings extracted", page)
+            self.assertNotIn("<h2>Results (", page)
+            self.assertIn('id="paper-cite"', page)
+        self.assertIn("<i>K. marxianus</i>", (self.out / "paper" / "90000000.html").read_text(encoding="utf-8"))
+
+    def test_search_data_holds_only_papers_with_findings(self):
+        data = json.loads((self.out / "data.js").read_text(encoding="utf-8")[len("window.MARXBASE = "):].rstrip().rstrip(";"))
+        self.assertEqual(len(data["papers"]), self.n_with)
+        self.assertNotIn("90000000", data["papers"])
 
 
 class BrowserScriptSyntaxTests(unittest.TestCase):

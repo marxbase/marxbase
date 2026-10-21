@@ -1,5 +1,7 @@
 dist/
+dist-*/
 __pycache__/
 .DS_Store
 gate/GATE_ANSWERS.md
 site-config.json
+Km_colonies_1.jpeg

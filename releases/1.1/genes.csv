@@ -1,0 +1,293 @@
+﻿gene_id,gene_name,organism,gene_kind,locus_tag,id_method,id_confidence,identity_note,n_results
+MARXBASE-G000001,PDC1,K. marxianus,locus_tagged,KLMA_60075,name_match,high,,10
+MARXBASE-G000002,PGK,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000003,VID28,K. marxianus,locus_tagged,KLMA_50470,name_match,high,,1
+MARXBASE-G000004,CAJ1,K. marxianus,locus_tagged,KLMA_20517,name_match,high,,1
+MARXBASE-G000005,MET13,K. marxianus,locus_tagged,KLMA_20276,name_match,high,,1
+MARXBASE-G000006,ESR1,K. marxianus,locus_tagged,KLMA_50479,manual,high,"Named ESR1 in PMID 34906221 because it was identified as an endoplasmic reticulum stress response gene; it is NOT S. cerevisiae ESR1 (an alias of MEC1), so no ortholog is assigned. Locus tag entered as recorded by the curator; not independently verified (annotation: uncharacterized protein, 124 aa).",2
+MARXBASE-G000007,HRD3,K. marxianus,locus_tagged,KLMA_70251,name_match,high,,4
+MARXBASE-G000008,USA1,K. marxianus,locus_tagged,KLMA_40573,name_match,high,,2
+MARXBASE-G000009,YET3,K. marxianus,locus_tagged,KLMA_40459,name_match,high,,2
+MARXBASE-G000010,ERG5,K. marxianus,locus_tagged,KLMA_60417,name_match,high,,1
+MARXBASE-G000011,ERG4,K. marxianus,locus_tagged,KLMA_40436,name_match,high,,1
+MARXBASE-G000012,ERG6,K. marxianus,locus_tagged,KLMA_30671,name_match,high,,7
+MARXBASE-G000013,MNN11,K. marxianus,locus_tagged,KLMA_10371,name_match,high,,6
+MARXBASE-G000014,KU70,K. marxianus,locus_tagged,KLMA_10274,reciprocal_best_hit,medium,,6
+MARXBASE-G000018,UTR1,K. marxianus,locus_tagged,KLMA_30282,reciprocal_best_hit,medium,,3
+MARXBASE-G000246,XYL1,Neurospora crassa,heterologous_gene,,,,,3
+MARXBASE-G000268,GXF1,Candida intermedia,heterologous_gene,,,,,1
+MARXBASE-G000134,XYL2,K. marxianus,locus_tagged,KLMA_70044,name_match,high,,8
+MARXBASE-G000016,HAK1,K. marxianus,locus_tagged,KLMA_50379,name_match,medium,,3
+MARXBASE-G000017,TRK1,K. marxianus,locus_tagged,KLMA_60036,name_match,high,,2
+MARXBASE-G000019,TRK1,Saccharomyces cerevisiae,scerevisiae_gene,YJL129C,name_match,high,,1
+MARXBASE-G000020,TRK2,Saccharomyces cerevisiae,scerevisiae_gene,YKR050W,name_match,high,,1
+MARXBASE-G000021,TPK1,K. marxianus,locus_tagged,KLMA_50248,name_match,high,,5
+MARXBASE-G000022,HOM2,K. marxianus,locus_tagged,KLMA_50503,name_match,high,,5
+MARXBASE-G000225,GSF2,K. marxianus,locus_tagged,KLMA_10424,name_match,high,,4
+MARXBASE-G000226,MED15,K. marxianus,locus_tagged,KLMA_20369,name_match,high,,4
+MARXBASE-G000227,RIM101,K. marxianus,locus_tagged,KLMA_20440,name_match,high,,1
+MARXBASE-G000221,UGGT1,Homo sapiens,heterologous_gene,,,,,2
+MARXBASE-G000222,UGGT2,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000223,SEP15,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000224,EDEM2,Homo sapiens,heterologous_gene,,,,,2
+MARXBASE-G000141,FPS1,K. marxianus,locus_tagged,KLMA_80411,name_match,high,,3
+MARXBASE-G000211,MNS1,K. marxianus,locus_tagged,KLMA_40509,name_match,high,,2
+MARXBASE-G000212,MNL1,K. marxianus,locus_tagged,KLMA_40481,name_match,high,,1
+MARXBASE-G000213,SEC23,K. marxianus,locus_tagged,KLMA_20498,name_match,high,,2
+MARXBASE-G000214,SAR1,K. marxianus,locus_tagged,KLMA_40556,name_match,high,,2
+MARXBASE-G000215,ERV29,K. marxianus,locus_tagged,KLMA_80182,name_match,high,,1
+MARXBASE-G000216,EMP47,K. marxianus,locus_tagged,KLMA_70027,name_match,high,,1
+MARXBASE-G000217,BET1,K. marxianus,locus_tagged,KLMA_50394,name_match,high,,1
+MARXBASE-G000218,PRB1,K. marxianus,locus_tagged,KLMA_80029,name_match,high,,2
+MARXBASE-G000219,HMX1,K. marxianus,locus_tagged,KLMA_50321,name_match,high,,1
+MARXBASE-G000210,MDH,Candida magnoliae,heterologous_gene,,,,,2
+MARXBASE-G000030,ADH2A,K. marxianus,unmapped_name,,,,Curator decision: leave unmapped (5 verified rows from PMID 41624984 and 41079773).,5
+MARXBASE-G000029,ACH1,K. marxianus,locus_tagged,KLMA_20042,name_match,high,,5
+MARXBASE-G000208,GDH1,K. marxianus,locus_tagged,KLMA_50019,reciprocal_best_hit,medium,,2
+MARXBASE-G000209,DAK1,K. marxianus,locus_tagged,KLMA_50161,name_match,high,,2
+MARXBASE-G000206,GUT1,K. marxianus,locus_tagged,KLMA_80412,name_match,high,,2
+MARXBASE-G000207,GUT2,K. marxianus,locus_tagged,KLMA_30722,name_match,high,,2
+MARXBASE-G000204,SAT1,K. marxianus,locus_tagged,KmMLEV2025,,,,4
+MARXBASE-G000205,SOU2,K. marxianus,locus_tagged,KLMA_10715,name_match,medium,,1
+MARXBASE-G000057,FLO9,Saccharomyces cerevisiae,scerevisiae_gene,YAL063C,name_match,high,,2
+MARXBASE-G000203,SPS22,Saccharomyces cerevisiae,scerevisiae_gene,YCL048W,name_match,high,,1
+MARXBASE-G000023,SDH1,K. marxianus,locus_tagged,KLMA_20466,name_match,high,,3
+MARXBASE-G000024,SDH3,K. marxianus,locus_tagged,KLMA_30124,name_match,high,,3
+MARXBASE-G000025,SDH5,K. marxianus,locus_tagged,KLMA_70402,name_match,high,,3
+MARXBASE-G000026,SDH4A,K. marxianus,unmapped_name,,,,,3
+MARXBASE-G000027,SDH2,K. marxianus,locus_tagged,KLMA_80408,name_match,high,,4
+MARXBASE-G000028,GPD1,K. marxianus,locus_tagged,KLMA_10179,name_match,high,,11
+MARXBASE-G000031,NDE1,K. marxianus,locus_tagged,KLMA_10695,name_match,high,,4
+MARXBASE-G000200,ATP7,K. marxianus,locus_tagged,KLMA_60151,name_match,high,,1
+MARXBASE-G000201,QDR2,K. marxianus,locus_tagged,KLMA_80175,name_match,high,,2
+MARXBASE-G000202,QDR3,K. marxianus,locus_tagged,KLMA_50233,name_match,high,,2
+MARXBASE-G000198,EGFP,Aequorea victoria,heterologous_gene,,,,,1
+MARXBASE-G000199,CAP,porcine circovirus type 3,heterologous_gene,,,,,1
+MARXBASE-G000032,ULP2,K. marxianus,locus_tagged,KLMA_40345,name_match,high,,3
+MARXBASE-G000197,NRK,K. marxianus,unmapped_name,,,,,3
+MARXBASE-G000196,PGU1,K. marxianus,locus_tagged,KLMA_10516,name_match,high,,2
+MARXBASE-G000195,SUA7,K. marxianus,locus_tagged,KLMA_50380,name_match,high,,1
+MARXBASE-G000173,GCR1,K. marxianus,locus_tagged,KLMA_10758,name_match,high,,6
+MARXBASE-G000194,GCR2,K. marxianus,locus_tagged,KLMA_40209,name_match,high,,5
+MARXBASE-G000193,GFP,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: green fluorescent protein (reporter). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000138,PGI1,K. marxianus,locus_tagged,KLMA_10763,name_match,high,,3
+MARXBASE-G000139,ZWF1,K. marxianus,locus_tagged,KLMA_50631,name_match,high,,3
+MARXBASE-G000190,ITR2,K. marxianus,locus_tagged,KLMA_80273,reciprocal_best_hit,medium,,1
+MARXBASE-G000191,MIOX5,K. marxianus,locus_tagged,KLMA_20050,name_match,medium,,1
+MARXBASE-G000259,BADGLA,Blastobotrys adeninivorans,heterologous_gene,,,,,2
+MARXBASE-G000186,PAL,Photorhabdus luminescens,heterologous_gene,,,,,1
+MARXBASE-G000187,C4H,Arabidopsis thaliana,heterologous_gene,,,,,1
+MARXBASE-G000188,CPR1,Arabidopsis thaliana,heterologous_gene,,,,,1
+MARXBASE-G000152,ARO10,K. marxianus,locus_tagged,KLMA_20597,name_match,high,,2
+MARXBASE-G000189,GDH1,Saccharomyces cerevisiae,scerevisiae_gene,YOR375C,name_match,high,,1
+MARXBASE-G000182,IAAM,Pseudomonas savastanoi,heterologous_gene,,,,,1
+MARXBASE-G000183,IAAH,Pseudomonas savastanoi,heterologous_gene,,,,,1
+MARXBASE-G000184,VIOE,Chromobacterium violaceum,heterologous_gene,,,,,1
+MARXBASE-G000185,VIOD,Chromobacterium violaceum,heterologous_gene,,,,,1
+MARXBASE-G000179,FTH1,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000177,LIP3,K. marxianus,unmapped_name,,,,,2
+MARXBASE-G000178,YJR107W,K. marxianus,unmapped_name,,,,,2
+MARXBASE-G000175,2-PS,Gerbera hybrida,heterologous_gene,,,,,1
+MARXBASE-G000176,6-MSAS,Penicillium griseofulvum,heterologous_gene,,,,,1
+MARXBASE-G000161,UPC2,K. marxianus,locus_tagged,KLMA_50125,name_match,high,,2
+MARXBASE-G000174,NDT80,K. marxianus,locus_tagged,KLMA_60266,name_match,high,,1
+MARXBASE-G000172,PDA1,K. marxianus,locus_tagged,KLMA_20172,name_match,high,,1
+MARXBASE-G000171,MSR,K. marxianus,unmapped_name,,,,Curator decision: leave unmapped (no reliable locus; 9 verified rows from PMID 38522677).,9
+MARXBASE-G000170,IAH1,K. marxianus,locus_tagged,KLMA_20604,name_match,high,,2
+MARXBASE-G000168,LSC1,K. marxianus,locus_tagged,KLMA_20568,name_match,high,,1
+MARXBASE-G000169,SSN3,K. marxianus,locus_tagged,KLMA_60395,name_match,high,,1
+MARXBASE-G000166,SNF3,K. marxianus,locus_tagged,KLMA_60507,name_match,high,,3
+MARXBASE-G000167,GRR1,K. marxianus,locus_tagged,KLMA_70111,name_match,high,,1
+MARXBASE-G000103,MTH1,K. marxianus,locus_tagged,KLMA_30237,reciprocal_best_hit,medium,,4
+MARXBASE-G000033,SNF1,K. marxianus,locus_tagged,KLMA_30582,name_match,high,,3
+MARXBASE-G000165,PIR,K. marxianus,locus_tagged,KLMA_80038,name_match,medium,,1
+MARXBASE-G000119,EAT1,K. marxianus,locus_tagged,KLMA_40050,name_match,high,,9
+MARXBASE-G000163,XYL1,Candida tropicalis,heterologous_gene,,,,,2
+MARXBASE-G000164,GAL2-N376F,Saccharomyces cerevisiae,heterologous_gene,,,,,1
+MARXBASE-G000162,TPI,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000034,HXK2,K. marxianus,locus_tagged,KLMA_60412,reciprocal_best_hit,medium,,2
+MARXBASE-G000160,STE5,K. marxianus,locus_tagged,KLMA_20171,name_match,high,,1
+MARXBASE-G000159,KLMX_70384,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000041,LAC4,K. marxianus,locus_tagged,KLMA_30009,name_match,medium,,10
+MARXBASE-G000157,PSR1,K. marxianus,locus_tagged,KLMA_30223,name_match,high,,2
+MARXBASE-G000158,PDE2,K. marxianus,locus_tagged,KLMA_30588,name_match,high,,2
+MARXBASE-G000042,LAC12,K. marxianus,undetermined_paralog,,,,Several K. marxianus loci carry this symbol. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed).,7
+MARXBASE-G000153,RUBISCO,Rhodopseudomonas palustris,heterologous_gene,,,,,1
+MARXBASE-G000149,ARO4,K. marxianus,locus_tagged,KLMA_20414,name_match,high,,3
+MARXBASE-G000150,PHA2,K. marxianus,locus_tagged,KLMA_70162,name_match,high,,1
+MARXBASE-G000151,ARO7,K. marxianus,locus_tagged,KLMA_80332,name_match,high,,1
+MARXBASE-G000145,ATG32,K. marxianus,locus_tagged,KLMA_30710,name_match,high,,1
+MARXBASE-G000146,ATG8,K. marxianus,locus_tagged,KLMA_80372,name_match,high,,1
+MARXBASE-G000147,ATG11,K. marxianus,locus_tagged,KLMA_70337,name_match,high,,1
+MARXBASE-G000148,ATG19,K. marxianus,locus_tagged,KLMA_30395,name_match,high,,1
+MARXBASE-G000102,GAL2,Saccharomyces cerevisiae,scerevisiae_gene,YLR081W,name_match,high,,5
+MARXBASE-G000142,SSA3,K. marxianus,locus_tagged,KLMA_80367,name_match,high,,1
+MARXBASE-G000143,ADH1,K. marxianus,undetermined_paralog,,,,The annotation symbol and the S. cerevisiae reciprocal best hit point to different loci. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed).,1
+MARXBASE-G000132,2-PS,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: 2-pyrone synthase (enzyme name). No locus tag is assigned by name; treat as a label in counts and searches.",2
+MARXBASE-G000140,STL1,K. marxianus,undetermined_paralog,,,,Several K. marxianus loci carry this symbol. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed). Hint: KLMA_60180 (name context).,1
+MARXBASE-G000136,GSH1,Yarrowia lipolytica,heterologous_gene,,,,,2
+MARXBASE-G000137,GSH2,Yarrowia lipolytica,heterologous_gene,,,,,2
+MARXBASE-G000045,INU1,K. marxianus,locus_tagged,KLMA_10518,manual,high,"The literature name INU1 (inulinase) for the locus RefSeq annotates as SUC2, beta-fructofuranosidase (556 aa, chr 1). It is the reciprocal best hit of S. cerevisiae SUC2 (YIL162W; 52% identity, 95-99% mutual coverage), so the ortholog is assigned normally. The curator also reports an extra C-terminal inulin-binding domain, which the alignment does not show. INU and INU1A (literature names) are the same gene and are merged into INU1.",27
+MARXBASE-G000128,XYL1,K. marxianus,unmapped_name,,,,,17
+MARXBASE-G000035,MIG1,K. marxianus,locus_tagged,KLMA_20059,name_match,high,,17
+MARXBASE-G000133,HIS4,K. marxianus,locus_tagged,KLMA_10065,name_match,high,,1
+MARXBASE-G000131,HXK1,K. marxianus,locus_tagged,KLMA_60412,reciprocal_best_hit,medium,,1
+MARXBASE-G000123,LDH,Plasmodium falciparum,heterologous_gene,,,,,1
+MARXBASE-G000124,LDH,Bacillus subtilis,heterologous_gene,,,,,1
+MARXBASE-G000125,JEN1,Saccharomyces cerevisiae,scerevisiae_gene,YKL217W,name_match,high,,1
+MARXBASE-G000126,PFK,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000127,DLD,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000036,RAG5,K. marxianus,locus_tagged,KLMA_60412,name_match,medium,,10
+MARXBASE-G000129,HGT,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: Hgt-like transporter family (family label). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000130,KHT,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: Kht-like transporter family (family label). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000120,ACO2B,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000121,RIP1,K. marxianus,locus_tagged,KLMA_10723,name_match,high,,1
+MARXBASE-G000122,MSS51,K. marxianus,locus_tagged,KLMA_50319,name_match,high,,1
+MARXBASE-G000116,RKI1,K. marxianus,locus_tagged,KLMA_80221,name_match,high,,1
+MARXBASE-G000117,TAL1,K. marxianus,locus_tagged,KLMA_30634,reciprocal_best_hit,medium,,1
+MARXBASE-G000118,TKL1,Saccharomyces cerevisiae,scerevisiae_gene,YPR074C,name_match,high,,1
+MARXBASE-G000037,SPT15,K. marxianus,locus_tagged,KLMA_20021,name_match,high,,2
+MARXBASE-G000048,GAP1,K. marxianus,locus_tagged,KLMA_40218,manual,high,Several K. marxianus loci carry this symbol. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed). FLAG: the S. cerevisiae-based hint points to KLMA_10394 but the papers' own wording points to KLMA_40218; check which gene each paper means.,11
+MARXBASE-G000115,MATΑ3,K. marxianus,unmapped_name,,,,,2
+MARXBASE-G000114,DPEASE,Agrobacterium tumefaciens,heterologous_gene,,,,,1
+MARXBASE-G000113,ATF1,K. marxianus,locus_tagged,KLMA_30203,reciprocal_best_hit,medium,,3
+MARXBASE-G000108,LDH,Lactobacillus plantarum,heterologous_gene,,,,,1
+MARXBASE-G000109,CYB2,K. marxianus,undetermined_paralog,,,,Several K. marxianus loci carry this symbol. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed). Hint: KLMA_10621 (name context).,1
+MARXBASE-G000110,DLD1,K. marxianus,undetermined_paralog,,,,Several K. marxianus loci carry this symbol. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed). Hint: KLMA_50301 (name context).,1
+MARXBASE-G000107,ERG11,K. marxianus,locus_tagged,KLMA_20551,name_match,high,,1
+MARXBASE-G000111,HSF1,K. marxianus,locus_tagged,KLMA_10648,name_match,high,,2
+MARXBASE-G000112,MSN2,K. marxianus,locus_tagged,KLMA_40315,name_match,high,,2
+MARXBASE-G000106,NEJ1,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000015,DNL4,K. marxianus,locus_tagged,KLMA_80033,name_match,high,,2
+MARXBASE-G000105,TPX1,K. marxianus,unmapped_name,,,,,5
+MARXBASE-G000038,LDH,Staphylococcus epidermidis,heterologous_gene,,,,,3
+MARXBASE-G000039,LDH,Lactobacillus acidophilus,heterologous_gene,,,,,3
+MARXBASE-G000100,GLUC,Gaussia princeps,heterologous_gene,,,,,1
+MARXBASE-G000101,LIF,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000098,PGK1,Saccharomyces cerevisiae,scerevisiae_gene,YCR012W,name_match,high,,1
+MARXBASE-G000099,MFΑ1,Saccharomyces cerevisiae,heterologous_gene,,,,,1
+MARXBASE-G000097,NS1,dengue virus type 1,heterologous_gene,,,,,1
+MARXBASE-G000095,ARO10,Saccharomyces cerevisiae,scerevisiae_gene,YDR380W,name_match,high,,1
+MARXBASE-G000096,ADH2,Saccharomyces cerevisiae,scerevisiae_gene,YMR303C,name_match,high,,1
+MARXBASE-G000040,ATOB,bacteria,heterologous_gene,,,,,1
+MARXBASE-G000094,MCT1,Saccharomyces cerevisiae,scerevisiae_gene,YOR221C,name_match,high,,1
+MARXBASE-G000092,CYP102A1,Bacillus megaterium,heterologous_gene,,,,,1
+MARXBASE-G000093,CYP505A1,Fusarium oxysporum,heterologous_gene,,,,,1
+MARXBASE-G000091,URA3,K. marxianus,locus_tagged,KLMA_10731,name_match,high,,1
+MARXBASE-G000071,ADE2,Saccharomyces cerevisiae,scerevisiae_gene,YOR128C,name_match,high,,1
+MARXBASE-G000072,ADE6,Saccharomyces cerevisiae,scerevisiae_gene,YGR061C,name_match,high,,1
+MARXBASE-G000073,HIS2,Saccharomyces cerevisiae,scerevisiae_gene,YFR025C,name_match,high,,1
+MARXBASE-G000074,HIS3,Saccharomyces cerevisiae,scerevisiae_gene,YOR202W,name_match,high,,2
+MARXBASE-G000075,HIS4,Saccharomyces cerevisiae,scerevisiae_gene,YCL030C,name_match,high,,1
+MARXBASE-G000076,HIS5,Saccharomyces cerevisiae,scerevisiae_gene,YIL116W,name_match,high,,1
+MARXBASE-G000077,HIS6,Saccharomyces cerevisiae,scerevisiae_gene,YIL020C,name_match,high,,1
+MARXBASE-G000078,HIS7,Saccharomyces cerevisiae,scerevisiae_gene,YBR248C,name_match,high,,1
+MARXBASE-G000079,LYS1,Saccharomyces cerevisiae,scerevisiae_gene,YIR034C,name_match,high,,1
+MARXBASE-G000080,LYS2,Saccharomyces cerevisiae,scerevisiae_gene,YBR115C,name_match,high,,1
+MARXBASE-G000081,LYS4,Saccharomyces cerevisiae,scerevisiae_gene,YDR234W,name_match,high,,1
+MARXBASE-G000082,LYS9,Saccharomyces cerevisiae,scerevisiae_gene,YNR050C,name_match,high,,1
+MARXBASE-G000083,LEU1,Saccharomyces cerevisiae,scerevisiae_gene,YGL009C,name_match,high,,1
+MARXBASE-G000084,LEU2,Saccharomyces cerevisiae,scerevisiae_gene,YCL018W,name_match,high,,1
+MARXBASE-G000085,MET2,Saccharomyces cerevisiae,scerevisiae_gene,YNL277W,name_match,high,,1
+MARXBASE-G000086,MET6,Saccharomyces cerevisiae,scerevisiae_gene,YER091C,name_match,high,,1
+MARXBASE-G000087,MET17,Saccharomyces cerevisiae,scerevisiae_gene,YLR303W,name_match,high,,1
+MARXBASE-G000088,TRP3,Saccharomyces cerevisiae,scerevisiae_gene,YKL211C,name_match,high,,1
+MARXBASE-G000089,TRP4,Saccharomyces cerevisiae,scerevisiae_gene,YDR354W,name_match,high,,1
+MARXBASE-G000090,TRP5,Saccharomyces cerevisiae,scerevisiae_gene,YGL026C,name_match,high,,1
+MARXBASE-G000068,HSA,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000069,GAA,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000056,FLO5,Saccharomyces cerevisiae,scerevisiae_gene,YHR211W,name_match,high,,2
+MARXBASE-G000064,BGS,Neocallimastix patriciarum,heterologous_gene,,,,,1
+MARXBASE-G000063,HOG1,K. marxianus,locus_tagged,KLMA_40175,name_match,high,,4
+MARXBASE-G000060,GOX,Aspergillus niger,heterologous_gene,,,,,1
+MARXBASE-G000059,SOD1,Kluyveromyces lactis,heterologous_gene,,,,,1
+MARXBASE-G000055,FLO1,Saccharomyces cerevisiae,scerevisiae_gene,YAR050W,name_match,high,,1
+MARXBASE-G000058,FLO10,Saccharomyces cerevisiae,scerevisiae_gene,YKR102W,name_match,high,,1
+MARXBASE-G000053,LYS1,K. marxianus,locus_tagged,KLMA_40368,name_match,high,,1
+MARXBASE-G000050,LDH,Bacillus megaterium,heterologous_gene,,,,,2
+MARXBASE-G000049,GUS,Escherichia coli,heterologous_gene,,,,,3
+MARXBASE-G000046,HXK1,Saccharomyces cerevisiae,scerevisiae_gene,YFR053C,name_match,high,,1
+MARXBASE-G000047,HXK2,Saccharomyces cerevisiae,scerevisiae_gene,YGL253W,name_match,high,,1
+MARXBASE-G000043,PGK,Saccharomyces cerevisiae,heterologous_gene,,,,,1
+MARXBASE-G000044,GAL7,Saccharomyces cerevisiae,scerevisiae_gene,YBR018C,name_match,high,,1
+MARXBASE-G000051,LC1,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000052,IL-2,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000054,ALPHA-AMYLASE,Aspergillus,heterologous_gene,,,,,1
+MARXBASE-G000061,EG,Trichoderma reesei,heterologous_gene,,,,,1
+MARXBASE-G000062,BGL,Aspergillus aculeatus,heterologous_gene,,,,,1
+MARXBASE-G000065,GPD,Saccharomyces cerevisiae,scerevisiae_gene,YGR192C,name_match,medium,,1
+MARXBASE-G000066,CYC1,Saccharomyces cerevisiae,scerevisiae_gene,YJR048W,name_match,high,,1
+MARXBASE-G000067,MIG1,Saccharomyces cerevisiae,scerevisiae_gene,YGL035C,name_match,high,,1
+MARXBASE-G000070,SOD1,K. marxianus,locus_tagged,KLMA_70087,name_match,high,,3
+MARXBASE-G000104,XYL2,Scheffersomyces stipitis,heterologous_gene,,,,,2
+MARXBASE-G000135,XYL3,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000144,GAL2_N376F,Saccharomyces cerevisiae,heterologous_gene,,,,,7
+MARXBASE-G000154,GAL80,K. marxianus,locus_tagged,KLMA_10427,name_match,high,,5
+MARXBASE-G000180,MELITTIN,Apis mellifera,heterologous_gene,,,,,1
+MARXBASE-G000181,PROMELITTIN,Apis mellifera,heterologous_gene,,,,,1
+MARXBASE-G000192,GLA,Blastobotrys adeninivorans,heterologous_gene,,,,,2
+MARXBASE-G000220,RSAI,K. marxianus,unmapped_name,,,,,2
+MARXBASE-G000228,AGA1,Cyamopsis tetragonoloba,heterologous_gene,,,,,1
+MARXBASE-G000229,CRE,bacteriophage P1,heterologous_gene,,,,,3
+MARXBASE-G000155,B,Kluyveromyces lactis,heterologous_gene,,,,,1
+MARXBASE-G000156,C,Kluyveromyces lactis,heterologous_gene,,,,,1
+MARXBASE-G000230,NTH1,Saccharomyces cerevisiae,scerevisiae_gene,YDR001C,name_match,high,,2
+MARXBASE-G000231,ATH1,Saccharomyces cerevisiae,scerevisiae_gene,YPR026W,name_match,high,,1
+MARXBASE-G000232,PCPL3,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: a promoter/regulatory element name, not a gene. No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000233,HPCHYB,Haematococcus pluvialis,heterologous_gene,,,,,3
+MARXBASE-G000234,BKT,Haematococcus pluvialis,heterologous_gene,,,,,3
+MARXBASE-G000235,GLK1,K. marxianus,locus_tagged,KLMA_10051,name_match,high,,1
+MARXBASE-G000236,CIPA,Clostridium thermocellum,heterologous_gene,,,,,1
+MARXBASE-G000237,M330,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: MAN330 mannanase (enzyme label). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000238,XYN-CDBFV,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: endoxylanase construct (enzyme label). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000239,RUXYN1,Ruminococcus albus,heterologous_gene,,,,,1
+MARXBASE-G000240,HEM1,K. marxianus,locus_tagged,KLMA_30530,name_match,high,,1
+MARXBASE-G000241,VAHB,Vigna angularis,heterologous_gene,,,,,1
+MARXBASE-G000242,RAD14,Saccharomyces cerevisiae,scerevisiae_gene,YMR201C,name_match,high,,1
+MARXBASE-G000243,NPABGS,Neocallimastix patriciarum,heterologous_gene,,,,,1
+MARXBASE-G000244,"ADE5,7",Saccharomyces cerevisiae,scerevisiae_gene,YGL234W,name_match,medium,,1
+MARXBASE-G000245,AROG(FBR),Klebsiella pneumoniae,heterologous_gene,,,,,1
+MARXBASE-G000247,INU,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: inulinase (enzyme name; the locus-tagged gene is INU1). No locus tag is assigned by name; treat as a label in counts and searches.",6
+MARXBASE-G000248,XDH,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: xylitol dehydrogenase (enzyme abbreviation). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000249,XR,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: xylose reductase (enzyme abbreviation). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000250,XK,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: xylulokinase (enzyme abbreviation). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000251,ALG3,K. marxianus,locus_tagged,KLMA_80379,name_match,high,,1
+MARXBASE-G000252,OCH1,K. marxianus,undetermined_paralog,,,,Several K. marxianus loci carry this symbol. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed). Hint: KLMA_40267 (name context).,1
+MARXBASE-G000253,RUBISCO FORM I,Rhodopseudomonas palustris,heterologous_gene,,,,,1
+MARXBASE-G000254,RUBISCO FORM II,Rhodopseudomonas palustris,heterologous_gene,,,,,1
+MARXBASE-G000255,FTH,Homo sapiens,heterologous_gene,,,,,1
+MARXBASE-G000256,CAT2,K. marxianus,locus_tagged,KLMA_30654,name_match,high,,1
+MARXBASE-G000257,ACC1,K. marxianus,locus_tagged,KLMA_60469,name_match,high,,1
+MARXBASE-G000258,2-PYRONE SYNTHASE,Gerbera hybrida,heterologous_gene,,,,,1
+MARXBASE-G000260,OST1,K. marxianus,locus_tagged,KLMA_20114,name_match,high,,1
+MARXBASE-G000261,LEU2,K. marxianus,locus_tagged,KLMA_20483,name_match,high,,2
+MARXBASE-G000262,ADH3,K. marxianus,undetermined_paralog,,,,Several K. marxianus loci carry this symbol. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed). Hint: KLMA_20158 (paper context).,4
+MARXBASE-G000264,COX15,K. marxianus,locus_tagged,KLMA_20033,name_match,high,,5
+MARXBASE-G000265,ATP25,K. marxianus,locus_tagged,KLMA_30567,name_match,high,,5
+MARXBASE-G000266,CYC3,K. marxianus,locus_tagged,KLMA_80238,name_match,high,,5
+MARXBASE-G000269,GRE2,K. marxianus,undetermined_paralog,,,,The annotation symbol and the S. cerevisiae reciprocal best hit point to different loci. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed).,1
+MARXBASE-G000270,AXT1,K. marxianus,unmapped_name,,,,,3
+MARXBASE-G000271,ULP1,K. marxianus,locus_tagged,KLMA_20214,name_match,high,,1
+MARXBASE-G000272,YME,K. marxianus,unmapped_name,,,,,7
+MARXBASE-G000273,KMAKR,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: the K. marxianus aldo-keto reductase (enzyme label). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000274,INU-ISO3,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: inulinase isoform 3 variant (enzyme variant label). No locus tag is assigned by name; treat as a label in counts and searches.",4
+MARXBASE-G000275,LDHA,bacterial,heterologous_gene,,,,,2
+MARXBASE-G000276,KM_SUT5,K. marxianus,unmapped_name,,,,,4
+MARXBASE-G000277,GDA,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: guanine deaminase (the paper's own acronym for the enzyme). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000278,AKR,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: aldo-keto reductase (enzyme class). No locus tag is assigned by name; treat as a label in counts and searches.",8
+MARXBASE-G000279,DEPA,K. marxianus,enzyme_or_protein_label,,,,"Enzyme/protein/element LABEL used as a gene name, not an established gene symbol: DON-degrading enzyme DepA (enzyme name). No locus tag is assigned by name; treat as a label in counts and searches.",1
+MARXBASE-G000280,AKR13B2,unknown,heterologous_gene,,,,,1
+MARXBASE-G000267,XYL1,Pichia stipitis,heterologous_gene,,,,,4
+MARXBASE-G000281,EPG1-2,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000282,CTA1,K. marxianus,locus_tagged,KLMA_60401,name_match,high,,1
+MARXBASE-G000283,TSL1,K. marxianus,locus_tagged,KLMA_20074,reciprocal_best_hit,medium,,1
+MARXBASE-G000284,ERG2,K. marxianus,locus_tagged,KLMA_60457,name_match,high,,1
+MARXBASE-G000285,ARO8,K. marxianus,undetermined_paralog,,,,Several K. marxianus loci carry this symbol. All candidate loci are recorded in gene_locus until the right one is determined (full text or supplement may be needed). Hint: KLMA_20259 (name context).,1
+MARXBASE-G000286,ARO9,K. marxianus,locus_tagged,KLMA_60423,name_match,high,,1
+MARXBASE-G000287,FKS2,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000288,ADH,K. marxianus,enzyme_or_protein_label,,,,"Generic enzyme name 'ADH' (cytoplasmic alcohol dehydrogenase, PMID 8485163). The only annotation-symbol hit (KLMA_40624) is medium confidence with no S. cerevisiae gene of this name to corroborate it, and several K. marxianus ADH genes exist, so no locus tag is assigned. Treat as a label until the paper's sequence or locus can be checked.",1
+MARXBASE-G000289,PHO610,K. marxianus,unmapped_name,,,,,2
+MARXBASE-G000290,UOX,K. marxianus,unmapped_name,,,,,1
+MARXBASE-G000291,KMCR,K. marxianus,unmapped_name,,,,,3
+MARXBASE-G000292,VP2,Infectious bursal disease virus,heterologous_gene,,,,,1
+MARXBASE-G000293,KMAR_10 531,K. marxianus,unmapped_name,,,,,4

@@ -1,0 +1,12 @@
+/* Look "neutral": charcoal bar, warm red accent, system fonts. Only tokens live here; the rules are in style.css. */
+:root {
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-head: var(--font-body);
+  --base-size: 16px;
+  --bar: #22262b; --bar-ink: #ffffff; --bar-ink-2: #c9ced6; --bar-accent: #ff7a66;
+  --accent: #d6392b; --accent-hover: #b82d20; --accent-ink: #ffffff;
+  --heading: #1c2024; --highlight: #ff7a66; --marker: #0b57a4;
+  --link: #0b57a4; --focus: #0b57a4;
+  --bg: #ffffff; --surface: #f4f5f7; --surface-2: #eceef1; --ink: #1c2024; --muted: #5b6470;
+  --line: #d9dce0; --line-strong: #8a919b;
+}

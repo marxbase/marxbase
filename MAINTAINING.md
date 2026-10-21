@@ -31,9 +31,10 @@ In the private research repository (needs `.env` with `SUPABASE_URL` and `SUPABA
 
 ## Routine 2: publish a new release (after a review round, at most quarterly)
 1. In the research repository: back up the database; check `python -m kmarx.curate check` and the tests pass.
-2. `python -m kmarx.release build --version X.Y --write --evidence hide` (use `show` only if the UCI Libraries copyright answer allows quoted
+2. If new papers were text-mined since the last release, run `python -m kmarx.curate mark-mined` first (it marks them so the release lists them, and leaves the held-out papers out).
+   Then `python -m kmarx.release build --version X.Y --write --evidence hide` (use `show` only if the UCI Libraries copyright answer allows quoted
    sentences). The release gate must say PASSED. The folder `releases/X.Y/` is written, with a `private/` subfolder that stays private.
-3. Copy `releases/X.Y/` **without** `private/` into this repository's `releases/X.Y/`. Put `X.Y` in `CURRENT_RELEASE`.
+3. Copy `releases/X.Y/` **without** `private/` into this repository's `releases/X.Y/`. Put `X.Y` in `CURRENT_RELEASE`. Older release folders stay in the repository.
 4. Update `CITATION.cff` (`version`), `README.md` and the citation text if they name a version. Run `python -m unittest discover -s tests`.
 5. Commit and push to `main`. The GitHub Action builds and publishes the site (it runs the tests first, including a parse check of every browser script).
    When the run is green, **open https://marxbase.org in a browser and look**: search for `ku70` (6 findings), open a paper page, open the browser's
@@ -48,7 +49,7 @@ The record for 1.0 is not in the Zenodo community `marxbase`: the `.zenodo.json`
 and no request appeared in https://zenodo.org/me/requests. The community is optional (the DOI and citation work without it); if wanted, ask Zenodo support to add the record.
 
 ## Routine 3: the evidence-sentence switch
-Release 1.0 hides quoted abstract sentences while the UCI Libraries copyright answer is pending. When it allows them, build the next release
+Releases 1.0 and 1.1 hide quoted abstract sentences while the UCI Libraries copyright answer is pending. When it allows them, build the next release
 with `--evidence show`. If it advises against them, keep `hide`.
 
 ## Routine 4: accounts and keys (once a year, and at hand-over)
@@ -80,5 +81,6 @@ renews automatically while the records stay as above.
 - [x] `marxbase.org` pointed at GitHub Pages, HTTPS enforced, `http://` and `www` redirect (2026-10-20)
 - [x] Live smoke test passed on https://marxbase.org/; one real report received through the live form (2026-10-20); delete the test row in the Supabase table editor
 - [x] Release `v1.0` tagged and archived at Zenodo, DOI 10.5281/zenodo.23519772 added (2026-10-20)
+- [ ] Release `v1.1` (all text-mined papers listed): tagged and archived at Zenodo; version DOI to be recorded here **TO FILL**
 - [ ] PI sign-off and copyright answer recorded **TO FILL**
 - [ ] Successor has owner access to GitHub, Cloudflare, Supabase and Zenodo **TO FILL**

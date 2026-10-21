@@ -116,6 +116,31 @@
   t('suggest: the field name is sent only for field edits', SG.payload({ kind: 'field_edit', field_name: 'product', proposed_value: 'x', comment: 'abc' }, { pageType: 'result', targetId: 'a', release: 'r' }).field_name === 'product' && SG.payload({ kind: 'error_report', field_name: 'product', comment: 'abc' }, { pageType: 'result', targetId: 'a', release: 'r' }).field_name === null);
   t('suggest: a publishable key goes in apikey only; a JWT key also in Authorization', (() => { const a = SG.headers('sb_publishable_abc'), b = SG.headers('eyJhbGciOi.x.y'); return a.apikey === 'sb_publishable_abc' && !a.Authorization && b.Authorization === 'Bearer eyJhbGciOi.x.y' && a.Prefer === 'return=minimal'; })());
   t('suggest: cooldown blocks a second send within 30 seconds', SG.cooldownLeft(1000, 11000) === 20000 && SG.cooldownLeft(1000, 40000) === 0 && SG.cooldownLeft(0, Date.now()) === 0);
+  // ---- species italics ----
+  const spNames = D.species;
+  const joinParts = (ps) => ps.map(([s, i]) => (i ? '[' + s + ']' : s)).join('');
+  t('species: the data carries a name list that includes K. marxianus and S. cerevisiae', Array.isArray(spNames) && spNames.includes('K. marxianus') && spNames.includes('S. cerevisiae'));
+  t('species: names are split out of a sentence', joinParts(S.speciesParts('host K. marxianus and S. cerevisiae.', spNames)) === 'host [K. marxianus] and [S. cerevisiae].', joinParts(S.speciesParts('host K. marxianus and S. cerevisiae.', spNames)));
+  t('species: a name inside a longer word is left alone', joinParts(S.speciesParts('NotK. marxianusX', spNames)) === 'NotK. marxianusX');
+  t('species: full names win over abbreviations and the text round-trips', (() => { const s = 'Kluyveromyces marxianus, K. marxianus, E. coli'; const ps = S.speciesParts(s, spNames); return ps.map((p) => p[0]).join('') === s && joinParts(ps) === '[Kluyveromyces marxianus], [K. marxianus], [E. coli]'; })());
+  t('species: text with no names comes back whole', joinParts(S.speciesParts('no names here', spNames)) === 'no names here' && S.speciesParts('', spNames).length === 1);
+  // ---- the search page itself starts (a startup error in app.js once blanked the live page) ----
+  const appRoot = document.getElementById('app');
+  t('app: the search page initialises (form, search box, results area)', !!(appRoot && appRoot.querySelector('form.searchbar') && appRoot.querySelector('#q') && appRoot.querySelector('#results-area')));
+  t('app: it starts as a landing page (results hidden) when there is no search in the address', !!(appRoot && appRoot.classList.contains('landing') && appRoot.querySelector('#results-area').hidden));
+  t('app: the Search button is a submit button and the host box is unticked', !!(appRoot && appRoot.querySelector('button[type=submit]') && appRoot.querySelector('#allhosts') && !appRoot.querySelector('#allhosts').checked));
+  t('app: typing or ticking the host box does not open the results while on the landing page', !!appRoot && !!appRoot.querySelector('#q') && (() => {
+    const q = appRoot.querySelector('#q'), box = appRoot.querySelector('#allhosts'), area = appRoot.querySelector('#results-area');
+    q.value = 'xyl'; q.dispatchEvent(new Event('input')); box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true }));
+    const stillHidden = area.hidden; q.value = ''; box.checked = false; box.dispatchEvent(new Event('change', { bubbles: true }));
+    return stillHidden;
+  })());
+  t('app: the home page marks itself as engaged (navigation shown) only after Search', (() => {
+    const before = document.body.classList.contains('engaged'), q = appRoot.querySelector('#q');
+    q.value = 'ku70'; appRoot.querySelector('form.searchbar').dispatchEvent(new Event('submit', { cancelable: true }));
+    const after = document.body.classList.contains('engaged');
+    return before === false && after === true;
+  })());
   summary.textContent = `${pass} passed, ${fail} failed`;
   summary.className = fail ? 'bad' : 'ok';
   document.title = fail ? 'TESTS FAILED' : 'TESTS PASSED';

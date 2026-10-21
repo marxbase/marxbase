@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use MarxBase, please cite it as below."
 title: "MarxBase: gene-phenotype results for Kluyveromyces marxianus metabolic engineering"
-version: "1.0"
+version: "1.1"
 type: dataset
 authors:
   - family-names: Eichelberger
@@ -16,5 +16,5 @@ keywords:
   - metabolic engineering
   - yeast
   - gene-phenotype database
-doi: "10.5281/zenodo.23519772"
+doi: "10.5281/zenodo.23519771"   # the concept DOI: it always points to the latest release
 date-released: "2026-10-21"

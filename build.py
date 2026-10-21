@@ -13,9 +13,11 @@ import hashlib
 import html
 import json
 import re
+import urllib.parse
 import shutil
 import sys
 import pages
+import species
 from collections import defaultdict
 from pathlib import Path
 
@@ -49,6 +51,20 @@ def load_config(path):
     if "service" in key.lower() or key.startswith("sb_secret_"):
         raise SystemExit(f"{path}: that looks like a service key; only the public anon key belongs here.")
     return {"supabaseUrl": url.rstrip("/"), "supabaseAnonKey": key}
+
+
+LOOKS = ("neutral", "uci")
+MARK = ('<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="mark-bg" width="32" height="32" rx="7"/>'
+        '<ellipse class="mark-cell" cx="14.5" cy="19" rx="9" ry="8.2" transform="rotate(-25 14.5 19)"/><circle class="mark-cell" cx="23.6" cy="9.4" r="4.8"/><circle class="mark-nuc" cx="16.6" cy="16.9" r="2.3"/></svg>')
+
+
+def look_tokens(look: str) -> dict:
+    """The --name: value pairs of a look file (used for the favicon and the style tile)."""
+    text = (SRC / "looks" / f"{look}.css").read_text(encoding="utf-8") + (SRC / "style.css").read_text(encoding="utf-8")
+    tok = dict(re.findall(r"(--[\w-]+):\s*([^;]+);", text))
+    if tok.get("--font-head", "").startswith("var("):
+        tok["--font-head"] = tok["--font-body"]
+    return tok
 
 
 def esc(s) -> str:
@@ -92,8 +108,11 @@ def pretty(s) -> str:
 
 
 class Site:
-    def __init__(self, bundle: Path, out: Path, csp: bool = False, config: Path = None, public: bool = False):
+    def __init__(self, bundle: Path, out: Path, csp: bool = False, config: Path = None, public: bool = False, look: str = "uci", preview: bool = False):
         self.bundle, self.out, self.csp, self.public = bundle, out, csp or public, public
+        if look not in LOOKS:
+            raise SystemExit(f"--look must be one of {', '.join(LOOKS)}")
+        self.look, self.preview = look, preview and not public
         self.config = load_config(config)
         names = ["results", "genes", "gene_orthologs", "gene_aliases", "gene_candidate_loci", "strains", "strain_aliases", "citations", "products", "comparisons"]
         self.t = {n: read_csv(bundle / f"{n}.csv") for n in names}
@@ -107,7 +126,8 @@ class Site:
         self.by_id = {r["public_id"]: r for r in self.results}
         self.genes = {g["gene_id"]: g for g in self.t["genes"]}
         self.strains = {s["strain_id"]: s for s in self.t["strains"]}
-        self.papers = {c["pmid"]: c for c in self.t["citations"]}
+        self.papers = {c["pmid"]: c for c in self.t["citations"]}                  # every text-mined paper
+        self.papers_with = {pm: c for pm, c in self.papers.items() if int(c["n_results"] or 0) > 0}   # papers with at least one finding
         self.products = {p["product_name"]: p for p in self.t["products"]}
         self.findings = defaultdict(list)
         for r in self.results:
@@ -135,6 +155,7 @@ class Site:
         self.count = 0
         doi_file = HERE / "DOI"
         self.doi = doi_file.read_text(encoding="utf-8").strip() if doi_file.exists() else ""   # the Zenodo DOI of this release; empty = "DOI pending"
+        self.species = species.names_from({r[k] for r in self.t["results"] for k in ("host_organism", "gene_organism")} | {g["organism"] for g in self.t["genes"]} | {s["species"] for s in self.t["strains"]})
         self.has_evidence = any(r.get("evidence_sentence") for r in self.t["results"])
         self.asset_tag = ""            # set at the start of build(): a hash of every browser file, so a changed file is never served from a visitor's cache
 
@@ -160,7 +181,7 @@ class Site:
         """A file address with a version tag, so a browser fetches a changed file at once instead of reusing its cached copy."""
         return f"{root}{name}?v={esc(self.version)}-{self.asset_tag}"
 
-    def layout(self, title: str, body: str, depth: int, active: str = "", suggest: tuple = None) -> str:
+    def layout(self, title: str, body: str, depth: int, active: str = "", suggest: tuple = None, body_class: str = "") -> str:
         root = "../" * depth
         if suggest and self.config:
             body += (f'<section id="suggest-box" data-page-type="{esc(suggest[0])}" data-target-id="{esc(suggest[1])}" data-release="{esc(self.version)}"></section>'
@@ -171,12 +192,15 @@ class Site:
             ("downloads", "downloads.html", "Downloads"), ("about", "about.html", "About &amp; limits")))
         return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
                 + (f'<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; img-src \'self\' data:; style-src \'self\'; script-src \'self\'{"; connect-src \'self\' " + self.config["supabaseUrl"] if self.config else ""}">' if self.csp else '') +
-                f'<title>{esc(title)} – MarxBase</title><link rel="stylesheet" href="{self.asset("style.css", root)}"></head><body>'
+                f'<title>{esc(title)} – MarxBase</title><link rel="icon" href="{root}favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{self.asset("style.css", root)}"><script src="{self.asset("site.js", root)}"></script></head><body{(" class=\"" + body_class + "\"") if body_class else ""}>'
                 f'<a class="skip" href="#main">Skip to content</a>'
-                f'<header class="top"><a class="brand" href="{root}index.html">MarxBase</a><span class="tag">K. marxianus metabolic engineering results</span>'
-                f'<nav aria-label="Main">{nav}</nav></header><main id="main">{body}</main>'
-                f'<footer><p>Release {esc(self.version)} ({esc(self.date)}) · {len(self.results)} results from {len(self.papers)} papers. {esc(LIMITS)} '
-                f'<a href="{root}about.html">More</a></p></footer></body></html>')
+                f'<header class="top"><div class="bar"><a class="brand" href="{root}index.html">{MARK}<span>MarxBase</span></a>'
+                f'<button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2 5h16M2 10h16M2 15h16"/></svg> Menu</button>'
+                f'<nav id="site-nav" aria-label="Main">{nav}</nav></div></header><main id="main">{species.italicize(body, self.species)}</main>'
+                f'<footer><div class="bar"><span class="release">MarxBase {esc(self.version)}</span><span>{esc(self.date)}</span>'
+                f'<span>{len(self.results)} results from {len(self.papers_with)} papers</span>'
+                + (f'<a href="https://doi.org/{esc(self.doi)}">DOI {esc(self.doi)}</a>' if self.doi else '<span>DOI pending</span>') +
+                f'<a href="{root}about.html">About &amp; limits</a><a href="{root}downloads.html">Downloads</a></div></footer></body></html>')
 
     def chip(self, cls: str) -> str:
         return f'<span class="chip chip-{esc(cls)}"><span aria-hidden="true">{CLASS_ICON.get(cls, "")}</span> {esc(CLASS_LABEL.get(cls, cls))}</span>'
@@ -349,7 +373,7 @@ class Site:
             links.append(f'<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/{esc(p["pmcid"])}/">PMC</a>')
         body = (f'<h1>{safe_html(p["title_html"], p["title"])}</h1><p>{esc(p["authors"])}<br>{esc(p["journal"])} {esc(p["year"])}'
                 f'{(" · " + esc(p["country"])) if p["country"] else ""} · {" · ".join(links)}</p>'
-                f'<h2>Results ({len({r["finding_id"] for r in rows})} findings)</h2>{self.findings_list(rows, 1)}'
+                + (f'<h2>Results ({len({r["finding_id"] for r in rows})} findings)</h2>{self.findings_list(rows, 1)}' if rows else '<p class="nofind-note">No findings extracted</p>') +
                 f'<h2>Cite this paper</h2><div id="paper-cite"><noscript><p>{esc(p["authors"])}. {esc(p["title"])}. {esc(p["journal"])}. {esc(p["year"])}.'
                 f'{(" doi:" + esc(p["doi"])) if p["doi"] else ""}</p></noscript></div>'
                 + '<script type="application/json" id="paper-data">' + json.dumps({k: p[k] for k in ("pmid", "title", "authors", "journal", "year", "doi", "pmcid")}, ensure_ascii=False).replace("</", "<\\/") + '</script>'
@@ -410,9 +434,14 @@ class Site:
         blocks = []
         for yr in sorted(by_year, reverse=True):
             ps = sorted(by_year[yr], key=lambda p: p["pmid"])
-            lis = "".join(f'<li><a href="paper/{esc(p["pmid"])}.html">{safe_html(p["title_html"], p["title"])}</a> <span class="small">{esc(p["authors"].split(";")[0] if p["authors"] else "")} \u00b7 {plural(p["n_results"], "result")}</span></li>' for p in ps)
-            blocks.append(f'<h2>{yr or "Year unknown"} <span class="small">({plural(len(ps), "paper")})</span></h2><ul class="plain">{lis}</ul>')
-        page("Papers", "papers", f'<p class="small">{plural(len(self.papers), "paper")}, newest first.</p>' + "".join(blocks))
+            lis = "".join(f'<li{"" if int(p["n_results"] or 0) else " class=\"nofind\""}><a href="paper/{esc(p["pmid"])}.html">{safe_html(p["title_html"], p["title"])}</a> '
+                          f'<span class="small">{esc(p["authors"].split(";")[0] if p["authors"] else "")}'
+                          f'{(" \u00b7 " + plural(p["n_results"], "result")) if int(p["n_results"] or 0) else ""}</span></li>' for p in ps)
+            blocks.append(f'<section class="year"><h2>{yr or "Year unknown"} <span class="small count">({plural(len(ps), "paper")})</span></h2><ul class="plain">{lis}</ul></section>')
+        page("Papers", "papers", '<div id="papers-toggle" class="papers-toggle" hidden><label class="switch-label"><input type="checkbox" id="only-findings" class="switch" checked>'
+             '<span class="dot dot-yes" aria-hidden="true"></span> Only papers with findings</label>'
+             '<span class="legend small" aria-label="Key"><span class="dot dot-yes" aria-hidden="true"></span> with findings <span class="dot dot-no" aria-hidden="true"></span> none extracted</span></div>'
+             + "".join(blocks) + f'<script src="{self.asset("papers.js")}"></script>')
         # products: general classes first; each class page lists its specific products
         by_class = defaultdict(list)
         for n, p in self.products.items():
@@ -433,12 +462,14 @@ class Site:
         cls = {k: sum(1 for r in self.results if r["result_class"] == k) for k in CLASS_LABEL}
         body = (f'<h1>About &amp; limits</h1><p>MarxBase collects gene–phenotype results for <em>Kluyveromyces marxianus</em> metabolic engineering. '
                 f'Release {esc(self.version)} ({esc(self.date)}) holds {len(self.results)} results ({len(self.findings)} findings, counting a multi-gene combination once): '
-                f'{cls["positive"]} positive, {cls["negative"]} negative, {cls["context-dependent"]} context-dependent, from {len(self.papers)} papers.</p>'
+                f'{cls["positive"]} positive, {cls["negative"]} negative, {cls["context-dependent"]} context-dependent, from {len(self.papers_with)} papers. {len(self.papers)} papers were text-mined in all; the others yielded no finding.</p>'
                 f'<h2>Limits</h2><ul><li>{esc(LIMITS)}</li><li>Temperature, scale and other conditions are recorded only when the abstract states them.</li>'
                 f'<li>Some gene names are enzyme or protein labels used by authors, not gene symbols; they are marked. Some K. marxianus genes have several copies and the paper '
-                f'does not say which one was used; they are marked as undetermined.</li><li>Negative results are scarce in abstracts, so absence of a failed attempt is not evidence that it worked.</li></ul>'
+                f'does not say which one was used; they are marked as undetermined.</li><li>Negative results are scarce in abstracts, so absence of a failed attempt is not evidence that it worked.</li>'
+                f'<li>A paper listed without findings may still contain relevant work: only abstracts are read, and the extraction misses some results.</li></ul>'
                 f'<h2>Reporting a problem</h2><p>On a result, gene, paper or strain page, <strong>Report or suggest</strong> sends a message to the MarxBase maintainers: something looks wrong, a field should change, a result is missing, or a gene identifier is known. Messages are anonymous unless you add a name or email so we can reply, are read only by the maintainers and are never shown on this site. A suggestion changes nothing by itself; the maintainer checks it against the paper before any change reaches a later release.</p>'
-                f'<p class="small">This is a development build. See <a href="methods.html">Methods</a> for how the data were made and <a href="downloads.html">Downloads</a> for the files.</p>')
+                f'<p class="small">See <a href="methods.html">Methods</a> for how the data were made and <a href="downloads.html">Downloads</a> for the files. '
+                f'Home page photograph: K. marxianus colonies on agar, \u00a9 Sidney Eichelberger.</p>')
         self.write("about.html", self.layout("About and limits", body, 0, "about"))
 
     def data_js(self) -> str:
@@ -447,7 +478,7 @@ class Site:
         self.csv_columns = cols
         home = self.km_strain_ids()
         data = {
-            "version": self.version, "date": self.date, "hasEvidence": self.has_evidence, "doi": self.doi,
+            "version": self.version, "date": self.date, "hasEvidence": self.has_evidence, "doi": self.doi, "species": self.species,
             "columns": cols,
             "results": [{k: r[k] for k in cols if r.get(k) not in ("", None)} for r in self.results],
             "genes": {gid: {"name": g["gene_name"], "organism": g["organism"], "kind": g["gene_kind"], "locus": g["locus_tag"],
@@ -456,25 +487,84 @@ class Site:
             "strains": {sid: {"name": s["strain_name"], "parent": s["parent_strain_id"], "species": s["species"], "home": sid in home, "root": self.strain_root[sid],
                               "aliases": [a["alias"] for a in self.salias.get(sid, [])]} for sid, s in self.strains.items()},
             "papers": {pm: {"pmid": pm, "title": p["title"], "authors": p["authors"], "journal": p["journal"], "year": num(p["year"]), "country": p["country"],
-                            "first_author": p["first_author"], "doi": p["doi"], "pmcid": p["pmcid"]} for pm, p in self.papers.items()}}
+                            "first_author": p["first_author"], "doi": p["doi"], "pmcid": p["pmcid"]} for pm, p in self.papers_with.items()}}
         return "window.MARXBASE = " + json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/") + ";\n"
+
+    EXAMPLES = ("KU70", "xylitol", "NBRC 1777", "lactose")
+
+    def hero(self) -> str:
+        """The headline and example searches above the search bar (hidden by the page script once someone presses Search or browses)."""
+        ex = " ".join(f'<a href="index.html?q={urllib.parse.quote(e)}">{esc(e)}</a>' for e in self.EXAMPLES)
+        return ('<section id="hero" class="hero"><h1><i>Kluyveromyces marxianus</i> metabolic engineering database</h1>'
+                f'<p class="examples"><span>Try</span> {ex}</p></section>'
+                '<h1 id="results-title" class="results-title" hidden>Search results</h1>')
+
+    def hero_extras(self) -> str:
+        """The scrolling part of the home page, below the search bar: a link to all findings, a band of boxes for the four browse pages, and a band for the information pages."""
+        n_find = len({r["finding_id"] for r in self.results if r["host_organism"] == "K. marxianus"})
+        n_genes = len([g for g in self.genes.values() if g["organism"] == "K. marxianus" and g["gene_kind"] != "enzyme_or_protein_label"])
+        n_strains = len({self.strain_root[s] for s in self.km_strain_ids()})
+        browse = [(len(self.papers), "Papers", "papers.html", f"Abstracts text-mined; {len(self.papers_with)} with findings"),
+                  (n_find, "Findings", "index.html?browse=1", "Each gene change and what happened"),
+                  (n_genes, "Genes", "genes.html", "Every gene that was changed, with its locus tag and S. cerevisiae ortholog"),
+                  (n_strains, "Strains", "strains.html", "The strains used, with derived strains grouped under their parent"),
+                  (len(self.products), "Products", "products.html", "What the strains make, grouped by type")]
+        about = [("Summary", "summary.html", "Charts of what the collection contains"), ("Methods", "methods.html", "How papers were found, read and checked"),
+                 ("Downloads", "downloads.html", "Data files, citations and an offline copy"), ("About &amp; limits", "about.html", "How accurate the results are, and what they cannot tell you")]
+        c1 = "".join(f'<li><a href="{h}"><b>{n:,}</b><strong>{t}</strong><span>{esc(d)}</span></a></li>' for n, t, h, d in browse)
+        c2 = "".join(f'<li><a href="{h}"><strong>{t}</strong><span>{esc(d)}</span></a></li>' for t, h, d in about)
+        return (f'<div id="hero-extras" class="home-sections">'
+                f'<section class="band" aria-labelledby="h-browse"><div class="inner"><h2 id="h-browse">Browse the data</h2><ul class="cards cards-browse">{c1}</ul></div></section>'
+                f'<section class="band band-photo" aria-labelledby="h-about"><div class="inner"><h2 id="h-about">About MarxBase</h2><ul class="cards cards-plain">{c2}</ul></div></section></div>')
+
+    def style_tile(self, tok: dict) -> str:
+        """A page of the look's colors, type, buttons, chips and a sample card, for judging identity (preview builds only)."""
+        names = ("--bar", "--accent", "--highlight", "--heading", "--link", "--ink", "--muted", "--surface", "--line-strong", "--pos", "--neg", "--ctx")
+        sw = "".join(f'<div class="sw"><span class="sw-c" data-c="{esc(tok.get(n, ""))}"></span><b>{n[2:]}</b> <code>{esc(tok.get(n, "see style.css"))}</code></div>' for n in names)
+        css = "".join(f'.sw-c[data-c="{tok.get(n, "")}"]{{background:{tok.get(n, "#fff")}}}' for n in names)
+        sample = self.finding_line(self.findings[self.results[0]["finding_id"]], 0)
+        return (f'<style>.sw{{display:flex;align-items:center;gap:10px;margin:4px 0}}.sw-c{{width:44px;height:28px;border-radius:6px;border:1px solid #0003}}{css}</style>'
+                f'<h1>Style tile: look "{esc(self.look)}"</h1><p class="small">Preview only; not part of the published site.</p>'
+                f'<h2>Colors</h2>{sw}<h2>Type</h2><p><b>Heading font:</b> {esc(tok["--font-head"])}</p><h1>Heading one</h1><h2>Heading two</h2><h3>heading three</h3>'
+                f'<p>Body text: paired genetic changes and their measured effects, with links to the source paper. <a href="#">A link</a> and <code>code</code>. <span class="small">Small muted text.</span></p>'
+                f'<h2>Buttons and inputs</h2><p><button type="submit">Primary action</button> <button type="button">Secondary</button> <button type="button" disabled>Disabled</button> '
+                f'<button type="button" class="linklike">link-style button</button></p><p><input type="search" value="KU70" aria-label="sample search" class="sample-input"></p>'
+                f'<h2>Result chips</h2><p>{self.chip("positive")} {self.chip("negative")} {self.chip("context-dependent")} <span class="badge">Locus tag KLMA_10274</span></p>'
+                f'<h2>A result</h2><ul class="findings">{sample}</ul>'
+                f'<blockquote>A quoted line.</blockquote><table class="kv"><tr><th>Gene</th><td>KU70</td></tr><tr><th>Host</th><td>K. marxianus</td></tr></table>')
 
     def build(self) -> int:
         if self.out.exists():
             shutil.rmtree(self.out)
         self.out.mkdir(parents=True)
-        files = ("style.css", "search-core.js", "cite.js", "app.js", "paperpage.js", "suggest.js")
+        files = ("search-core.js", "cite.js", "app.js", "paperpage.js", "suggest.js", "site.js", "papers.js")
         data_text = self.data_js()
-        self.asset_tag = hashlib.sha256(b"".join((SRC / f).read_bytes() for f in files) + data_text.encode("utf-8") + json.dumps(self.config).encode("utf-8")).hexdigest()[:8]
+        css = (SRC / "looks" / f"{self.look}.css").read_text(encoding="utf-8") + "\n" + (SRC / "style.css").read_text(encoding="utf-8")
+        self.asset_tag = hashlib.sha256(b"".join((SRC / f).read_bytes() for f in files) + b"".join(p.read_bytes() for p in sorted((SRC / "img").glob("*"))) + css.encode("utf-8") + data_text.encode("utf-8") + json.dumps(self.config).encode("utf-8")).hexdigest()[:8]
         for f in files:
             shutil.copy(SRC / f, self.out / f)
+        self.write("style.css", css)
+        (self.out / "img").mkdir(exist_ok=True)
+        for p in sorted((SRC / "img").glob("*")):                   # the home-page photo (resized copies; the full-size original is not part of the site)
+            shutil.copy(p, self.out / "img" / p.name)
+            self.count += 1
+        tok = look_tokens(self.look)
+        self.write("favicon.svg", f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="{tok["--accent"]}"/>'
+                   f'<g fill="{tok["--accent-ink"]}"><ellipse cx="14.5" cy="19" rx="9" ry="8.2" transform="rotate(-25 14.5 19)"/><circle cx="23.6" cy="9.4" r="4.8"/></g>'
+                   f'<circle cx="16.6" cy="16.9" r="2.3" fill="{tok["--accent"]}"/></svg>\n')
+        if self.look == "uci":                     # the self-hosted font files and their licence
+            for f in sorted((SRC / "fonts").iterdir()):
+                (self.out / "fonts").mkdir(exist_ok=True)
+                shutil.copy(f, self.out / "fonts" / f.name)
+                self.count += 1
+        if self.preview:
+            self.write("_look.html", self.layout("Style tile", self.style_tile(tok), 0))
         self.write("data.js", data_text)
         if self.config:
             self.write("config.js", "window.MARXBASE_CONFIG = " + json.dumps(self.config) + ";\n")
-        index = (f'<h1>Search results</h1><p class="small">{esc(LIMITS)}</p><div id="app"><noscript>This page needs JavaScript. '
-                 f'You can still browse <a href="genes.html">genes</a>, <a href="strains.html">strains</a>, <a href="papers.html">papers</a> and <a href="products.html">products</a>.</noscript></div>'
+        index = (self.hero() + f'<div id="app" class="landing"><noscript>This page needs JavaScript to search. You can still browse <a href="genes.html">genes</a>, <a href="strains.html">strains</a>, <a href="papers.html">papers</a> and <a href="products.html">products</a>.</noscript></div>' + self.hero_extras() +
                  f'<script src="{self.asset("data.js")}"></script><script src="{self.asset("search-core.js")}"></script><script src="{self.asset("cite.js")}"></script><script src="{self.asset("app.js")}"></script>')
-        self.write("index.html", self.layout("Search", index, 0, "search"))
+        self.write("index.html", self.layout("Search", index, 0, "search", body_class="home"))
         for r in self.results:
             self.build_result_page(r)
         for g in self.genes.values():
@@ -498,8 +588,8 @@ class Site:
         pages.build_offline_zip(self)
         if not self.public:
           self.write("tests.html", "<!doctype html><meta charset=utf-8><title>MarxBase tests</title><style>.ok{color:#0a6b2f}.bad{color:#a1260b;font-weight:700}body{font:15px system-ui;margin:20px}</style>"
-                   "<h1>Search-core tests</h1><p id=summary>running...</p><ul id=out></ul><script src=data.js></script><script src=search-core.js></script><script src=cite.js></script><script src=suggest.js></script>"
-                   "<script src=expected.js></script><script src=tests.js></script>")
+                   "<h1>Search-core tests</h1><p id=summary>running...</p><ul id=out></ul><div id=app hidden></div><script src=data.js></script><script src=search-core.js></script><script src=cite.js></script><script src=suggest.js></script>"
+                   "<script src=expected.js></script><script src=app.js></script><script src=tests.js></script>")
         return self.count
 
 
@@ -509,9 +599,11 @@ def main(argv=None) -> int:
     ap.add_argument("--out", default=str(HERE / "dist"))
     ap.add_argument("--config", default=str(HERE / "site-config.json"), help="site-config.json with supabaseUrl and supabaseAnonKey (public anon key only); optional")
     ap.add_argument("--public", action="store_true", help="the hosted build: content-security policy on, no test pages or gate files")
+    ap.add_argument("--look", default="uci", choices=LOOKS, help="the visual look (colors and fonts); the published site uses one of them")
+    ap.add_argument("--preview", action="store_true", help="also write _look.html, a style tile (never in a --public build)")
     ap.add_argument("--csp", action="store_true", help="add a Content-Security-Policy meta tag (for the hosted build; test it before use: some browsers apply 'self' differently to file:// pages)")
     a = ap.parse_args(argv)
-    site = Site(Path(a.bundle), Path(a.out), csp=a.csp, config=Path(a.config), public=a.public)
+    site = Site(Path(a.bundle), Path(a.out), csp=a.csp, config=Path(a.config), public=a.public, look=a.look, preview=a.preview)
     n = site.build()
     print(f"built {n} files into {a.out} from release {site.version}: {len(site.results)} results, {len(site.findings)} findings, "
           f"{len(site.genes)} genes, {len(site.strains)} strains, {len(site.papers)} papers, {len(site.products)} products")

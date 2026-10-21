@@ -3,9 +3,14 @@
   'use strict';
   const S = window.MarxSearch, data = window.MARXBASE;
   const index = S.build(data);
-  const root = document.getElementById('app');
+  const root = document.getElementById('app'), extras = document.getElementById('hero-extras');
   if (!root) return;
   let state = S.fromParams(location.search);
+  const hero = document.getElementById('hero'), resultsTitle = document.getElementById('results-title');
+  let browseAll = new URLSearchParams(location.search).get('browse') === '1';        // "browse all findings" from the home tiles
+  const hasFilters = (st) => !!(st.q || st.strain || st.ymin != null || st.ymax != null || st.allHosts || FACET_DEFS.some(([k]) => st[k].length));
+  // The home page stays a landing page until the person presses Search (or arrives with a search in the address); after that the list updates live.
+  let engaged = false;                                   // set below, once the filter definitions exist
   let shown = 50;
 
   const KIND = { locus_tagged: 'Locus tag', scerevisiae_gene: 'S. cerevisiae gene', undetermined_paralog: 'Undetermined paralog', enzyme_or_protein_label: 'Enzyme or protein label, not a gene symbol', heterologous_gene: 'Heterologous gene', unmapped_name: 'Name without a genome identifier' };
@@ -13,6 +18,8 @@
   const CLASS = { positive: ['+', 'Positive'], negative: ['−', 'Negative'], 'context-dependent': ['∼', 'Context-dependent'] };
   const QUAL = { greater_than: '> ', less_than: '< ', approx: '≈ ' };
   const WEAK_TYPES = ['heterologous_expression', 'promoter_swap'];
+
+  const sp = (text) => S.speciesParts(text, data.species).map(([t, isSp]) => (isSp ? el('i', { text: t }) : t));   // species names in italics
 
   function el(tag, attrs, ...kids) {
     const e = document.createElement(tag);
@@ -41,8 +48,10 @@
     allValues[key] = fixed ? fixed.filter((x) => set.has(x)) : [...set].sort((a, b) => a.localeCompare(b));
   }
 
+  engaged = browseAll || hasFilters(state);
+
   // ---- static controls ----
-  const q = el('input', { id: 'q', type: 'search', value: state.q, placeholder: 'gene, locus tag, ortholog (SUC2, YIL162W), product, strain, phenotype…', autocomplete: 'off', role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': 'false', 'aria-controls': 'suggest' });
+  const q = el('input', { id: 'q', type: 'search', value: state.q, placeholder: 'Search gene, strain, product…', autocomplete: 'off', role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': 'false', 'aria-controls': 'suggest' });
   const sugg = el('ul', { id: 'suggest', class: 'suggest', role: 'listbox', 'aria-label': 'Suggestions', hidden: true });
   const allHosts = el('input', { id: 'allhosts', type: 'checkbox', checked: state.allHosts });
   const sortSel = el('select', { id: 'sort' }, [['relevance', 'Relevance (or newest first)'], ['year', 'Newest first']].map(([v, t]) => el('option', { value: v, text: t, selected: state.sort === v })));
@@ -64,7 +73,6 @@
   const ymax = el('input', { id: 'ymax', type: 'number', min: 1900, max: 2100, value: state.ymax == null ? '' : state.ymax, 'aria-label': 'To year' });
   const clear = el('button', { type: 'button', text: 'Clear all filters' });
   const count = el('p', { id: 'count', role: 'status', 'aria-live': 'polite' });
-  const hostBtn = el('button', { type: 'button', class: 'linklike' });
   const note = el('p', { class: 'weak', hidden: true });
   const list = el('ol', { class: 'findings' });
   const more = el('button', { type: 'button', class: 'more' });
@@ -83,17 +91,20 @@
     for (const v of allValues[key]) {
       const cb = el('input', { type: 'checkbox', value: v });
       const n = el('span', { class: 'n' });
-      const lab = el('label', { class: 'opt' }, cb, ' ', labelFn(v), ' ', n);
+      const lab = el('label', { class: 'opt' }, cb, ' ', sp(labelFn(v)), ' ', n);
       groups[key].inputs[v] = { cb, n, lab };
       box.append(lab);
     }
     filterBox.append(box);
   }
   filterBox.append(clear);
-  const hostSwitch = el('div', { class: 'hostswitch' }, el('label', { for: 'allhosts' }, allHosts, el('strong', { text: ' Include results in other host organisms' }),
-    el('span', { class: 'small', text: ' (S. cerevisiae, Pichia, E. coli and others; by default only results obtained in K. marxianus are shown)' })));
-  const form = el('div', { class: 'searchbar', role: 'search' }, el('label', { for: 'q', text: 'Search' }), el('div', { class: 'combo' }, q, sugg), hostSwitch,
-    el('div', { class: 'toggles' }, el('label', { class: 'inline', for: 'sort' }, 'Sort ', sortSel)));
+  const searchBtn = el('button', { type: 'submit', text: 'Search' });
+  const sortLab = el('label', { class: 'inline', for: 'sort' }, 'Sort ', sortSel);
+  const hostSwitch = el('label', { class: 'hostswitch', for: 'allhosts' }, allHosts, ' ', sp('Include other hosts expressing K. marxianus genes'));
+  const form = el('form', { class: 'searchbar', role: 'search' },
+    el('label', { for: 'q', class: 'sr-only', text: 'Search genes, strains, products and papers' }),
+    el('div', { class: 'searchrow' }, el('div', { class: 'combo' }, q, sugg), searchBtn),
+    el('div', { class: 'toolbar' }, hostSwitch, sortLab));
   const fmtSel = el('select', { id: 'fmt' }, Object.entries(C.FORMATS).map(([k, v]) => el('option', { value: k, text: v.label })));
   const scopeSel = el('select', { id: 'scope' });
   const richBox = el('input', { id: 'rich', type: 'checkbox' });
@@ -106,7 +117,8 @@
     el('div', { class: 'row' }, el('label', { for: 'fmt', text: 'References for' }), scopeSel, el('label', { for: 'fmt', text: 'Format' }), fmtSel,
       el('label', { class: 'inline' }, richBox, ' also keep italics (opens as a web page you can paste into Word; AMA, APA, MLA, NLM only)')),
     el('p', {}, refBtn), el('p', { class: 'small', text: 'Volume, issue and page numbers are not stored; each reference carries the DOI instead.' }), exportMsg);
-  root.append(form, el('div', { class: 'countbar' }, count, hostBtn), exportBox, note, el('div', { class: 'layout' }, el('details', { class: 'filterwrap', open: true }, el('summary', { text: 'Filters' }), filterBox), el('section', { 'aria-label': 'Results' }, list, more)));
+  const resultsArea = el('div', { id: 'results-area' }, el('div', { class: 'countbar' }, count), exportBox, note, el('div', { class: 'layout' }, el('details', { class: 'filterwrap', open: true }, el('summary', { text: 'Filters' }), filterBox), el('section', { 'aria-label': 'Results' }, list, more)));
+  root.append(form, resultsArea);
 
   // ---- rendering ----
   const valueText = (r) => {
@@ -121,7 +133,7 @@
   };
   const badge = (g, prefix) => {
     const label = g.kind === 'locus_tagged' && g.locus ? 'Locus tag ' + g.locus : g.kind === 'heterologous_gene' ? 'Heterologous gene from ' + g.organism : KIND[g.kind] || g.kind;
-    return el('span', { class: 'badge badge-' + g.kind, title: KIND_HELP[g.kind] || '', text: (prefix ? prefix + ': ' : '') + label });
+    return el('span', { class: 'badge badge-' + g.kind, title: KIND_HELP[g.kind] || '' }, sp((prefix ? prefix + ': ' : '') + label));
   };
 
   function renderFinding(f) {
@@ -137,7 +149,7 @@
     const [icon, label] = CLASS[r0.result_class] || ['', r0.result_class];
     const p = data.papers[r0.pmid] || {};
     const meta = ['host ' + r0.host_organism];
-    const metaEl = el('div', { class: 'fl2' }, 'host ', r0.host_organism === S.HOME_HOST ? r0.host_organism : el('strong', { text: r0.host_organism }));
+    const metaEl = el('div', { class: 'fl2' }, 'host ', r0.host_organism === S.HOME_HOST ? sp(r0.host_organism) : el('strong', {}, sp(r0.host_organism)));
     if (r0.strain_id) { const rs = data.strains[r0.strain_id].root || r0.strain_id; metaEl.append(' · strain ', el('a', { href: 'strain/' + rs + '.html', text: data.strains[rs].name })); }
     metaEl.append(' · ', el('a', { href: 'paper/' + r0.pmid + '.html', text: (p.first_author || 'Paper') + ' ' + (r0.year || '') }));
     const vt = valueText(r0);
@@ -213,18 +225,22 @@
       g.box.hidden = !any || (key === 'hosts' && !st.allHosts && !st.hosts.length);
     }
     lastView = res;
+    const active = engaged;
+    if (hero) hero.hidden = active;
+    if (extras) extras.hidden = active;
+    resultsArea.hidden = !active; sortLab.hidden = !active; root.classList.toggle('landing', !active);
+    document.body.classList.toggle('engaged', active);
+    if (resultsTitle) resultsTitle.hidden = !active;
     list.replaceChildren(...res.items.slice(0, shown).map(renderFinding));
     updateExport();
     const rest = res.nFindings - shown;
     more.hidden = rest <= 0; more.textContent = 'Show more (' + rest + ' remaining)';
     const allMode = st.allHosts || st.hosts.length;
-    count.textContent = res.nFindings + (res.nFindings === 1 ? ' finding (' : ' findings (') + res.nRows + (res.nRows === 1 ? ' result) ' : ' results) ') + (allMode ? 'in all host organisms.' : 'in K. marxianus host organisms only.') + (res.nFindings || allMode ? '' : ' Try removing a filter or including other hosts.');
-    hostBtn.textContent = allMode ? 'Show K. marxianus hosts only' : 'Include other host organisms';
-    hostBtn.hidden = !!st.hosts.length;
+    count.replaceChildren(...sp(res.nFindings + (res.nFindings === 1 ? ' finding (' : ' findings (') + res.nRows + (res.nRows === 1 ? ' result) ' : ' results) ') + (allMode ? 'in all host organisms.' : 'in K. marxianus host organisms only.') + (res.nFindings || allMode ? '' : ' Try removing a filter or including other hosts.')));
     const weak = st.types.some((t) => WEAK_TYPES.includes(t)) || st.cats.includes('protein_production');
     note.hidden = !weak;
     note.textContent = weak ? 'Heads-up: results for heterologous expression, promoters and protein production are the least complete part of this collection (abstract-only extraction).' : '';
-    try { const p = S.toParams(state); history.replaceState(null, '', p ? '?' + p : location.pathname); } catch (e) { /* file:// may refuse; harmless */ }
+    try { const p = S.toParams(state), qs = p || (browseAll ? 'browse=1' : ''); history.replaceState(null, '', qs ? '?' + qs : location.pathname); } catch (e) { /* file:// may refuse; harmless */ }
   }
 
   function readControls() {
@@ -237,6 +253,7 @@
   }
   let timer;
   const refresh = () => { readControls(); render(); };
+  const refreshIfEngaged = () => { if (engaged) refresh(); else readControls(); };   // on the landing page, just remember the settings
   // ---- suggestions while typing ----
   let items = [], active = -1;
   function closeSugg() { sugg.hidden = true; sugg.replaceChildren(); items = []; active = -1; q.setAttribute('aria-expanded', 'false'); q.removeAttribute('aria-activedescendant'); }
@@ -245,20 +262,21 @@
     [...sugg.children].forEach((li, k) => { li.setAttribute('aria-selected', k === i ? 'true' : 'false'); li.classList.toggle('active', k === i); });
     if (i >= 0) q.setAttribute('aria-activedescendant', 'sg-' + i); else q.removeAttribute('aria-activedescendant');
   }
-  function choose(i) { if (i < 0 || !items[i]) return; q.value = items[i].label; closeSugg(); clearTimeout(timer); refresh(); }
+  function choose(i) { if (i < 0 || !items[i]) return; q.value = items[i].label; closeSugg(); clearTimeout(timer); refreshIfEngaged(); }
   function showSugg() {
     const text = q.value.trim();
     if (!text) return closeSugg();
     items = S.suggest(index, text, { allHosts: allHosts.checked });
     if (!items.length) return closeSugg();
     sugg.replaceChildren(...items.map((it, i) => {
-      const li = el('li', { id: 'sg-' + i, role: 'option', 'aria-selected': 'false' }, el('strong', { text: it.label }), el('span', { class: 'hint', text: ' ' + it.hint }));
+      const li = el('li', { id: 'sg-' + i, role: 'option', 'aria-selected': 'false' }, el('strong', { text: it.label }), el('span', { class: 'hint' }, sp(' ' + it.hint)));
       li.addEventListener('mousedown', (e) => { e.preventDefault(); choose(i); });
       return li;
     }));
     sugg.hidden = false; q.setAttribute('aria-expanded', 'true'); setActive(-1);
   }
-  q.addEventListener('input', () => { showSugg(); clearTimeout(timer); timer = setTimeout(refresh, 150); });
+  form.addEventListener('submit', (e) => { e.preventDefault(); closeSugg(); clearTimeout(timer); engaged = true; refresh(); });
+  q.addEventListener('input', () => { showSugg(); clearTimeout(timer); timer = setTimeout(refreshIfEngaged, 150); });
   q.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown' && items.length) { e.preventDefault(); setActive((active + 1) % items.length); }
     else if (e.key === 'ArrowUp' && items.length) { e.preventDefault(); setActive((active - 1 + items.length) % items.length); }
@@ -267,9 +285,8 @@
   });
   q.addEventListener('blur', () => setTimeout(closeSugg, 120));
   q.addEventListener('focus', () => { if (q.value.trim()) showSugg(); });
-  for (const e of [allHosts, sortSel, strainSel, derived, ymin, ymax]) e.addEventListener('change', refresh);
-  filterBox.addEventListener('change', refresh);
-  hostBtn.addEventListener('click', () => { allHosts.checked = !allHosts.checked; refresh(); });
+  for (const e of [allHosts, sortSel, strainSel, derived, ymin, ymax]) e.addEventListener('change', refreshIfEngaged);
+  filterBox.addEventListener('change', refreshIfEngaged);
   more.addEventListener('click', () => { shown += 50; render(); });
   clear.addEventListener('click', () => { state = S.defaultState(); q.value = ''; allHosts.checked = false; fillStrains(); strainSel.value = ''; derived.checked = true; ymin.value = ''; ymax.value = ''; sortSel.value = 'relevance'; shown = 50; render(); });
   window.MarxApp = { render, getState: () => state };

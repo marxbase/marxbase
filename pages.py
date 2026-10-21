@@ -57,7 +57,7 @@ def chart_data(site) -> dict:
     for r0, rows in fs:
         if r0["pmid"] not in seen:
             seen.add(r0["pmid"])
-            papers_year[int(site.papers[r0["pmid"]]["year"] or 0)] += 1
+            papers_year[int(site.papers_with[r0["pmid"]]["year"] or 0)] += 1
     return {"n": len(fs), "n_papers": len(seen), "cat": cat, "types": types, "prod": prod, "years": papers_year}
 
 
@@ -167,7 +167,7 @@ def build_summary(site) -> str:
 
 # ----------------------------------------------------------------------------------------- methods
 def build_methods(site) -> str:
-    n_res, n_papers = len(site.results), len(site.papers)
+    n_res, n_papers = len(site.results), len(site.papers_with)
     return f"""<h1>Methods</h1>
 <p class="weak"><strong>Draft for the curators to edit.</strong> This page was drafted from the project notes; check every figure before the site is published.</p>
 <h2>Where the papers come from</h2>
@@ -193,7 +193,7 @@ def build_methods(site) -> str:
 <li>Negative results are rarely reported in abstracts.</li>
 </ul>
 <h2>This release</h2>
-<p>Release {esc(site.version)} ({esc(site.date)}): {n_res} results from {n_papers} papers. Each release is a fixed, checked snapshot; see <a href="downloads.html">Downloads</a> for the data files and a data dictionary.</p>
+<p>Release {esc(site.version)} ({esc(site.date)}): {n_res} results from {n_papers} papers. The Papers page also lists the {len(site.papers) - n_papers} other papers whose abstracts were text-mined without a finding. Each release is a fixed, checked snapshot; see <a href="downloads.html">Downloads</a> for the data files and a data dictionary.</p>
 """
 
 
@@ -265,7 +265,7 @@ def downloads_body(site, offline: bool) -> str:
                f'Unzip it, open the folder and double-click <code>index.html</code>. Search, filters and downloads all work without a connection; '
                f'links to PubMed and DOIs need internet. If your browser blocks the search page from a local file, use Chrome, Firefox or Safari.</p>')
     return (f'<h1>Downloads</h1><p class="small">Release {esc(site.version)} ({esc(site.date)}). {doi_html(site)}</p>'
-            f'<h2>Data files</h2><p><a href="downloads/{esc(dz)}">{esc(dz)}</a> ({kb(size)}) holds the results, genes, orthologs, strains, papers (without abstracts), '
+            f'<h2>Data files</h2><p><a href="downloads/{esc(dz)}">{esc(dz)}</a> ({kb(size)}) holds the results, genes, orthologs, strains, all text-mined papers (without abstracts), '
             f'products and comparisons as CSV files that open in Excel, a SQLite database, citations in CSL-JSON, a data dictionary, checksums and a licence notice.</p>'
             f'<p>From the search page you can also download <strong>the results you are looking at</strong> as a CSV file, and export the papers behind them as references '
             f'(BibTeX, RIS, CSL-JSON, or formatted AMA, APA, MLA and NLM).</p>'

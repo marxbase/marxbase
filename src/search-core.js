@@ -221,5 +221,21 @@
     return res;
   }
 
-  root.MarxSearch = { build, run, facets, suggest, defaultState, toParams, fromParams, descendants, scoreToken, squash, wordsOf, pretty, HOME_HOST };
+  // ---- species names: split a text into [piece, isSpeciesName] so the page can italicise them (the list comes from data.js) ----
+  function speciesParts(text, names) {
+    const str = String(text == null ? '' : text);
+    if (!names || !names.length) return [[str, false]];
+    if (!names._re) names._re = new RegExp('(^|[^\\w])(' + names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')(?![\\w])', 'g');
+    const re = names._re; re.lastIndex = 0;
+    const out = []; let last = 0, m;
+    while ((m = re.exec(str))) {
+      const start = m.index + m[1].length;
+      if (start > last) out.push([str.slice(last, start), false]);
+      out.push([m[2], true]); last = start + m[2].length; re.lastIndex = last;
+    }
+    if (last < str.length) out.push([str.slice(last), false]);
+    return out.length ? out : [[str, false]];
+  }
+
+  root.MarxSearch = { speciesParts, build, run, facets, suggest, defaultState, toParams, fromParams, descendants, scoreToken, squash, wordsOf, pretty, HOME_HOST };
 })(typeof window !== 'undefined' ? window : globalThis);

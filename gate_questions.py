@@ -45,7 +45,7 @@ def compute(site) -> dict:
         e[key] = {"query": name, "genes": sorted(site.genes[g]["gene_name"] for g in gids), "findings": fids}
     e["q6"] = sorted(g["gene_name"] for g in site.genes.values() if g["gene_kind"] == "undetermined_paralog")
     e["q7"] = sum(1 for rows in F.values() if any(r["host_organism"] == "Saccharomyces cerevisiae" for r in rows))
-    e["q8"] = sum(1 for p in site.papers.values() if (int(p["year"]) if p["year"] else 0) >= 2025)
+    e["q8"] = sum(1 for p in site.papers_with.values() if (int(p["year"]) if p["year"] else 0) >= 2025)
     dnl = next((g for g in site.genes.values() if g["gene_name"] == "DNL4" and g["organism"] == "K. marxianus"), None)
     if dnl:
         orth = [o for o in site.t["gene_orthologs"] if o["gene_id"] == dnl["gene_id"] and o["rank"] == "1"]
