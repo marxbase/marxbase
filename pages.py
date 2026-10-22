@@ -274,7 +274,7 @@ def downloads_body(site, offline: bool) -> str:
             + ('<li>Evidence sentences quote paper abstracts and are not covered by the data licence.</li>' if site.has_evidence else '<li>This release does not include quoted evidence sentences; every result links to its paper.</li>') + '</ul>'
             + f'<h2>How to cite MarxBase</h2><p id="cite-self">{esc(citation_text(site))}</p>'
             f'<p class="small">The DOI will be added when the first release is archived at Zenodo.</p>'
-            f'<h2>Cite a single paper or result</h2><p>Every paper page has a citation block, and every result page ends with “Cite as: MarxBase result …, release …”.</p>')
+            f'<h2>Cite a paper, not a result</h2><p>MarxBase results are automatically extracted and are a quick way to find papers, not citable findings.</p>')
 
 
 def build_offline_zip(site) -> Path:

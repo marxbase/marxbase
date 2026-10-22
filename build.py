@@ -95,6 +95,29 @@ def num(s):
     return int(x) if x == int(x) else round(x, 6)
 
 
+# A small line icon for each product class (20x20, drawn in the current text colour)
+CLASS_ICONS = {
+    "Aromatics and flavor compounds": '<path d="M4.5 9h9v3.5a4.5 4.5 0 0 1-9 0zM13.5 10.5h1.2a2 2 0 0 1 0 4h-1.7M7 7c-1.2-1.2 1.2-2.3 0-3.8M10.5 7c-1.2-1.2 1.2-2.3 0-3.8"/>',
+    "Enzymes": '<circle cx="5.5" cy="15" r="2.3"/><circle cx="14.5" cy="15" r="2.3"/><path d="M7.2 13.4L14.5 2.8M12.8 13.4L5.5 2.8"/>',
+    "Fuels and solvents": '<path d="M10 1.8c.8 3.4-5.2 5.2-5.2 10a5.2 5.2 0 0 0 10.4 0c0-2-1-3.2-2.2-4.4-.2 1.7-1 2.4-1.8 2.4C11 9.6 11.6 5 10 1.8z"/><path d="M10 17.2a2.6 2.6 0 0 1-2.6-2.6c0-1.6 1.4-2.4 2.6-3.6 1.2 1.2 2.6 2 2.6 3.6a2.6 2.6 0 0 1-2.6 2.6z"/>',
+    "Organic acids": '<circle cx="10" cy="10" r="7.5"/><text x="10" y="13" text-anchor="middle">H+</text>',
+    "Other recombinant proteins": '<circle cx="4.5" cy="13.5" r="2.2"/><circle cx="10" cy="6.5" r="2.2"/><circle cx="15.5" cy="13.5" r="2.2"/><path d="M5.9 11.8l2.8-3.6M11.3 8.2l2.8 3.6M6.7 13.5h6.6"/>',
+    "Pigments and bioactives": '<path d="M10 2.5a7.5 7.5 0 1 0 0 15c1.4 0 2-.9 2-1.8 0-1.4-1.2-1.5-1.2-2.7 0-.9.8-1.5 1.7-1.5H15a2.5 2.5 0 0 0 2.5-2.5C17.5 5.8 14.2 2.5 10 2.5z"/><circle cx="6.3" cy="9.3" r=".8"/><circle cx="8.8" cy="5.8" r=".8"/><circle cx="12.8" cy="6.3" r=".8"/>',
+    "Specialty sugars": '<path d="M10 2.5l6.5 3.5v8L10 17.5 3.5 14V6zM3.5 6L10 9.5 16.5 6M10 9.5v8"/>',
+    "Sugar alcohols and polyols": '<path d="M2.5 13.5l3-4 3 4 3-4 3 4 3-4M5.5 9.5v-4M11.5 9.5v-4M8.5 13.5v4M14.5 13.5v4"/>',
+}
+
+
+# The word(s) in a result statement that name its product (the link text). Also sent to the browser in data.js.
+PRODUCT_WORDS = {
+    "Xylitol": "xylitol", "Ethanol": "ethanol", "Succinic acid": "succinic acid|succinate", "2-Phenylethanol": "2-phenylethanol|phenylethanol|2-pe\\b",
+    "Esters (ethyl acetate and other aroma esters)": "ethyl acetate|isoamyl acetate|phenylethyl acetate|esters?", "L-Lactic acid": "lactic acid|lactate",
+    "Glycerol": "glycerol", "Acetic acid / acetate": "acetic acid|acetate", "Myo-inositol": "myo-inositol|inositol", "Pyruvate / PEP": "pyruvate",
+    "Triacetic acid lactone (TAL)": "triacetic acid lactone|\\btal\\b", "p-Coumaric acid": "p-coumaric acid|coumaric acid", "Glutathione": "glutathione",
+    "Mannitol": "mannitol", "Fructose": "fructose", "Fumaric acid": "fumaric acid|fumarate", "Indole-3-acetic acid": "indole-3-acetic acid|indole",
+    "3-HP": "3-hp", "D-Allulose": "allulose", "6-MSA": "6-msa", "Violacein": "violacein"}
+
+
 def slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
@@ -195,7 +218,7 @@ class Site:
                 f'<title>{esc(title)} – MarxBase</title><link rel="icon" href="{root}favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{self.asset("style.css", root)}"><script src="{self.asset("site.js", root)}"></script></head><body{(" class=\"" + body_class + "\"") if body_class else ""}>'
                 f'<a class="skip" href="#main">Skip to content</a>'
                 f'<header class="top"><div class="bar"><a class="brand" href="{root}index.html">{MARK}<span>MarxBase</span></a>'
-                f'<button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2 5h16M2 10h16M2 15h16"/></svg> Menu</button>'
+                f'<button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2 5h16M2 10h16M2 15h16"/></svg></button>'
                 f'<nav id="site-nav" aria-label="Main">{nav}</nav></div></header><main id="main">{species.italicize(body, self.species)}</main>'
                 f'<footer><div class="bar"><span class="release">MarxBase {esc(self.version)}</span><span>{esc(self.date)}</span>'
                 f'<span>{len(self.results)} results from {len(self.papers_with)} papers</span>'
@@ -232,19 +255,32 @@ class Site:
     def paper_cite(self, pmid: str) -> str:
         p = self.papers.get(pmid, {})
         first = (p.get("first_author") or (p.get("authors") or "").split(";")[0]).strip()
-        return f"{first or 'Unknown'} {p.get('year') or ''}".strip()
+        many = len([a for a in (p.get("authors") or "").split(";") if a.strip()]) > 1
+        return f"{first or 'Unknown'}{' et al.' if many else ''} {p.get('year') or ''}".strip()
+
+    def phenotype_html(self, r: dict, depth: int) -> tuple:
+        """The phenotype text with the word naming the product linked to its page; (html, linked?)."""
+        text, rx = r["phenotype"], PRODUCT_WORDS.get(r["product"] or "")
+        m = re.search(rx, text, re.I) if rx else None
+        if not m:
+            return esc(text), False
+        return f'{esc(text[:m.start()])}<a href="{"../" * depth}product/{slug(r["product"])}.html">{esc(m.group(0))}</a>{esc(text[m.end():])}', True
 
     def finding_line(self, rows: list, depth: int, current_gene: str = "") -> str:
         r0 = rows[0]
         members = " + ".join(f'{self.gene_link(m, depth)} <span class="chg">{esc(pretty(m["intervention_type"]))}</span>' for m in rows)
-        meta = [f"host {esc(r0['host_organism'])}"]
+        meta = []
         if r0["strain_name"]:
             meta.append(f'strain {self.strain_link(r0["strain_id"], depth)}')
         meta.append(f'<a href="{"../" * depth}paper/{esc(r0["pmid"])}.html">{esc(self.paper_cite(r0["pmid"]))}</a>')
+        pheno, linked = self.phenotype_html(r0, depth)
+        if r0["product"] and not linked:        # no word in the statement names it (e.g. "protein secretion"): link it from the details line
+            meta.append(f'product <a href="{"../" * depth}product/{slug(r0["product"])}.html">{esc(r0["product"])}</a>')
         val = self.value_text(r0)
-        return (f'<li class="finding"><div class="fl1">{members} → <strong>{esc(r0["effect_direction"])}</strong> {esc(r0["phenotype"])} {self.chip(r0["result_class"])}</div>'
-                f'<div class="fl2">{" · ".join(meta)}{(" · " + esc(val)) if val else ""} · '
-                f'<a href="{"../" * depth}result/{esc(r0["public_id"])}.html">details</a></div></li>')
+        return (f'<li class="finding cls-{esc(r0["result_class"])}"><a class="cardlink" href="{"../" * depth}result/{esc(r0["public_id"])}.html"><span class="sr-only">Details of this result</span></a><div class="fl1">{members} → <strong>{esc(r0["effect_direction"])}</strong> {pheno}{(" (" + esc(val) + ")") if val else ""} <span class="sr-only">({esc(CLASS_LABEL.get(r0["result_class"], r0["result_class"]))})</span></div>'
+                + (f'<div class="fl3"><span class="badge badge-host">Host: {esc(r0["host_organism"])}</span></div>' if r0["host_organism"] != "K. marxianus" else "")
+                + f'<div class="fl2">{" · ".join(meta)}'
+                f'</div></li>')
 
     def findings_list(self, rows: list, depth: int) -> str:
         seen, items = set(), []
@@ -262,86 +298,110 @@ class Site:
         c = {k: sum(1 for v in fids.values() if v == k) for k in CLASS_LABEL}
         return ", ".join(f"{n} {CLASS_LABEL[k].lower()}" for k, n in c.items() if n) or "none"
 
+    # ----- page parts shared by the detail pages -----
+    def crumbs(self, trail: list, depth: int = 1) -> str:
+        """Breadcrumb: trail = [(label, href or None), ...]; the last item is the current page."""
+        root = "../" * depth
+        parts = [f'<a href="{root}{h}">{label}</a>' if h else f'<span aria-current="page">{label}</span>' for label, h in trail]
+        return '<nav class="crumbs" aria-label="Breadcrumb">' + ' <span aria-hidden="true">›</span> '.join(parts) + '</nav>'
+
+    def facts(self, items: list) -> str:
+        """A definition list of label / value pairs (values are HTML); empty values are left out."""
+        rows = "".join(f'<div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in items if v not in ("", None))
+        return f'<dl class="facts">{rows}</dl>' if rows else ""
+
+    def card(self, title: str, inner: str, extra: str = "") -> str:
+        return f'<section class="infocard{(" " + extra) if extra else ""}"><h2>{title}</h2>{inner}</section>' if inner else ""
+
+    def page_head(self, title_html: str, sub_html: str = "", cls: str = "") -> str:
+        return f'<header class="page-head{(" cls-" + cls) if cls else ""}"><h1>{title_html}</h1>{("<p class=\"head-sub\">" + sub_html + "</p>") if sub_html else ""}</header>'
+
+    def detail_layout(self, main: str, side: str) -> str:
+        return f'<div class="detail-layout"><div class="detail-main">{main}</div>{("<aside class=\"detail-side\">" + side + "</aside>") if side else ""}</div>'
+
+    def link_buttons(self, p: dict, pmid: str) -> str:
+        links = [f'<a class="linkbtn" href="https://pubmed.ncbi.nlm.nih.gov/{esc(pmid)}/">PubMed</a>']
+        if p.get("doi"):
+            links.append(f'<a class="linkbtn" href="https://doi.org/{esc(p["doi"])}">DOI</a>')
+        if p.get("pmcid"):
+            links.append(f'<a class="linkbtn" href="https://www.ncbi.nlm.nih.gov/pmc/articles/{esc(p["pmcid"])}/">PMC</a>')
+        return '<p class="linkbtns">' + " ".join(links) + "</p>"
+
+    def count_chips(self, rows: list) -> str:
+        fids = {}
+        for r in rows:
+            fids[r["finding_id"]] = r["result_class"]
+        out = [f'<span class="cnt cnt-{k}">{n} {CLASS_LABEL[k].lower()}</span>' for k in CLASS_LABEL if (n := sum(1 for v in fids.values() if v == k))]
+        return f'<span class="cnt">{plural(len(fids), "finding")}</span> ' + " ".join(out)
+
     # ----- pages -----
     def build_result_page(self, r: dict) -> None:
         g = self.genes[r["gene_id"]]
         gd = {**g, "gene_organism": g["organism"]}
-        rows = [("Gene", f'{self.gene_link(r, 1)} {self.kind_badge(gd)}'),
-                ("Name in the paper", esc(r["reported_gene_name"]) if r["reported_gene_name"] else ""),
-                ("Gene from", esc(r["gene_organism"])), ("Change", esc(pretty(r["intervention_type"]))),
-                ("Effect", esc(r["effect_direction"])), ("Phenotype", f'{esc(r["phenotype"])} ({esc(pretty(r["phenotype_category"]))})'),
-                ("Class", self.chip(r["result_class"])), ("Host", esc(r["host_organism"])),
-                ("Strain", (self.strain_link(r["strain_id"], 1) + (f' <span class="small">(recorded as {esc(r["strain_name"])})</span>' if self.strain_root[r["strain_id"]] != r["strain_id"] else "")) if r["strain_id"] else "not stated"),
-                ("Product", f'<a href="../product/{slug(r["product"])}.html">{esc(r["product"])}</a> ({esc(r["product_class"])})' if r["product"] else ""),
-                ("Condition tag", esc(r["condition_label"]) if r["condition_label"] and r["condition_label"] != "default" else "")]
-        quant = [("Value", esc(self.value_text(r))), ("Size as written", esc(r["effect_magnitude_text"])), ("Metric", esc(pretty(r["metric_type"]))),
-                 ("Statistics", esc(pretty(r["statistics_reported"]))), ("Replicates", esc(r["n_replicates"]))]
-        cond_fields = [("Temperature", f'{r["temperature_c"]} °C' if r["temperature_c"] is not None else r["temperature_note"]),
-                       ("pH", r["ph"]), ("Scale", pretty(r["scale"])), ("Volume (L)", r["volume_l"]), ("Process", pretty(r["process_mode"])),
-                       ("Carbon source", r["carbon_source"]), ("Medium", r["feedstock_medium"]), ("Oxygen", r["oxygen_level"]),
-                       ("Time (h)", r["cultivation_time_h"]), ("Stressor", " ".join(x for x in (r["stressor_type"], r["stressor_level"]) if x))]
-
-        cond_fields = [(k, esc(v)) for k, v in cond_fields]
-
-        def table(items):
-            body = "".join(f"<tr><th scope='row'>{k}</th><td>{v}</td></tr>" for k, v in items if v not in ("", None))
-            return f"<table class='kv'>{body}</table>" if body else ""
+        details = self.facts([
+            ("Gene", f'{self.gene_link(r, 1)} {self.kind_badge(gd)}'),
+            ("Name in the paper", esc(r["reported_gene_name"]) if r["reported_gene_name"] else ""),
+            ("Gene from", esc(r["gene_organism"])), ("Change", esc(pretty(r["intervention_type"]))),
+            ("Effect", esc(r["effect_direction"])), ("Phenotype", f'{esc(r["phenotype"])} ({esc(pretty(r["phenotype_category"]))})'),
+            ("Host", esc(r["host_organism"])),
+            ("Strain", (self.strain_link(r["strain_id"], 1) + (f' <span class="small">(recorded as {esc(r["strain_name"])})</span>' if self.strain_root[r["strain_id"]] != r["strain_id"] else "")) if r["strain_id"] else "not stated"),
+            ("Product", f'<a href="../product/{slug(r["product"])}.html">{esc(r["product"])}</a> ({esc(r["product_class"])})' if r["product"] else ""),
+            ("Condition tag", esc(r["condition_label"]) if r["condition_label"] and r["condition_label"] != "default" else "")])
+        quant = self.facts([("Value", esc(self.value_text(r))), ("Size as written", esc(r["effect_magnitude_text"])), ("Metric", esc(pretty(r["metric_type"]))),
+                            ("Statistics", esc(pretty(r["statistics_reported"]))), ("Replicates", esc(r["n_replicates"]))])
+        cond = self.facts([(k, esc(v)) for k, v in [
+            ("Temperature", f'{r["temperature_c"]} °C' if r["temperature_c"] is not None else r["temperature_note"]),
+            ("pH", r["ph"]), ("Scale", pretty(r["scale"])), ("Volume (L)", r["volume_l"]), ("Process", pretty(r["process_mode"])),
+            ("Carbon source", r["carbon_source"]), ("Medium", r["feedstock_medium"]), ("Oxygen", r["oxygen_level"]),
+            ("Time (h)", r["cultivation_time_h"]), ("Stressor", " ".join(x for x in (r["stressor_type"], r["stressor_level"]) if x))]])
         p = self.papers.get(r["pmid"], {})
-        links = [f'<a href="https://pubmed.ncbi.nlm.nih.gov/{esc(r["pmid"])}/">PubMed</a>']
-        if p.get("doi"):
-            links.append(f'<a href="https://doi.org/{esc(p["doi"])}">DOI</a>')
-        if p.get("pmcid"):
-            links.append(f'<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/{esc(p["pmcid"])}/">PMC</a>')
         others = [m for m in self.findings[r["finding_id"]] if m["public_id"] != r["public_id"]]
-        combo = ""
-        if others:
-            combo = "<h2>Changed together</h2><ul>" + "".join(
-                f'<li>{self.gene_link(m, 1)} {esc(pretty(m["intervention_type"]))} (<a href="{esc(m["public_id"])}.html">{esc(m["public_id"])}</a>)</li>' for m in others) + "</ul>"
-        comp = ""
-        if self.comps.get(r["public_id"]):
-            comp = "<h2>Compared with other yeasts (authors' statement)</h2><ul>" + "".join(
-                f'<li><strong>{esc(pretty(c["relation"]))}</strong> vs {esc(c["other_organism"])}' + (f': “{safe_html(c["evidence_sentence_html"], c["evidence_sentence"])}”' if c["evidence_sentence"] else "") + '</li>'
-                for c in self.comps[r["public_id"]]) + "</ul>"
+        combo = ("<ul>" + "".join(f'<li>{self.gene_link(m, 1)} {esc(pretty(m["intervention_type"]))} (<a href="{esc(m["public_id"])}.html">{esc(m["public_id"])}</a>)</li>' for m in others) + "</ul>") if others else ""
+        comp = ("<ul>" + "".join(
+            f'<li><strong>{esc(pretty(c["relation"]))}</strong> vs {esc(c["other_organism"])}' + (f': “{safe_html(c["evidence_sentence_html"], c["evidence_sentence"])}”' if c["evidence_sentence"] else "") + '</li>'
+            for c in self.comps[r["public_id"]]) + "</ul>") if self.comps.get(r["public_id"]) else ""
         evidence = (f'<blockquote>{safe_html(r["evidence_sentence_html"], r["evidence_sentence"])}</blockquote><p class="small">From the abstract. '
                     f'Evidence sentences are third-party text and are not covered by the data licence.</p>'
                     if r["evidence_sentence"] else f'<p>{esc(r["provenance_note"])}</p>')
-        body = (f'<h1>{esc(r["gene_name"])} {esc(pretty(r["intervention_type"]))}: {esc(r["phenotype"])}</h1>'
-                f'<p>{self.chip(r["result_class"])} <span class="badge">{esc(r["provenance"])}</span> <span class="small">{esc(r["public_id"])}</span></p>'
-                f'{table(rows)}<h2>Measured</h2>{table(quant) or "<p>No quantified value stated.</p>"}'
-                f'{("<h2>Conditions</h2>" + table(cond_fields)) if table(cond_fields) else ""}{combo}{comp}'
-                f'<h2>Evidence</h2>{evidence}<h2>Paper</h2><p><a href="../paper/{esc(r["pmid"])}.html">{safe_html(p.get("title_html"), p.get("title"))}</a><br>'
-                f'{esc(p.get("authors"))}<br>{esc(p.get("journal"))} {esc(p.get("year"))} · {" · ".join(links)}</p>'
-                f'<p class="small">Cite as: MarxBase result {esc(r["public_id"])}, release {esc(self.version)}.</p>')
+        main = (self.card("Details", details) + self.card("Measured", quant or "<p>No quantified value stated.</p>") + self.card("Conditions", cond)
+                + self.card("Changed together", combo) + self.card("Compared with other yeasts (authors' statement)", comp) + self.card("Evidence", evidence))
+        side = self.card("Paper", f'<p><a href="../paper/{esc(r["pmid"])}.html">{safe_html(p.get("title_html"), p.get("title"))}</a></p>'
+                         f'<p class="small">{esc(p.get("authors"))}<br>{esc(p.get("journal"))} {esc(p.get("year"))}</p>{self.link_buttons(p, r["pmid"])}')
+        body = (self.crumbs([("Search", "index.html"), (esc(r["public_id"]), None)])
+                + self.page_head(f'{esc(r["gene_name"])} {esc(pretty(r["intervention_type"]))}',
+                                 "", r["result_class"])
+                + self.detail_layout(main, side))
         self.write(f"result/{r['public_id']}.html", self.layout(f"{r['gene_name']} {pretty(r['intervention_type'])}", body, 1, suggest=("result", r["public_id"])))
 
     def build_gene_page(self, g: dict) -> None:
         rows = [r for r in self.results if r["gene_id"] == g["gene_id"]]
         gd = {**g, "gene_organism": g["organism"]}
-        ident = [("Organism", g["organism"]), ("Locus tag", g["locus_tag"]), ("Identity method", pretty(g["id_method"])), ("Confidence", g["id_confidence"])]
-        ident_html = "".join(f"<tr><th scope='row'>{k}</th><td>{esc(v)}</td></tr>" for k, v in ident if v)
         al = [a["alias_name"] for a in self.aliases.get(g["gene_id"], [])]
         reported = sorted({r["reported_gene_name"] for r in rows if r["reported_gene_name"]})
+        ident = self.facts([("Organism", esc(g["organism"])), ("Locus tag", esc(g["locus_tag"])), ("Identity method", esc(pretty(g["id_method"]))), ("Confidence", esc(g["id_confidence"])),
+                            ("Also known as", esc(", ".join(al))), ("Named in the papers as", esc(", ".join(reported)))])
+        notes = (f'<p>{esc(g["identity_note"])}</p>' if g["identity_note"] else "") + (f'<p class="small">{esc(KIND_HELP[g["gene_kind"]])}</p>' if g["gene_kind"] in KIND_HELP else "")
         orth = self.orthologs.get(g["gene_id"], [])
-        orth_html = ("<h2>S. cerevisiae ortholog</h2><table class='kv'><tr><th>Gene</th><th>ID</th><th>Identity</th><th>Coverage</th><th>Rank</th><th>Confidence</th></tr>" +
-                     "".join(f"<tr><td>{esc(o['ortholog_gene_name'])}</td><td>{esc(o['ortholog_systematic_id'])}</td><td>{esc(o['identity_pct'])}%</td><td>{esc(o['coverage_pct'])}%</td>"
-                             f"<td>{esc(o['rank'])}</td><td>{esc(o['confidence'])}</td></tr>" for o in orth) + "</table>") if orth else ""
+        def orth_id(o):          # the ortholog's name is shown only when it differs from this gene's name (e.g. DNL4 and LIG4)
+            nm = (o["ortholog_gene_name"] or "").strip()
+            return esc(o["ortholog_systematic_id"]) + (f' ({esc(nm)})' if nm and nm.lower() != g["gene_name"].lower() else "")
+        orth_html = ("<table class='kv'><tr><th>ID</th><th>Identity</th><th>Coverage</th><th>Rank</th></tr>" +
+                     "".join(f"<tr><td>{orth_id(o)}</td><td>{esc(o['identity_pct'])}%</td><td>{esc(o['coverage_pct'])}%</td><td>{esc(o['rank'])}</td></tr>" for o in orth) + "</table>") if orth else ""
         cand = self.cands.get(g["gene_id"], [])
         cand_html = ""
         if g["gene_kind"] == "undetermined_paralog" and cand:
-            cand_html = ("<h2>Candidate loci</h2><p><strong>Undetermined:</strong> the papers do not say which copy was used.</p><ul>" +
+            cand_html = ("<p><strong>Undetermined:</strong> the papers do not say which copy was used.</p><ul>" +
                          "".join(f"<li>{esc(c['locus_tag'])} – {esc(c['product'])}{(' (' + esc(c['hint']) + ')') if c['hint'] else ''}</li>" for c in cand) + "</ul>")
         by_cat = defaultdict(list)
         for r in rows:
             by_cat[r["phenotype_category"]].append(r)
-        sections = "".join(f"<h3>{esc(pretty(cat))} <span class='small'>({self.class_counts(rs)})</span></h3>{self.findings_list(rs, 1)}" for cat, rs in sorted(by_cat.items()))
-        body = (f'<h1>{esc(g["gene_name"])}</h1><p>{self.kind_badge(gd)} <span class="small">{esc(g["gene_id"])}</span></p>'
-                f'<p>{len({r["finding_id"] for r in rows})} findings ({self.class_counts(rows)}).</p>'
-                f'<table class="kv">{ident_html}</table>'
-                f'{("<p>Also known as: " + esc(", ".join(al)) + "</p>") if al else ""}'
-                f'{("<p>Named in the papers as: " + esc(", ".join(reported)) + "</p>") if reported else ""}'
-                f'{("<p>" + esc(g["identity_note"]) + "</p>") if g["identity_note"] else ""}'
-                f'{("<p class=\"small\">" + esc(KIND_HELP[g["gene_kind"]]) + "</p>") if g["gene_kind"] in KIND_HELP else ""}'
-                f'{orth_html}{cand_html}<h2>Results</h2>{sections}')
+        sections = "".join(f"<h3>{esc(pretty(cat))}</h3>{self.findings_list(rs, 1)}" for cat, rs in sorted(by_cat.items()))
+        n_find = len({r["finding_id"] for r in rows})
+        main = f'<section class="infocard"><h2>Results ({plural(n_find, "finding")})</h2>{sections}</section>'
+        side = self.card("Identity", ident + notes) + self.card("<i>S. cerevisiae</i> ortholog", orth_html) + self.card("Candidate loci", cand_html)
+        body = (self.crumbs([("Genes", "genes.html"), (esc(g["gene_name"]), None)])
+                + self.page_head(esc(g["gene_name"]), "" if g["gene_kind"] == "locus_tagged" else self.kind_badge(gd))
+                + self.detail_layout(main, side))
         self.write(f"gene/{g['gene_id']}.html", self.layout(g["gene_name"], body, 1, "genes", suggest=("gene", g["gene_id"])))
 
     def build_strain_page(self, s: dict) -> None:
@@ -349,19 +409,21 @@ class Site:
         root = self.strain_root[sid]
         if root != sid:       # a derived strain: its results are compiled under the root strain
             r = self.strains[root]
-            body = (f'<h1>{esc(s["strain_name"])}</h1><p>Results from this strain are included under '
-                    f'<a href="{esc(root)}.html">{esc(r["strain_name"])}</a>.</p>')
+            body = (self.crumbs([("Strains", "strains.html"), (esc(s["strain_name"]), None)])
+                    + self.page_head(esc(s["strain_name"]))
+                    + f'<div class="infocard"><p>Results from this strain are included under <a href="{esc(root)}.html">{esc(r["strain_name"])}</a>.</p></div>')
             self.write(f"strain/{sid}.html", self.layout(s["strain_name"], body, 1, "strains"))
             return
         members = [x for x in self.strains if self.strain_root[x] == sid]
         rows = [r for r in self.results if r["strain_id"] in members]
         derived = [self.strains[x]["strain_name"] for x in members if x != sid]
         al = self.salias.get(sid, [])
-        body = (f'<h1>{esc(s["strain_name"])}</h1><p class="small">{esc(sid)}{(" \u00b7 " + esc(s["species"])) if s["species"] else ""}</p>'
-                f'{("<h2>Other designations</h2><p>" + esc(", ".join(a["alias"] for a in al)) + "</p>") if al else ""}'
-                f'{("<p class=\"small\">Includes results recorded under derived strains: " + esc(", ".join(sorted(derived))) + ".</p>") if derived else ""}'
-                f'<h2>Results ({len({r["finding_id"] for r in rows})} findings)</h2>'
-                f'{self.findings_list(rows, 1) if rows else "<p>No result in the current release uses this strain directly.</p>"}')
+        side = self.card("Strain", self.facts([("Species", esc(s["species"])), ("Other designations", esc(", ".join(a["alias"] for a in al)))])
+                         + ('<p class="small">Includes results recorded under derived strains: ' + esc(", ".join(sorted(derived))) + ".</p>" if derived else ""))
+        main = (f'<section class="infocard"><h2>Results ({plural(len({r["finding_id"] for r in rows}), "finding")})</h2>'
+                f'{self.findings_list(rows, 1) if rows else "<p>No result in the current release uses this strain directly.</p>"}</section>')
+        body = (self.crumbs([("Strains", "strains.html"), (esc(s["strain_name"]), None)]) + self.page_head(esc(s["strain_name"]))
+                + self.detail_layout(main, side))
         self.write(f"strain/{sid}.html", self.layout(s["strain_name"], body, 1, "strains", suggest=("strain", sid)))
 
     def build_paper_page(self, p: dict) -> None:
@@ -371,11 +433,15 @@ class Site:
             links.append(f'<a href="https://doi.org/{esc(p["doi"])}">DOI</a>')
         if p["pmcid"]:
             links.append(f'<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/{esc(p["pmcid"])}/">PMC</a>')
-        body = (f'<h1>{safe_html(p["title_html"], p["title"])}</h1><p>{esc(p["authors"])}<br>{esc(p["journal"])} {esc(p["year"])}'
-                f'{(" · " + esc(p["country"])) if p["country"] else ""} · {" · ".join(links)}</p>'
-                + (f'<h2>Results ({len({r["finding_id"] for r in rows})} findings)</h2>{self.findings_list(rows, 1)}' if rows else '<p class="nofind-note">No findings extracted</p>') +
-                f'<h2>Cite this paper</h2><div id="paper-cite"><noscript><p>{esc(p["authors"])}. {esc(p["title"])}. {esc(p["journal"])}. {esc(p["year"])}.'
-                f'{(" doi:" + esc(p["doi"])) if p["doi"] else ""}</p></noscript></div>'
+        info = f'{esc(p["journal"])} {esc(p["year"])}{(" \u00b7 " + esc(p["country"])) if p["country"] else ""} \u00b7 {" \u00b7 ".join(links)}'
+        plain = f'{esc(p["authors"])}. {esc(p["title"])}. {esc(p["journal"])}. {esc(p["year"])}.{(" doi:" + esc(p["doi"])) if p["doi"] else ""}'
+        findings = (f'<section class="infocard"><h2>Results ({plural(len({r["finding_id"] for r in rows}), "finding")})</h2>{self.findings_list(rows, 1)}</section>' if rows
+                    else '<p class="nofind-note">No findings extracted</p>')
+        body = (self.crumbs([("Papers", "papers.html"), (esc(p["pmid"]), None)])
+                + self.page_head(safe_html(p["title_html"], p["title"]), esc(p["authors"]) + "<br>" + info)
+                + findings
+                + '<p class="head-actions"><button type="button" id="cite-open" class="cite-btn" hidden>Cite this paper</button>'
+                  f'<noscript><span class="small">{plain}</span></noscript></p>'
                 + '<script type="application/json" id="paper-data">' + json.dumps({k: p[k] for k in ("pmid", "title", "authors", "journal", "year", "doi", "pmcid")}, ensure_ascii=False).replace("</", "<\\/") + '</script>'
                 f'<script src="{self.asset("cite.js", "../")}"></script><script src="{self.asset("paperpage.js", "../")}"></script>')
         self.write(f"paper/{p['pmid']}.html", self.layout(p["title"] or p["pmid"], body, 1, "papers", suggest=("paper", p["pmid"])))
@@ -384,8 +450,10 @@ class Site:
         rows = [r for r in self.results if r["product"] == name]
         worked = [r for r in rows if r["result_class"] == "positive"]
         failed = [r for r in rows if r["result_class"] != "positive"]
-        body = (f'<p><a href="../product-class/{self.class_slug(p["product_class"])}.html">\u2190 {esc(p["product_class"])}</a></p><h1>{esc(name)}</h1><p class="small">{esc(p["product_class"])} · {len({r["finding_id"] for r in rows})} findings ({self.class_counts(rows)})</p>'
-                f'<h2>What worked</h2>{self.findings_list(worked, 1)}<h2>What failed or depended on conditions</h2>{self.findings_list(failed, 1)}')
+        body = (self.crumbs([("Products", "products.html"), (esc(p["product_class"]), f'products.html#{self.class_slug(p["product_class"])}'), (esc(name), None)])
+                + self.page_head(esc(name), f'<span class="small">{esc(p["product_class"])}</span>')
+                + '<div class="worked-failed">' + self.card("What worked", self.findings_list(worked, 1), "cls-positive")
+                + self.card("What failed or depended on conditions", self.findings_list(failed, 1), "cls-negative") + '</div>')
         self.write(f"product/{slug(name)}.html", self.layout(name, body, 1, "products", suggest=("product", name)))
 
     def km_strain_ids(self) -> set:
@@ -442,21 +510,19 @@ class Site:
              '<span class="dot dot-yes" aria-hidden="true"></span> Only papers with findings</label>'
              '<span class="legend small" aria-label="Key"><span class="dot dot-yes" aria-hidden="true"></span> with findings <span class="dot dot-no" aria-hidden="true"></span> none extracted</span></div>'
              + "".join(blocks) + f'<script src="{self.asset("papers.js")}"></script>')
-        # products: general classes first; each class page lists its specific products
+        # products: one page, each class is a dropdown that lists its specific products
         by_class = defaultdict(list)
         for n, p in self.products.items():
             by_class[p["product_class"]].append(n)
         items = []
-        for cls in sorted(by_class):
-            fids = {r["finding_id"] for r in self.results if r["product"] in by_class[cls]}
-            items.append(f'<li><a href="product-class/{self.class_slug(cls)}.html">{esc(cls)}</a> <span class="small">{plural(len(by_class[cls]), "product")} \u00b7 {plural(len(fids), "finding")}</span></li>')
-            lis = []
-            for n in sorted(by_class[cls]):
-                rows = [r for r in self.results if r["product"] == n]
-                lis.append(f'<li><a href="../product/{slug(n)}.html">{esc(n)}</a> <span class="small">{len({r["finding_id"] for r in rows})} findings ({self.class_counts(rows)})</span></li>')
-            self.write(f"product-class/{self.class_slug(cls)}.html", self.layout(cls, f'<p><a href="../products.html">\u2190 All product classes</a></p><h1>{esc(cls)}</h1>'
-                       f'<p class="small">{plural(len(fids), "finding")} across {plural(len(by_class[cls]), "product")}.</p><ul class="plain">{"".join(lis)}</ul>', 1, "products"))
-        page("Products", "products", f'<p class="small">Product classes. Open a class to see its specific products.</p><ul class="plain">{"".join(items)}</ul>')
+        # alphabetical, except that the other-proteins dropdown sits right after Enzymes
+        order = sorted(c for c in by_class if c != "Other recombinant proteins")
+        if "Other recombinant proteins" in by_class:
+            order.insert(order.index("Enzymes") + 1 if "Enzymes" in order else 0, "Other recombinant proteins")
+        for cls in order:
+            lis = "".join(f'<li><a href="product/{slug(n)}.html">{esc(n)}</a></li>' for n in sorted(by_class[cls]))
+            items.append(f'<details class="pclass" id="{self.class_slug(cls)}"><summary><svg class="cicon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">{CLASS_ICONS.get(cls, "<circle cx='10' cy='10' r='6'/>")}</svg>{esc(cls)}</summary><ul class="plain">{lis}</ul></details>')
+        page("Products", "products", "".join(items))
 
     def build_about(self) -> None:
         cls = {k: sum(1 for r in self.results if r["result_class"] == k) for k in CLASS_LABEL}
@@ -478,7 +544,7 @@ class Site:
         self.csv_columns = cols
         home = self.km_strain_ids()
         data = {
-            "version": self.version, "date": self.date, "hasEvidence": self.has_evidence, "doi": self.doi, "species": self.species,
+            "version": self.version, "date": self.date, "hasEvidence": self.has_evidence, "doi": self.doi, "species": self.species, "productWords": PRODUCT_WORDS,
             "columns": cols,
             "results": [{k: r[k] for k in cols if r.get(k) not in ("", None)} for r in self.results],
             "genes": {gid: {"name": g["gene_name"], "organism": g["organism"], "kind": g["gene_kind"], "locus": g["locus_tag"],

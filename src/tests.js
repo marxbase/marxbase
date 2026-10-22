@@ -141,6 +141,18 @@
     const after = document.body.classList.contains('engaged');
     return before === false && after === true;
   })());
+  // ---- stage C: results header, filter accordions, result cards ----
+  t('app: the filter panel has a header bar with a Clear all button, and 11 accordions (strain, year and the 9 facets)', !!appRoot && !!appRoot.querySelector('#filters .filters-head .clear-all') && appRoot.querySelectorAll('#filters details.facet').length === 11, appRoot && appRoot.querySelectorAll('#filters details.facet').length);
+  t('app: Result class and Phenotype category start open, the rest closed', !!appRoot && ['classes', 'cats'].every((k) => appRoot.querySelector('details.facet[data-facet=' + k + ']').open) && ['_strain', '_year', 'products', 'hosts'].every((k) => !appRoot.querySelector('details.facet[data-facet=' + k + ']').open));
+  t('app: the results header holds the count, Sort and the Download or cite button', !!appRoot && !!appRoot.querySelector('.resultsbar #count') && !!appRoot.querySelector('.resultsbar #sort') && !!appRoot.querySelector('.resultsbar .export-toggle'));
+  t('app: the download panel is closed until the button is pressed', (() => { const b = appRoot.querySelector('.export-toggle'), p = appRoot.querySelector('#export-panel'); const closed = p.hidden && b.getAttribute('aria-expanded') === 'false'; b.click(); const open = !p.hidden && b.getAttribute('aria-expanded') === 'true'; b.click(); return closed && open && p.hidden; })());
+  t('app: result cards carry their class (edge colour), and a ticked filter shows a count badge', (() => {
+    const q = appRoot.querySelector('#q'); q.value = 'ku70'; appRoot.querySelector('form.searchbar').dispatchEvent(new Event('submit', { cancelable: true }));
+    const card = appRoot.querySelector('li.finding'); const okCard = !!card && /\bcls-(positive|negative|context-dependent)\b/.test(card.className);
+    const cb = appRoot.querySelector('details.facet[data-facet=classes] input'); cb.click();
+    const badge = appRoot.querySelector('details.facet[data-facet=classes] .selcount'); const okBadge = !badge.hidden && badge.textContent === '1' && appRoot.querySelector('.clear-all').hidden === false;
+    cb.click(); return okCard && okBadge;
+  })());
   summary.textContent = `${pass} passed, ${fail} failed`;
   summary.className = fail ? 'bad' : 'ok';
   document.title = fail ? 'TESTS FAILED' : 'TESTS PASSED';

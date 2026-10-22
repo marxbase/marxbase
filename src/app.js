@@ -71,7 +71,7 @@
   const derived = el('input', { id: 'derived', type: 'checkbox', checked: state.derived });
   const ymin = el('input', { id: 'ymin', type: 'number', min: 1900, max: 2100, value: state.ymin == null ? '' : state.ymin, 'aria-label': 'From year' });
   const ymax = el('input', { id: 'ymax', type: 'number', min: 1900, max: 2100, value: state.ymax == null ? '' : state.ymax, 'aria-label': 'To year' });
-  const clear = el('button', { type: 'button', text: 'Clear all filters' });
+  const clear = el('button', { type: 'button', class: 'linklike clear-all', text: 'Clear all' });
   const count = el('p', { id: 'count', role: 'status', 'aria-live': 'polite' });
   const note = el('p', { class: 'weak', hidden: true });
   const list = el('ol', { class: 'findings' });
@@ -82,42 +82,52 @@
   let lastView = { items: [], nRows: 0 };
 
   const filterBox = el('aside', { id: 'filters', 'aria-label': 'Filters' });
-  filterBox.append(el('div', { class: 'row' }, el('label', { for: 'strain', text: 'Strain' }), strainSel),
-    el('label', { class: 'inline' }, derived, ' include derived strains'),
-    el('fieldset', {}, el('legend', { text: 'Publication year' }), ymin, ' to ', ymax));
+  const accordions = {};                                  // key -> { box, badge } for the selected-count badges
+  const accordion = (key, title, body, open) => {
+    const badge = el('span', { class: 'selcount', hidden: true });
+    const box = el('details', { class: 'facet', 'data-facet': key, open }, el('summary', {}, el('span', { text: title }), badge), el('div', { class: 'facet-body' }, body));
+    accordions[key] = { box, badge };
+    return box;
+  };
+  filterBox.append(el('div', { class: 'filters-head' }, el('span', { text: 'Filter results' }), clear));
+  filterBox.append(accordion('_strain', 'Strain', [el('div', { class: 'row' }, strainSel), el('label', { class: 'inline' }, derived, ' include derived strains')], false),
+    accordion('_year', 'Publication year', [ymin, ' to ', ymax], false));
   for (const [key, title, labelFn] of FACET_DEFS) {
-    const box = el('fieldset', { class: 'facet', 'data-facet': key }, el('legend', { text: title }));
+    const body = el('div', {});
+    const box = accordion(key, title, body, key === 'classes' || key === 'cats');
     groups[key] = { box, inputs: {} };
     for (const v of allValues[key]) {
       const cb = el('input', { type: 'checkbox', value: v });
       const n = el('span', { class: 'n' });
       const lab = el('label', { class: 'opt' }, cb, ' ', sp(labelFn(v)), ' ', n);
       groups[key].inputs[v] = { cb, n, lab };
-      box.append(lab);
+      body.append(lab);
     }
     filterBox.append(box);
   }
-  filterBox.append(clear);
   const searchBtn = el('button', { type: 'submit', text: 'Search' });
   const sortLab = el('label', { class: 'inline', for: 'sort' }, 'Sort ', sortSel);
   const hostSwitch = el('label', { class: 'hostswitch', for: 'allhosts' }, allHosts, ' ', sp('Include other hosts expressing K. marxianus genes'));
   const form = el('form', { class: 'searchbar', role: 'search' },
     el('label', { for: 'q', class: 'sr-only', text: 'Search genes, strains, products and papers' }),
     el('div', { class: 'searchrow' }, el('div', { class: 'combo' }, q, sugg), searchBtn),
-    el('div', { class: 'toolbar' }, hostSwitch, sortLab));
+    el('div', { class: 'toolbar' }, hostSwitch));
   const fmtSel = el('select', { id: 'fmt' }, Object.entries(C.FORMATS).map(([k, v]) => el('option', { value: k, text: v.label })));
   const scopeSel = el('select', { id: 'scope' });
   const richBox = el('input', { id: 'rich', type: 'checkbox' });
   const csvBtn = el('button', { type: 'button', text: 'Download results as CSV' });
   const refBtn = el('button', { type: 'button', text: 'Download references' });
   const exportMsg = el('p', { class: 'small', role: 'status' });
-  const exportBox = el('details', { class: 'exportbox' }, el('summary', { text: 'Download or cite these results' }),
+  const exportPanel = el('div', { class: 'exportbox', id: 'export-panel', hidden: true },
     el('p', { class: 'small', text: 'The CSV holds every result column for the findings you are looking at, one row per result.' + (data.hasEvidence ? ' Evidence sentences quote abstracts and are not covered by the data licence.' : '') }),
     el('p', {}, csvBtn),
     el('div', { class: 'row' }, el('label', { for: 'fmt', text: 'References for' }), scopeSel, el('label', { for: 'fmt', text: 'Format' }), fmtSel,
       el('label', { class: 'inline' }, richBox, ' also keep italics (opens as a web page you can paste into Word; AMA, APA, MLA, NLM only)')),
     el('p', {}, refBtn), el('p', { class: 'small', text: 'Volume, issue and page numbers are not stored; each reference carries the DOI instead.' }), exportMsg);
-  const resultsArea = el('div', { id: 'results-area' }, el('div', { class: 'countbar' }, count), exportBox, note, el('div', { class: 'layout' }, el('details', { class: 'filterwrap', open: true }, el('summary', { text: 'Filters' }), filterBox), el('section', { 'aria-label': 'Results' }, list, more)));
+  const exportToggle = el('button', { type: 'button', class: 'export-toggle', 'aria-expanded': 'false', 'aria-controls': 'export-panel', text: 'Download or cite' });
+  exportToggle.addEventListener('click', () => { exportPanel.hidden = !exportPanel.hidden; exportToggle.setAttribute('aria-expanded', exportPanel.hidden ? 'false' : 'true'); });
+  const resultsBar = el('div', { class: 'resultsbar' }, count, el('div', { class: 'resultsactions' }, sortLab, exportToggle));
+  const resultsArea = el('div', { id: 'results-area' }, resultsBar, exportPanel, note, el('div', { class: 'layout' }, el('details', { class: 'filterwrap', open: !window.matchMedia('(max-width: 760px)').matches || !!(state.strain || state.ymin != null || state.ymax != null || FACET_DEFS.some(([k]) => state[k].length)) }, el('summary', { text: 'Filters' }), filterBox), el('section', { 'aria-label': 'Results' }, list, more)));
   root.append(form, resultsArea);
 
   // ---- rendering ----
@@ -136,6 +146,15 @@
     return el('span', { class: 'badge badge-' + g.kind, title: KIND_HELP[g.kind] || '' }, sp((prefix ? prefix + ': ' : '') + label));
   };
 
+  const productUrl = (name) => 'product/' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') + '.html';   // same slug rule as build.py
+  const productLink = (name, text) => el('a', { href: productUrl(name), text });
+  // the phenotype text with the word that names the product linked to the product page
+  function phenotypeNodes(r) {
+    const words = (data.productWords || {})[r.product || ''], m = words && new RegExp(words, 'i').exec(r.phenotype);
+    if (!m) return { nodes: [r.phenotype], linked: false };
+    return { nodes: [r.phenotype.slice(0, m.index), productLink(r.product, m[0]), r.phenotype.slice(m.index + m[0].length)], linked: true };
+  }
+
   function renderFinding(f) {
     const r0 = f.rows[0];
     const members = [];
@@ -145,24 +164,27 @@
     });
     const seen = new Set(), badges = [];
     const nGenes = new Set(f.rows.map((r) => r.gene_id)).size;
-    for (const r of f.rows) if (!seen.has(r.gene_id)) { seen.add(r.gene_id); badges.push(badge(data.genes[r.gene_id], nGenes > 1 ? r.gene_name : ''), ' '); }
-    const [icon, label] = CLASS[r0.result_class] || ['', r0.result_class];
+    for (const r of f.rows) if (!seen.has(r.gene_id)) { seen.add(r.gene_id); if (data.genes[r.gene_id].kind !== 'locus_tagged') badges.push(badge(data.genes[r.gene_id], nGenes > 1 ? r.gene_name : ''), ' '); }   // a proper KLMA locus needs no flag
+    const label = (CLASS[r0.result_class] || ['', r0.result_class])[1];
     const p = data.papers[r0.pmid] || {};
-    const meta = ['host ' + r0.host_organism];
-    const metaEl = el('div', { class: 'fl2' }, 'host ', r0.host_organism === S.HOME_HOST ? sp(r0.host_organism) : el('strong', {}, sp(r0.host_organism)));
-    if (r0.strain_id) { const rs = data.strains[r0.strain_id].root || r0.strain_id; metaEl.append(' · strain ', el('a', { href: 'strain/' + rs + '.html', text: data.strains[rs].name })); }
-    metaEl.append(' · ', el('a', { href: 'paper/' + r0.pmid + '.html', text: (p.first_author || 'Paper') + ' ' + (r0.year || '') }));
+    const parts = [];
+    if (r0.strain_id) { const rs = data.strains[r0.strain_id].root || r0.strain_id; parts.push(['strain ', el('a', { href: 'strain/' + rs + '.html', text: data.strains[rs].name })]); }
+    parts.push([el('a', { href: 'paper/' + r0.pmid + '.html', text: (p.first_author || 'Paper') + (p.authors && p.authors.split(';').length > 1 ? ' et al.' : '') + ' ' + (r0.year || '') })]);
     const vt = valueText(r0);
-    if (vt) metaEl.append(' · ' + vt);
-    metaEl.append(' · ', el('a', { href: 'result/' + r0.public_id + '.html', text: 'details' }));
+    const pheno = phenotypeNodes(r0);
+    if (r0.product && !pheno.linked) parts.push(['product ', productLink(r0.product, r0.product)]);   // no word in the statement names it
+    const metaEl = el('div', { class: 'fl2' });
+    parts.forEach((x, i) => metaEl.append(...(i ? [' \u00b7 '] : []), ...x));
+    // only a host other than K. marxianus is flagged
+    if (r0.host_organism !== S.HOME_HOST) badges.unshift(el('span', { class: 'badge badge-host' }, 'Host: ', sp(r0.host_organism)), ' ');
     const cb = el('input', { type: 'checkbox', 'aria-label': 'Select for citation export' });
     cb.checked = picked.has(f.id);
     cb.addEventListener('change', () => { if (cb.checked) picked.add(f.id); else picked.delete(f.id); updateExport(); });
-    return el('li', { class: 'finding' },
+    return el('li', { class: 'finding cls-' + r0.result_class },
+      el('a', { class: 'cardlink', href: 'result/' + r0.public_id + '.html' }, el('span', { class: 'sr-only', text: 'Details of this result' })),
       el('label', { class: 'pick small' }, cb, ' cite'),
-      el('div', { class: 'fl1' }, members, ' → ', el('strong', { text: r0.effect_direction }), ' ' + r0.phenotype + ' ',
-        el('span', { class: 'chip chip-' + r0.result_class }, el('span', { 'aria-hidden': 'true', text: icon }), ' ' + label),
-        f.rows.length > 1 ? el('span', { class: 'combo', text: ' combination of ' + f.rows.length }) : null),
+      el('div', { class: 'fl1' }, members, ' → ', el('strong', { text: r0.effect_direction }), ' ', ...pheno.nodes, vt ? ' (' + vt + ')' : '', ' ',
+        el('span', { class: 'sr-only', text: '(' + label + ')' })),
       el('div', { class: 'fl3' }, badges), metaEl);
   }
 
@@ -230,13 +252,18 @@
     if (extras) extras.hidden = active;
     resultsArea.hidden = !active; sortLab.hidden = !active; root.classList.toggle('landing', !active);
     document.body.classList.toggle('engaged', active);
+    const sel = (k, n) => { const b = accordions[k].badge; b.hidden = !n; b.textContent = n || ''; };
+    for (const [key] of FACET_DEFS) sel(key, st[key].length);
+    sel('_strain', st.strain ? 1 : 0); sel('_year', (st.ymin != null ? 1 : 0) + (st.ymax != null ? 1 : 0));
+    clear.hidden = !hasFilters(st);
     if (resultsTitle) resultsTitle.hidden = !active;
     list.replaceChildren(...res.items.slice(0, shown).map(renderFinding));
     updateExport();
     const rest = res.nFindings - shown;
     more.hidden = rest <= 0; more.textContent = 'Show more (' + rest + ' remaining)';
     const allMode = st.allHosts || st.hosts.length;
-    count.replaceChildren(...sp(res.nFindings + (res.nFindings === 1 ? ' finding (' : ' findings (') + res.nRows + (res.nRows === 1 ? ' result) ' : ' results) ') + (allMode ? 'in all host organisms.' : 'in K. marxianus host organisms only.') + (res.nFindings || allMode ? '' : ' Try removing a filter or including other hosts.')));
+    const head = res.nFindings + (res.nFindings === 1 ? ' finding' : ' findings');
+    count.replaceChildren(el('strong', { class: 'bignum', text: head }), ...sp(' (' + res.nRows + (res.nRows === 1 ? ' result) ' : ' results) ') + (allMode ? 'in all host organisms.' : 'in K. marxianus host organisms only.') + (res.nFindings || allMode ? '' : ' Try removing a filter or including other hosts.')));
     const weak = st.types.some((t) => WEAK_TYPES.includes(t)) || st.cats.includes('protein_production');
     note.hidden = !weak;
     note.textContent = weak ? 'Heads-up: results for heterologous expression, promoters and protein production are the least complete part of this collection (abstract-only extraction).' : '';

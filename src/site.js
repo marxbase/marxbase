@@ -11,5 +11,12 @@
     });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.focus(); } });
   }
+  // a link such as products.html#sugar-alcohols-and-polyols opens that dropdown
+  function openTarget() {
+    const d = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (d && d.tagName === 'DETAILS') { d.open = true; d.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', openTarget);
+  document.addEventListener('DOMContentLoaded', openTarget);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

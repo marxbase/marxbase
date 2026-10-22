@@ -183,16 +183,17 @@ class BuiltSiteTests(unittest.TestCase):
         for name in other_only + ["GDA"]:
             self.assertNotIn(f">{build.esc(name)}</a>", page, name)
 
-    def test_products_page_lists_classes_and_class_pages_list_products(self):
+    def test_products_page_has_one_dropdown_per_class_listing_its_products(self):
         s = self.site
         page = (self.out / "products.html").read_text(encoding="utf-8")
         classes = {p["product_class"] for p in s.products.values()}
-        self.assertEqual(len(re.findall(r'href="product-class/', page)), len(classes))
-        self.assertNotIn('href="product/', page)                            # specific products only on the class pages
-        cls = (self.out / "product-class" / "sugar-alcohols-and-polyols.html").read_text(encoding="utf-8")
-        self.assertIn("Xylitol", cls)
-        self.assertIn('href="../product/xylitol.html"', cls)
-        self.assertIn('href="../product-class/sugar-alcohols-and-polyols.html"', (self.out / "product" / "xylitol.html").read_text(encoding="utf-8"))
+        self.assertEqual(len(re.findall(r'<details class="pclass"', page)), len(classes))
+        self.assertEqual(len(re.findall(r'href="product/', page)), len(s.products))   # every product is linked from its class
+        self.assertNotIn("finding", page)                                             # no finding counts on the lines
+        self.assertFalse((self.out / "product-class").exists())                       # the separate class pages are gone
+        self.assertIn('id="sugar-alcohols-and-polyols"', page)
+        self.assertRegex(page, r'id="enzymes".*?</details><details class="pclass" id="other-recombinant-proteins"')   # next to Enzymes
+        self.assertIn('href="../products.html#sugar-alcohols-and-polyols"', (self.out / "product" / "xylitol.html").read_text(encoding="utf-8"))
 
     def test_strain_flags_in_data_js(self):
         text = (self.out / "data.js").read_text(encoding="utf-8")
@@ -660,13 +661,113 @@ class MinedPapersTests(unittest.TestCase):
             page = (self.out / "paper" / f"{pmid}.html").read_text(encoding="utf-8")
             self.assertIn("No findings extracted", page)
             self.assertNotIn("<h2>Results (", page)
-            self.assertIn('id="paper-cite"', page)
+            self.assertIn('id="cite-open"', page); self.assertNotIn("<h2>Paper</h2>", page)
         self.assertIn("<i>K. marxianus</i>", (self.out / "paper" / "90000000.html").read_text(encoding="utf-8"))
 
     def test_search_data_holds_only_papers_with_findings(self):
         data = json.loads((self.out / "data.js").read_text(encoding="utf-8")[len("window.MARXBASE = "):].rstrip().rstrip(";"))
         self.assertEqual(len(data["papers"]), self.n_with)
         self.assertNotIn("90000000", data["papers"])
+
+
+class DetailPageTests(unittest.TestCase):
+    """Stage D: breadcrumbs, a header block, info cards in two columns, class-colored result cards on every detail page."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.site = build.Site(BUNDLE, Path(tempfile.mkdtemp()) / "dist")
+        cls.site.build()
+        cls.out = cls.site.out
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(cls.out.parent, ignore_errors=True)
+
+    def page(self, rel):
+        return (self.out / rel).read_text(encoding="utf-8")
+
+    def first(self, folder):
+        return next(iter(sorted((self.out / folder).glob("*.html"))))
+
+    def test_every_kind_of_detail_page_has_a_breadcrumb_and_a_header_block(self):
+        for folder, crumb in (("result", "Search"), ("gene", "Genes"), ("paper", "Papers"), ("product", "Products")):
+            text = self.first(folder).read_text(encoding="utf-8")
+            self.assertIn('<nav class="crumbs" aria-label="Breadcrumb">', text, folder)
+            self.assertRegex(text, r'<nav class="crumbs"[^>]*><a href="\.\./[^"]+">' + crumb + "</a>", folder)
+            self.assertIn('<header class="page-head', text, folder)
+            if folder != "paper":   # a paper with no findings has only the header and a note
+                self.assertIn("infocard", text, folder)
+        strain = next(p for p in sorted((self.out / "strain").glob("*.html")) if "Includes results" in p.read_text(encoding="utf-8")).read_text(encoding="utf-8")
+        self.assertIn('aria-label="Breadcrumb"', strain)
+
+    def test_result_page_has_two_columns_and_the_class_edge(self):
+        r = self.site.results[0]
+        text = self.page(f"result/{r['public_id']}.html")
+        self.assertIn('<div class="detail-layout"><div class="detail-main">', text)
+        self.assertIn('<aside class="detail-side">', text)
+        self.assertIn(f'<header class="page-head cls-{r["result_class"]}">', text)
+        self.assertIn('<dl class="facts">', text)
+        self.assertIn('class="linkbtn"', text)                                       # PubMed / DOI buttons
+        self.assertNotIn("<table class='kv'>", text)                                 # the facts are a definition list now
+
+    def test_server_built_result_cards_carry_their_class(self):
+        with_findings = self.out / "paper" / f"{next(iter(self.site.papers_with))}.html"
+        for rel in (self.first("gene"), with_findings, self.first("product")):
+            text = rel.read_text(encoding="utf-8")
+            self.assertRegex(text, r'<li class="finding cls-(positive|negative|context-dependent)">', rel.name)
+
+    def test_product_page_shows_worked_and_failed_side_by_side(self):
+        text = self.page("product/xylitol.html")
+        self.assertIn('<div class="worked-failed">', text)
+        self.assertLess(text.index("What worked"), text.index("What failed or depended on conditions"))
+        self.assertIn('infocard cls-positive', text); self.assertIn('infocard cls-negative', text)
+
+    def test_the_product_word_in_a_finding_is_the_link_to_the_product_page(self):
+        s = self.site
+        r = next(r for r in s.results if r["product"] == "Glycerol" and "glycerol" in r["phenotype"].lower())
+        html_, linked = s.phenotype_html(r, 1)
+        self.assertTrue(linked)
+        self.assertRegex(html_, r'<a href="\.\./product/glycerol\.html">[Gg]lycerol</a>')
+        r2 = next(r for r in s.results if r["product"] == "Secreted enzyme")          # no word in "secretion" names the product: a details-line link instead
+        self.assertEqual(s.phenotype_html(r2, 1)[1], False)
+        self.assertIn('product <a href="../product/secreted-enzyme.html">Secreted enzyme</a>', s.finding_line([r2], 1))
+
+    def test_gene_page_has_finding_count_in_the_results_heading_and_identity_card(self):
+        gene = next(iter(self.site.genes.values()))
+        text = self.page(f"gene/{gene['gene_id']}.html")
+        self.assertNotIn('<p class="counts">', text)
+        self.assertRegex(text, r"<h2>Results \(\d+ findings?\)</h2>")
+        self.assertIn("Identity", text)
+
+    def test_gene_page_is_compact_no_reference_number_no_locus_tag_in_the_header(self):
+        s = self.site
+        gene = next(g for g in s.genes.values() if g["gene_kind"] == "locus_tagged" and s.orthologs.get(g["gene_id"]))
+        text = self.page(f"gene/{gene['gene_id']}.html")
+        head = text[text.index('<header class="page-head'):text.index("</header>", text.index('<header class="page-head'))]
+        self.assertNotIn("Locus tag", head)                                          # it is in the Identity card
+        visible = re.sub(r"<[^>]*>", " ", text)
+        self.assertNotIn(gene["gene_id"], visible)                                   # no MARXBASE-G reference number shown (links may still contain it)
+        self.assertIn("Locus tag</dt>", text)
+        table = text[text.index("<table class='kv'><tr><th>ID</th>"):]
+        table = table[:table.index("</table>")]
+        self.assertEqual(table.count("<th>"), 4)                                     # ID, Identity, Coverage, Rank
+        self.assertNotIn("Confidence</th>", table)
+        self.assertNotIn("<th>Gene</th>", table)
+        for o in s.orthologs[gene["gene_id"]]:
+            self.assertIn(o["ortholog_systematic_id"], table)
+        # a differently named ortholog keeps its name, in brackets after the ID; one with the same name does not repeat it
+        gpd1 = next(g for g in s.genes.values() if g["gene_name"] == "GPD1" and g["organism"] == "K. marxianus")
+        page = self.page(f"gene/{gpd1['gene_id']}.html")
+        self.assertIn("YDL022W</td>", page)
+        self.assertIn("YOL059W (GPD2)</td>", page)
+        # strain pages show no MARXBASE-S reference number either
+        for strain in list(s.strains.values())[:15]:
+            self.assertNotIn(strain["strain_id"], re.sub(r"<[^>]*>", " ", self.page(f"strain/{strain['strain_id']}.html")))
+
+    def test_header_navigation_styles_do_not_leak_into_the_breadcrumb(self):
+        css = self.page("style.css")
+        self.assertRegex(css, r"header\.top nav \{")
+        self.assertNotRegex(css, r"(?m)^nav \{")                                        # a bare `nav` rule would restyle the breadcrumb too
 
 
 class BrowserScriptSyntaxTests(unittest.TestCase):

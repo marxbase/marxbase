@@ -99,7 +99,7 @@
 
   const FORMATS = {
     bibtex: { label: 'BibTeX (.bib)', ext: 'bib', mime: 'application/x-bibtex', make: toBibTeX },
-    ris: { label: 'RIS (.ris) for Zotero, EndNote, Mendeley', ext: 'ris', mime: 'application/x-research-info-systems', make: toRIS },
+    ris: { label: 'RIS (.ris)', ext: 'ris', mime: 'application/x-research-info-systems', make: toRIS },
     csl: { label: 'CSL-JSON (.json)', ext: 'json', mime: 'application/json', make: toCSL },
     ama: { label: 'AMA, formatted text (.txt)', ext: 'txt', mime: 'text/plain', make: (ps) => ps.map((p) => asText(ama(p))).join('\n\n') + '\n' },
     apa: { label: 'APA, formatted text (.txt)', ext: 'txt', mime: 'text/plain', make: (ps) => ps.map((p) => asText(apa(p))).join('\n\n') + '\n' },
