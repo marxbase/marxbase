@@ -195,6 +195,36 @@ class BuiltSiteTests(unittest.TestCase):
         self.assertRegex(page, r'id="enzymes".*?</details><details class="pclass" id="other-recombinant-proteins"')   # next to Enzymes
         self.assertIn('href="../products.html#sugar-alcohols-and-polyols"', (self.out / "product" / "xylitol.html").read_text(encoding="utf-8"))
 
+    def test_gene_pages_show_a_visible_note_for_genes_that_are_not_plain_locus_tagged(self):
+        s = self.site
+        plain = next(g for g in s.genes.values() if g["gene_kind"] == "locus_tagged")
+        self.assertNotIn('class="kindnote', (self.out / "gene" / f"{plain['gene_id']}.html").read_text(encoding="utf-8"))
+        for kind in ("undetermined_paralog", "enzyme_or_protein_label", "heterologous_gene"):
+            g = next((g for g in s.genes.values() if g["gene_kind"] == kind), None)
+            if g:
+                text = (self.out / "gene" / f"{g['gene_id']}.html").read_text(encoding="utf-8")
+                self.assertRegex(text, rf'<p class="kindnote kind-{kind}" role="note"><strong>', kind)
+
+    def test_finishing_rules_are_in_the_stylesheet(self):
+        css = (self.out / "style.css").read_text(encoding="utf-8")
+        self.assertIn("@media print", css)
+        self.assertIn("prefers-reduced-motion: reduce", css)
+        self.assertRegex(css, r"a\.cardlink:focus-visible::after \{ outline: 3px solid var\(--focus\)")      # contrast of the card focus ring
+        self.assertNotRegex(css, r"outline:\s*(none|0)\b")                                                     # no focus ring is ever removed
+        self.assertIn("table.kv { display: block", css)                                                          # wide tables scroll inside their box on phones
+
+    def test_genes_page_has_an_az_strip_and_letter_headings_strains_page_is_compact(self):
+        genes = (self.out / "genes.html").read_text(encoding="utf-8")
+        self.assertIn('<nav class="az"', genes)
+        self.assertIn('<h3 class="letter" id="k-a">A</h3>', genes)
+        self.assertNotIn("Locus-tagged", genes)                     # the gene kind is shown on the gene page, not in the list
+        self.assertNotIn("Undetermined paralog", genes)
+        strains = (self.out / "strains.html").read_text(encoding="utf-8")
+        self.assertIn('class="plain cols"', strains)
+        self.assertNotIn('class="letter"', strains)
+        for page in ("methods", "about", "downloads"):
+            self.assertIn('<body class="textpage">', (self.out / f"{page}.html").read_text(encoding="utf-8"), page)
+
     def test_strain_flags_in_data_js(self):
         text = (self.out / "data.js").read_text(encoding="utf-8")
         data = json.loads(text[len("window.MARXBASE = "):].rstrip().rstrip(";"))

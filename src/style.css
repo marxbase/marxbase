@@ -4,7 +4,7 @@
 :root {
   --pos: #2a78d6; --pos-ink: #1a5aa8; --pos-tint: #eaf2fc;
   --neg: #eb6834; --neg-ink: #b4400f; --neg-tint: #fdeee6;
-  --ctx: #1baf7a; --ctx-ink: #0b6b4a; --ctx-tint: #e4f6ef;
+  --ctx: #159d6e; --ctx-ink: #0b6b4a; --ctx-tint: #e4f6ef;
   --r: 8px; --r-sm: 5px; --shadow: 0 1px 2px rgba(20, 30, 45, .08), 0 2px 8px rgba(20, 30, 45, .06);
 }
 * { box-sizing: border-box; }
@@ -74,7 +74,7 @@ li.finding:hover { box-shadow: var(--shadow); background: var(--surface); }
 a.cardlink::after { content: ""; position: absolute; inset: 0; z-index: 0; }
 li.finding a:not(.cardlink), li.finding .pick, li.finding .badge { position: relative; z-index: 1; }
 li.finding:has(a.cardlink) { cursor: pointer; }
-a.cardlink:focus-visible::after { outline: 3px solid var(--highlight); outline-offset: 2px; border-radius: var(--r); }
+a.cardlink:focus-visible::after { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: var(--r); }
 .fl2, .fl3 { font-size: .88rem; color: var(--muted); } .fl3:empty { display: none; }
 .pick { float: right; margin-left: 8px; }
 
@@ -139,7 +139,7 @@ svg.viz { width: 100%; max-width: 760px; height: auto; display: block; } svg.viz
 figure { margin: .6em 0; } .legend { display: flex; flex-wrap: wrap; gap: 4px 16px; } .lg { white-space: nowrap; }
 
 @media (max-width: 760px) { .layout { grid-template-columns: minmax(0, 1fr); } header.top nav { margin-left: 0; } .brand { font-size: 1.6rem; } .brand svg { width: 38px; height: 38px; } }
-@media print { header.top, footer, #filters, .searchbar, .exportbox, .sg-wrap { display: none; } body { color: #000; } }
+
 
 /* ---- home page: centered headline above the search bar, examples and key numbers below it ---- */
 .hero { padding: 36px 0 0; text-align: center; }
@@ -295,3 +295,45 @@ details.pclass[open] > summary { border-bottom: 1px solid var(--line); }
 details.pclass > ul { margin: 0; padding: 8px 16px 12px 52px; list-style: none; } details.pclass > ul li { padding: 4px 0; }
 .cicon { flex: none; width: 1.5em; height: 1.5em; fill: none; stroke: var(--marker); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .cicon text { fill: var(--marker); stroke: none; font: 700 8.5px var(--font-head); }
+
+/* ---- browse lists (Genes, Strains): A-Z strip, letter headings, compact columns ---- */
+nav.az { display: flex; flex-wrap: wrap; gap: 4px; margin: .4em 0 .8em; }
+nav.az a { min-width: 2em; padding: 3px 7px; text-align: center; font-weight: 600; text-decoration: none; border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface); }
+nav.az a:hover { border-color: var(--highlight); background: var(--surface-2); }
+h3.letter { margin: 1em 0 .2em; padding-bottom: 2px; border-bottom: 1px solid var(--line); font-size: 1.1rem; color: var(--heading); scroll-margin-top: 12px; }
+ul.plain.cols { columns: 3 17em; column-gap: 28px; margin-top: .3em; }
+ul.plain.cols li { break-inside: avoid; padding: 2px 0; }
+
+/* ---- long-form pages (Methods, About, Downloads): readable line length and spacing ---- */
+body.textpage main { max-width: 780px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; line-height: 1.65; }
+body.textpage main h1 { margin-bottom: .5em; }
+body.textpage main h2 { margin: 1.8em 0 .5em; padding-bottom: 4px; border-bottom: 1px solid var(--line); font-size: 1.3rem; }
+body.textpage main ul, body.textpage main ol { padding-left: 1.4em; } body.textpage main li { margin: .3em 0; }
+body.textpage main table { margin: .8em 0; }
+
+/* ---- gene pages: a visible note for genes that are not plain locus-tagged K. marxianus genes ---- */
+.kindnote { margin: 0 0 16px; padding: 10px 14px; border: 1px solid var(--line-strong); border-left-width: 5px; border-radius: var(--r-sm); background: var(--surface); }
+.kindnote.kind-undetermined_paralog, .kindnote.kind-enzyme_or_protein_label, .kindnote.kind-unmapped_name { background: #fff4e0; border-color: #e0b66a; }
+.kindnote.kind-heterologous_gene, .kindnote.kind-scerevisiae_gene { background: #e3f2f8; border-color: #7fc3d6; }
+
+/* ---- print: content only, black on white, cards kept whole, links spelled out ---- */
+@media print {
+  header.top, footer, #filters, .searchbar, .exportbox, .sg-wrap, .skip, nav.az, nav.crumbs, .hostswitch, .head-actions, dialog, .pick, .menu-toggle, #papers-toggle, #suggest-box { display: none !important; }
+  body, body.home { background: #fff; color: #000; font-size: 11pt; }
+  main, body.textpage main, body.home main { max-width: none; margin: 0; padding: 0; }
+  a { color: #000; text-decoration: underline; }
+  main a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; word-break: break-all; }
+  li.finding, .infocard, details.pclass, .cards a { break-inside: avoid; box-shadow: none; background: #fff; }
+  li.finding { border: 1px solid #999; border-left: 6px solid #555; }
+  details > * { display: block; } details > summary { font-weight: 700; }
+  .band, .band-photo, .hero { background: #fff !important; color: #000 !important; }
+  .detail-layout { display: block; } .detail-side { margin-top: 12px; }
+  a.cardlink { display: none; }
+  h1, h2, h3 { break-after: avoid; }
+}
+
+/* ---- phones: a wide table scrolls inside its own box instead of pushing the page sideways ---- */
+@media (max-width: 560px) { table.kv { display: block; max-width: 100%; overflow-x: auto; } }
+
+/* ---- people who ask for less motion get none ---- */
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }

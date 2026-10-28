@@ -205,6 +205,8 @@ class Site:
         return f"{root}{name}?v={esc(self.version)}-{self.asset_tag}"
 
     def layout(self, title: str, body: str, depth: int, active: str = "", suggest: tuple = None, body_class: str = "") -> str:
+        if not body_class and active in ("methods", "about", "downloads"):
+            body_class = "textpage"          # long-form pages: a readable line length and calmer spacing
         root = "../" * depth
         if suggest and self.config:
             body += (f'<section id="suggest-box" data-page-type="{esc(suggest[0])}" data-target-id="{esc(suggest[1])}" data-release="{esc(self.version)}"></section>'
@@ -227,6 +229,14 @@ class Site:
 
     def chip(self, cls: str) -> str:
         return f'<span class="chip chip-{esc(cls)}"><span aria-hidden="true">{CLASS_ICON.get(cls, "")}</span> {esc(CLASS_LABEL.get(cls, cls))}</span>'
+
+    def kind_notice(self, g: dict) -> str:
+        """A visible note under the gene header for any gene that is not a plain locus-tagged K. marxianus gene."""
+        kind = g["gene_kind"]
+        if kind == "locus_tagged":
+            return ""
+        label = f"Heterologous gene from {g['organism']}" if kind == "heterologous_gene" else KIND_LABEL.get(kind, kind)
+        return f'<p class="kindnote kind-{esc(kind)}" role="note"><strong>{esc(label)}.</strong> {esc(KIND_HELP.get(kind, ""))}</p>'
 
     def kind_badge(self, g: dict) -> str:
         kind = g["gene_kind"]
@@ -380,7 +390,7 @@ class Site:
         reported = sorted({r["reported_gene_name"] for r in rows if r["reported_gene_name"]})
         ident = self.facts([("Organism", esc(g["organism"])), ("Locus tag", esc(g["locus_tag"])), ("Identity method", esc(pretty(g["id_method"]))), ("Confidence", esc(g["id_confidence"])),
                             ("Also known as", esc(", ".join(al))), ("Named in the papers as", esc(", ".join(reported)))])
-        notes = (f'<p>{esc(g["identity_note"])}</p>' if g["identity_note"] else "") + (f'<p class="small">{esc(KIND_HELP[g["gene_kind"]])}</p>' if g["gene_kind"] in KIND_HELP else "")
+        notes = (f'<p>{esc(g["identity_note"])}</p>' if g["identity_note"] else "")
         orth = self.orthologs.get(g["gene_id"], [])
         def orth_id(o):          # the ortholog's name is shown only when it differs from this gene's name (e.g. DNL4 and LIG4)
             nm = (o["ortholog_gene_name"] or "").strip()
@@ -400,7 +410,8 @@ class Site:
         main = f'<section class="infocard"><h2>Results ({plural(n_find, "finding")})</h2>{sections}</section>'
         side = self.card("Identity", ident + notes) + self.card("<i>S. cerevisiae</i> ortholog", orth_html) + self.card("Candidate loci", cand_html)
         body = (self.crumbs([("Genes", "genes.html"), (esc(g["gene_name"]), None)])
-                + self.page_head(esc(g["gene_name"]), "" if g["gene_kind"] == "locus_tagged" else self.kind_badge(gd))
+                + self.page_head(esc(g["gene_name"]))
+                + self.kind_notice(g)
                 + self.detail_layout(main, side))
         self.write(f"gene/{g['gene_id']}.html", self.layout(g["gene_name"], body, 1, "genes", suggest=("gene", g["gene_id"])))
 
@@ -476,15 +487,28 @@ class Site:
         km_host_genes = {r["gene_id"] for r in self.results if r["host_organism"] == "K. marxianus"}
         genes = sorted(self.genes.values(), key=lambda g: g["gene_name"].lower())
 
+        def az_list(prefix, entries, strip=True):
+            """entries: (sort name, <li> html), already sorted. Letter headings, plus an A-Z strip that jumps to them when there are many."""
+            if not strip:       # a short list: one compact set of columns, no letter headings
+                return f'<ul class="plain cols">{"".join(li for _, li in entries)}</ul>'
+            groups = {}
+            for name, li in entries:
+                ch = name[:1].upper()
+                groups.setdefault(ch if ch.isalpha() else "0\u20139", []).append(li)
+            keys = sorted(groups, key=lambda k: (k[0] != "0", k))
+            nav = (f'<nav class="az" aria-label="Jump to a letter">' + "".join(f'<a href="#{prefix}{slug(k) or "num"}">{k}</a>' for k in keys) + '</nav>') if strip else ""
+            body = "".join(f'<h3 class="letter" id="{prefix}{slug(k) or "num"}">{k}</h3><ul class="plain cols">{"".join(groups[k])}</ul>' for k in keys)
+            return nav + body
+
         def gene_item(g, show_org):
             extra = [esc(g["organism"])] if show_org else []
-            extra += [esc(KIND_LABEL.get(g["gene_kind"], "")), plural(g["n_results"], "result")]
+            extra.append(plural(g["n_results"], "result"))
             return f'<li><a href="gene/{esc(g["gene_id"])}.html">{esc(g["gene_name"])}</a> <span class="small">{" \u00b7 ".join(extra)}</span></li>'
         A = [g for g in genes if g["organism"] == "K. marxianus" and g["gene_kind"] != "enzyme_or_protein_label"]
         B = [g for g in genes if g["organism"] != "K. marxianus" and g["gene_id"] in km_host_genes]
-        body = (f'<details open><summary>K. marxianus genes ({len(A)})</summary><ul class="plain">{"".join(gene_item(g, False) for g in A)}</ul></details>'
+        body = (f'<details open><summary>K. marxianus genes ({len(A)})</summary>{az_list("k-", [(g["gene_name"], gene_item(g, False)) for g in A])}</details>'
                 f'<details><summary>Genes from other species expressed in K. marxianus ({len(B)})</summary>'
-                f'<ul class="plain">{"".join(gene_item(g, True) for g in B)}</ul></details>')
+                f'{az_list("o-", [(g["gene_name"], gene_item(g, True)) for g in B], strip=len(B) >= 40)}</details>')
         page("Genes", "genes", body)
         # strains: K. marxianus strains only; derived strains are compiled under their parent and not listed
         keep = self.km_strain_ids()
@@ -492,10 +516,10 @@ class Site:
         items = []
         for rid in roots:
             n = sum(1 for r in self.results if r["strain_id"] and self.strain_root[r["strain_id"]] == rid)
-            items.append(f'<li><a href="strain/{esc(rid)}.html">{esc(self.strains[rid]["strain_name"])}</a> <span class="small">{plural(n, "result")}</span></li>')
+            items.append((self.strains[rid]["strain_name"], f'<li><a href="strain/{esc(rid)}.html">{esc(self.strains[rid]["strain_name"])}</a> <span class="small">{plural(n, "result")}</span></li>'))
         page("Strains", "strains", f'<p class="small">K. marxianus strains. Results from derived strains are included under their parent strain. '
              f'Strains used only in other host organisms are not listed here; they appear in search results when other hosts are switched on.</p>'
-             f'<ul class="plain">{"".join(items)}</ul>')
+             f'{az_list("s-", items, strip=len(items) >= 80)}')
         by_year = defaultdict(list)
         for p in self.papers.values():
             by_year[num(p["year"]) or 0].append(p)
